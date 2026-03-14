@@ -1,0 +1,2042 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="theme-color" content="#1a1a1a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%23ff4d4d'>🦞</text></svg>">
+    <title>MyClaw · 22种语言 · 100技能 · 进化型AI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: #0a0a0a;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 16px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            width: 100%;
+            background: rgba(20, 20, 20, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            border-bottom: 1px solid rgba(255, 77, 77, 0.3);
+            padding: 32px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255,77,77,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        
+        .header h1 {
+            font-size: 2.8em;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .header h1 span {
+            font-size: 0.5em;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 77, 77, 0.2);
+            padding: 4px 12px;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 77, 77, 0.3);
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 600px;
+        }
+        
+        .skill-count {
+            display: inline-block;
+            background: #ff4d4d;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin-left: 16px;
+        }
+        
+        .region-bar {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 16px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .region-selector {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .region-selector label {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+        
+        .region-selector select {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 8px 16px;
+            color: white;
+            font-size: 0.95em;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.2s;
+        }
+        
+        .region-selector select:hover {
+            border-color: rgba(255, 77, 77, 0.5);
+            background: rgba(0, 0, 0, 0.6);
+        }
+        
+        .region-selector select option {
+            background: #1a1a1a;
+            color: white;
+        }
+        
+        .mode-badge {
+            background: rgba(76, 175, 80, 0.15);
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            border-radius: 40px;
+            padding: 6px 16px;
+            color: #4caf50;
+            font-size: 0.9em;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .mode-badge::before {
+            content: '⚡';
+            font-size: 1.1em;
+        }
+        
+        .user-bar {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 16px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #ff4d4d, #ff8080);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 1.2em;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .user-details {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .user-name {
+            color: white;
+            font-weight: 500;
+            font-size: 1em;
+        }
+        
+        .user-plan {
+            font-size: 0.85em;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .badge {
+            background: rgba(255, 77, 77, 0.2);
+            border: 1px solid rgba(255, 77, 77, 0.3);
+            border-radius: 40px;
+            padding: 4px 12px;
+            font-size: 0.85em;
+            color: #ff4d4d;
+        }
+        
+        .badge-free {
+            background: rgba(76, 175, 80, 0.2);
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            color: #4caf50;
+        }
+        
+        .btn {
+            padding: 8px 20px;
+            border-radius: 8px;
+            border: none;
+            font-size: 0.95em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 77, 77, 0.5);
+        }
+        
+        .btn-primary {
+            background: #ff4d4d;
+            border: 1px solid #ff4d4d;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #ff6666;
+            border-color: #ff6666;
+        }
+        
+        .api-section {
+            padding: 24px 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .api-mode-tabs {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 12px;
+        }
+        
+        .api-mode-tab {
+            padding: 6px 16px;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .api-mode-tab.active {
+            background: rgba(255, 77, 77, 0.2);
+            border-color: #ff4d4d;
+            color: #ff4d4d;
+        }
+        
+        .api-mode-tab:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+        }
+        
+        .api-input {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .api-input label {
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 500;
+            min-width: 80px;
+        }
+        
+        .api-input input {
+            flex: 2;
+            min-width: 300px;
+            padding: 12px 16px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: white;
+            font-family: monospace;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        
+        .api-input input:focus {
+            border-color: #ff4d4d;
+            outline: none;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        
+        .api-input input:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .api-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9em;
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #4caf50;
+            box-shadow: 0 0 10px #4caf50;
+        }
+        
+        .status-dot.disconnected {
+            background: #ff4d4d;
+            box-shadow: 0 0 10px #ff4d4d;
+        }
+        
+        .status-dot.shared {
+            background: #ffa500;
+            box-shadow: 0 0 10px #ffa500;
+        }
+        
+        .evolution-bar {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 12px 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        
+        .evolution-metrics {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+        
+        .metric {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .metric-label {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.8em;
+        }
+        
+        .metric-value {
+            color: white;
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+        
+        .metric-value small {
+            color: #ff4d4d;
+            font-size: 0.7em;
+            margin-left: 4px;
+        }
+        
+        .main-content {
+            display: flex;
+            min-height: 500px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .chat-section {
+            flex: 2;
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .chat-header {
+            padding: 16px 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chat-header h3 {
+            color: white;
+            font-weight: 500;
+            font-size: 1.1em;
+        }
+        
+        .api-source {
+            font-size: 0.8em;
+            padding: 4px 12px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .api-source.self {
+            background: rgba(76, 175, 80, 0.15);
+            color: #4caf50;
+        }
+        
+        .api-source.shared {
+            background: rgba(255, 165, 0, 0.15);
+            color: #ffa500;
+        }
+        
+        .learning-indicator {
+            background: rgba(76, 175, 80, 0.2);
+            border-radius: 20px;
+            padding: 4px 12px;
+            color: #4caf50;
+            font-size: 0.8em;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .chat-container {
+            flex: 1;
+            padding: 24px;
+            overflow-y: auto;
+            max-height: 400px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .message {
+            display: flex;
+            margin-bottom: 8px;
+        }
+        
+        .user-message {
+            justify-content: flex-end;
+        }
+        
+        .bot-message {
+            justify-content: flex-start;
+        }
+        
+        .message-content {
+            max-width: 80%;
+            padding: 12px 18px;
+            border-radius: 18px;
+            font-size: 14px;
+            line-height: 1.6;
+            word-wrap: break-word;
+        }
+        
+        .user-message .message-content {
+            background: #ff4d4d;
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+        
+        .bot-message .message-content {
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.9);
+            border-bottom-left-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .input-area {
+            padding: 20px 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .input-box {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        
+        .input-box textarea {
+            flex: 1;
+            padding: 12px 16px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            color: white;
+            font-size: 14px;
+            resize: none;
+            min-height: 50px;
+            max-height: 120px;
+            line-height: 1.5;
+        }
+        
+        .input-box textarea:focus {
+            border-color: #ff4d4d;
+            outline: none;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        
+        .input-box button {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #ff4d4d;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        
+        .input-box button:hover {
+            background: #ff6666;
+            transform: scale(1.05);
+        }
+        
+        .input-box button:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .skills-section {
+            flex: 1;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 24px;
+            overflow-y: auto;
+            max-height: 600px;
+        }
+        
+        .skills-header {
+            margin-bottom: 24px;
+            position: sticky;
+            top: 0;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            padding-bottom: 16px;
+            z-index: 10;
+        }
+        
+        .skills-header h3 {
+            color: white;
+            font-weight: 500;
+            font-size: 1.1em;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .skills-header h3 span {
+            background: #ff4d4d;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 0.7em;
+        }
+        
+        .skills-header p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9em;
+        }
+        
+        .skills-search {
+            margin-top: 12px;
+        }
+        
+        .skills-search input {
+            width: 100%;
+            padding: 10px 12px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: white;
+            font-size: 0.9em;
+        }
+        
+        .skills-search input:focus {
+            border-color: #ff4d4d;
+            outline: none;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        
+        .skill-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 12px;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        
+        .skill-item:hover {
+            background: rgba(255, 77, 77, 0.1);
+            border-color: rgba(255, 77, 77, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .skill-icon {
+            font-size: 1.5em;
+            margin-bottom: 8px;
+        }
+        
+        .skill-name {
+            color: white;
+            font-weight: 500;
+            font-size: 0.95em;
+            margin-bottom: 4px;
+        }
+        
+        .skill-desc {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.8em;
+            margin-bottom: 6px;
+        }
+        
+        .skill-badge {
+            display: inline-block;
+            background: rgba(255, 77, 77, 0.2);
+            border-radius: 4px;
+            padding: 2px 6px;
+            font-size: 0.7em;
+            color: #ff4d4d;
+        }
+        
+        .skills-footer {
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 0.8em;
+            text-align: center;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            position: sticky;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .plans-section {
+            padding: 32px 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .plans-tabs {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 16px;
+        }
+        
+        .plan-tab {
+            padding: 8px 20px;
+            background: transparent;
+            border: none;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1em;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 40px;
+            transition: all 0.2s;
+        }
+        
+        .plan-tab.active {
+            background: rgba(255, 77, 77, 0.2);
+            color: #ff4d4d;
+        }
+        
+        .plan-tab:hover {
+            color: white;
+        }
+        
+        .invite-section {
+            background: rgba(255, 77, 77, 0.1);
+            border: 1px solid rgba(255, 77, 77, 0.3);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        
+        .invite-label {
+            color: #ff4d4d;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .invite-input {
+            display: flex;
+            gap: 8px;
+            flex: 1;
+            max-width: 400px;
+        }
+        
+        .invite-input input {
+            flex: 1;
+            padding: 10px 12px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: white;
+        }
+        
+        .invite-input input:focus {
+            border-color: #ff4d4d;
+            outline: none;
+        }
+        
+        .invite-input button {
+            padding: 10px 20px;
+            background: #ff4d4d;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .invite-note {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.85em;
+        }
+        
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+        
+        .plan-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .plan-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff4d4d, #ff8080);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        
+        .plan-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 77, 77, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .plan-card:hover::before {
+            opacity: 1;
+        }
+        
+        .plan-card.popular {
+            border-color: rgba(255, 77, 77, 0.5);
+            background: rgba(255, 77, 77, 0.05);
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: #ff4d4d;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.7em;
+            font-weight: 600;
+        }
+        
+        .plan-name {
+            color: white;
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .plan-price {
+            color: #ff4d4d;
+            font-size: 2em;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        
+        .plan-price small {
+            font-size: 0.5em;
+            color: rgba(255, 255, 255, 0.4);
+            font-weight: 400;
+        }
+        
+        .plan-period {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.9em;
+            margin-bottom: 20px;
+        }
+        
+        .plan-features {
+            list-style: none;
+            margin-bottom: 24px;
+        }
+        
+        .plan-features li {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9em;
+            padding: 6px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .plan-features li::before {
+            content: '✓';
+            color: #ff4d4d;
+            font-weight: 600;
+        }
+        
+        .plan-btn {
+            width: 100%;
+            padding: 12px;
+            background: transparent;
+            border: 1px solid rgba(255, 77, 77, 0.5);
+            border-radius: 8px;
+            color: #ff4d4d;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .plan-btn:hover {
+            background: #ff4d4d;
+            color: white;
+        }
+        
+        .plan-btn.popular {
+            background: #ff4d4d;
+            color: white;
+        }
+        
+        .plan-btn.popular:hover {
+            background: #ff6666;
+            border-color: #ff6666;
+        }
+        
+        .footer {
+            padding: 24px 40px;
+            background: rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.9em;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 24px;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.4);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .footer-links a:hover {
+            color: #ff4d4d;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: #1a1a1a;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 32px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+        
+        .modal-content h2 {
+            color: white;
+            font-size: 1.5em;
+            margin-bottom: 24px;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        
+        .form-group {
+            margin-bottom: 16px;
+        }
+        
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+        
+        .form-group label {
+            display: block;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9em;
+            margin-bottom: 6px;
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px 12px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: white;
+            font-size: 0.95em;
+        }
+        
+        .form-group input:focus, .form-group select:focus {
+            border-color: #ff4d4d;
+            outline: none;
+        }
+        
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .radio-group label {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: white;
+            cursor: pointer;
+        }
+        
+        .radio-group input[type="radio"] {
+            width: auto;
+            margin-right: 4px;
+        }
+        
+        .close-btn {
+            float: right;
+            font-size: 24px;
+            color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        
+        .close-btn:hover {
+            color: white;
+        }
+        
+        .modal-footer {
+            margin-top: 24px;
+            display: flex;
+            gap: 12px;
+        }
+        
+        @media (max-width: 768px) {
+            .header { padding: 24px; }
+            .region-bar { padding: 16px 24px; }
+            .user-bar { padding: 16px 24px; }
+            .api-section { padding: 20px 24px; }
+            .evolution-bar { padding: 12px 24px; }
+            .main-content { flex-direction: column; }
+            .chat-section { border-right: none; }
+            .skills-section { max-height: 400px; }
+            .plans-section { padding: 24px; }
+            .footer { padding: 20px 24px; flex-direction: column; text-align: center; }
+            .form-grid { grid-template-columns: 1fr; }
+            .form-group.full-width { grid-column: span 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>
+                🦞 MyClaw
+                <span>MyLobster</span>
+            </h1>
+            <p id="headerDesc">
+                Your AI Agent · 22 Languages · 100 Skills
+                <span class="skill-count">100 skills</span>
+            </p>
+        </div>
+
+        <div class="region-bar">
+            <div class="region-selector">
+                <label id="langLabel">🌐 Language / 语言:</label>
+                <select id="languageSelect" onchange="changeLanguage(this.value)">
+                    <option value="en">🇺🇸 English</option>
+                    <option value="zh" selected>🇨🇳 中文</option>
+                    <option value="es">🇪🇸 Español</option>
+                    <option value="pt">🇧🇷 Português (Brasil)</option>
+                    <option value="es-ar">🇦🇷 Español (Argentina)</option>
+                    <option value="es-mx">🇲🇽 Español (México)</option>
+                    <option value="fr">🇫🇷 Français</option>
+                    <option value="de">🇩🇪 Deutsch</option>
+                    <option value="ms">🇲🇾 Bahasa Melayu</option>
+                    <option value="ar">🇸🇦 العربية</option>
+                    <option value="hi">🇮🇳 हिन्दी</option>
+                    <option value="ur">🇵🇰 اردو</option>
+                    <option value="ru">🇷🇺 Русский</option>
+                    <option value="th">🇹🇭 ไทย</option>
+                    <option value="vi">🇻🇳 Tiếng Việt</option>
+                    <option value="id">🇮🇩 Bahasa Indonesia</option>
+                    <option value="fil">🇵🇭 Filipino</option>
+                    <option value="ko">🇰🇷 한국어</option>
+                    <option value="ja">🇯🇵 日本語</option>
+                    <option value="sw">🇰🇪 Kiswahili (Kenya)</option>
+                    <option value="am">🇪🇹 አማርኛ (ኢትዮጵያ)</option>
+                    <option value="af">🇿🇦 Afrikaans (Suid-Afrika)</option>
+                </select>
+            </div>
+            <div class="mode-badge">
+                <span id="modeText">Shared API Pool · 8100M+ Tokens</span>
+            </div>
+        </div>
+
+        <div class="user-bar" id="userBar">
+            <div class="user-info">
+                <div class="user-avatar" id="userAvatar">👤</div>
+                <div class="user-details">
+                    <span class="user-name" id="userName">Not logged in</span>
+                    <span class="user-plan" id="userPlan">-</span>
+                </div>
+                <span class="badge" id="trialBadge">30-day trial</span>
+                <span class="badge badge-free" id="inviteBadge" style="display: none;">Invite · Free</span>
+            </div>
+            <div>
+                <button class="btn" id="authBtn" onclick="showRegisterModal()">Register / Login</button>
+                <button class="btn" id="logoutBtn" style="display: none;" onclick="logout()">Logout</button>
+            </div>
+        </div>
+
+        <div class="api-section">
+            <div class="api-mode-tabs">
+                <button class="api-mode-tab active" onclick="switchAPIMode('shared')" id="sharedModeTab">🌐 Shared API Pool</button>
+                <button class="api-mode-tab" onclick="switchAPIMode('self')" id="selfModeTab">🔑 Use My Own API</button>
+            </div>
+            <div id="selfAPIInput" style="display: none;">
+                <div class="api-input">
+                    <label>🔑 Your API Key:</label>
+                    <input type="password" id="userAPIKey" placeholder="sk-... (your own key)">
+                    <button class="btn btn-primary" onclick="saveUserAPIKey()">Save</button>
+                </div>
+                <div class="api-status" style="margin-top: 12px;">
+                    <span class="status-dot disconnected" id="userAPIStatusDot"></span>
+                    <span id="userAPIStatus">Not configured</span>
+                </div>
+            </div>
+            <div id="sharedAPIInfo">
+                <div class="api-status" style="justify-content: space-between;">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span class="status-dot shared"></span>
+                        <span>Shared API Pool · 8100M+ Tokens · Auto-switch</span>
+                    </div>
+                    <span id="apiStatusText">Connected</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="evolution-bar">
+            <div class="evolution-metrics">
+                <div class="metric">
+                    <span class="metric-label">Users learned</span>
+                    <span class="metric-value">127 <small>+12</small></span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Preferences</span>
+                    <span class="metric-value">3,842</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Errors avoided</span>
+                    <span class="metric-value">231</span>
+                </div>
+            </div>
+            <div class="evolution-progress">🧠 Learning in progress</div>
+        </div>
+
+        <div class="main-content">
+            <div class="chat-section">
+                <div class="chat-header">
+                    <h3>💬 Chat</h3>
+                    <div class="api-source shared" id="currentAPISource">🌐 Shared Pool</div>
+                    <div class="learning-indicator" id="learningIndicator">
+                        <span>Learning your preferences</span>
+                    </div>
+                </div>
+                <div class="chat-container" id="chatContainer">
+                    <div class="message bot-message">
+                        <div class="message-content" id="welcomeMessage">
+                            Hello! I'm MyClaw.<br>
+                            Click 'Connect' to start using 100 skills.
+                        </div>
+                    </div>
+                </div>
+                <div class="input-area">
+                    <div class="input-box">
+                        <textarea id="userInput" placeholder="Type your question..." disabled></textarea>
+                        <button id="sendBtn" onclick="sendMessage()" disabled>📤</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skills-section">
+                <div class="skills-header">
+                    <h3>🛠️ 100 Skills <span>v2.0</span></h3>
+                    <p id="skillsCount">100 skills ready</p>
+                    <div class="skills-search">
+                        <input type="text" id="skillSearch" placeholder="Search skills..." onkeyup="filterSkills()">
+                    </div>
+                </div>
+                <div class="skills-grid" id="skillsGrid"></div>
+                <div class="skills-footer">
+                    <span>✨ 100 skills · Add more via chat</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="plans-section" id="plansSection">
+            <div class="invite-section">
+                <div class="invite-label">
+                    <span>🎫</span> Invite Code (Free for testers)
+                </div>
+                <div class="invite-input">
+                    <input type="text" id="inviteCode" placeholder="Enter invite code">
+                    <button onclick="redeemInviteCode()">Activate</button>
+                </div>
+                <div class="invite-note">Provided by admin, free forever</div>
+            </div>
+
+            <div class="plans-tabs">
+                <button class="plan-tab active" onclick="switchPlanTab('personal')">Personal</button>
+                <button class="plan-tab" onclick="switchPlanTab('business')">Business</button>
+            </div>
+            <div class="plans-grid" id="plansGrid"></div>
+        </div>
+
+        <div class="footer">
+            <div id="footerText">🦞 MyClaw · 100 skills · 22 languages · 8100M+ Token Pool</div>
+            <div class="footer-links">
+                <a href="#">Terms</a>
+                <a href="#">Privacy</a>
+                <a href="#">Help</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="hideRegisterModal()">&times;</span>
+            <h2 id="loginTitle">Register MyClaw</h2>
+            <form id="registerForm" onsubmit="event.preventDefault(); register();">
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <label id="phoneLabel">Phone *</label>
+                        <input type="tel" id="regPhone" placeholder="e.g. 13800138000" required>
+                    </div>
+                    <div class="form-group full-width">
+                        <label id="emailLabel">Email *</label>
+                        <input type="email" id="regEmail" placeholder="your@email.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label id="codeLabel">Verification Code *</label>
+                        <input type="text" id="regCode" placeholder="6 digits" required>
+                    </div>
+                    <div class="form-group">
+                        <label>&nbsp;</label>
+                        <button type="button" class="btn" onclick="sendVerifyCode()" style="width: 100%;" id="sendCodeBtn">Send Code</button>
+                    </div>
+
+                    <div class="form-group">
+                        <label id="industryLabel">Industry</label>
+                        <select id="regIndustry">
+                            <option value="">Select</option>
+                            <option value="technology">Technology</option>
+                            <option value="finance">Finance</option>
+                            <option value="education">Education</option>
+                            <option value="healthcare">Healthcare</option>
+                            <option value="manufacturing">Manufacturing</option>
+                            <option value="retail">Retail</option>
+                            <option value="media">Media</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label id="countryLabel">Country</label>
+                        <input type="text" id="regCountry" placeholder="China">
+                    </div>
+
+                    <div class="form-group">
+                        <label id="cityLabel">City</label>
+                        <input type="text" id="regCity" placeholder="Beijing">
+                    </div>
+
+                    <div class="form-group">
+                        <label id="companyLabel">Company</label>
+                        <input type="text" id="regCompany" placeholder="Optional">
+                    </div>
+
+                    <div class="form-group">
+                        <label id="positionLabel">Position</label>
+                        <input type="text" id="regPosition" placeholder="Product Manager">
+                    </div>
+
+                    <div class="form-group">
+                        <label id="ageLabel">Age</label>
+                        <input type="number" id="regAge" placeholder="25" min="1" max="120">
+                    </div>
+
+                    <div class="form-group">
+                        <label id="genderLabel">Gender</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="gender" value="male" id="genderMale"> Male</label>
+                            <label><input type="radio" name="gender" value="female" id="genderFemale"> Female</label>
+                            <label><input type="radio" name="gender" value="other" id="genderOther"> Other</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label id="inviteCodeLabel">Invite Code (if any)</label>
+                        <input type="text" id="regInviteCode" placeholder="Provided by admin">
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label style="display: flex; align-items: center; gap: 8px;">
+                            <input type="checkbox" id="agreeTerms" checked>
+                            <span id="termsText">I agree to Terms & Privacy</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" style="flex: 1; padding: 14px;" id="registerBtn">Register</button>
+                    <button type="button" class="btn" style="flex: 1;" onclick="switchToLogin()" id="switchToLoginBtn">已有账号？登录</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="hideLoginModal()">&times;</span>
+            <h2 id="loginModalTitle">Login to MyClaw</h2>
+            <div class="form-group">
+                <label id="loginAccountLabel">Phone / Email</label>
+                <input type="text" id="loginAccount" placeholder="Enter">
+            </div>
+            <div class="form-group">
+                <label id="loginCodeLabel">Verification Code</label>
+                <input type="text" id="loginCode" placeholder="Code">
+            </div>
+            <div style="display: flex; gap: 12px; margin-top: 24px;">
+                <button class="btn btn-primary" style="flex: 1;" onclick="login()" id="loginBtn">Login</button>
+                <button class="btn" style="flex: 1;" onclick="switchToRegister()" id="switchToRegisterBtn">Register</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="paymentModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="hidePaymentModal()">&times;</span>
+            <h2 id="paymentTitle">Subscribe</h2>
+            <div style="text-align: center; margin: 24px 0;" id="paymentDetail">
+                <div style="font-size: 2em; color: #ff4d4d;" id="paymentAmount"></div>
+                <div style="color: rgba(255,255,255,0.5); margin-top: 8px;" id="paymentPlan"></div>
+            </div>
+            <div style="display: flex; gap: 12px;">
+                <button class="btn btn-primary" style="flex: 1;" onclick="payWithAlipay()" id="alipayBtn">Alipay</button>
+                <button class="btn btn-primary" style="flex: 1;" onclick="payWithWechat()" id="wechatBtn">WeChat</button>
+            </div>
+            <div style="display: flex; gap: 12px; margin-top: 12px;" id="usdPayment" style="display: none;">
+                <button class="btn btn-primary" style="flex: 1;" onclick="payWithStripe()">Credit Card</button>
+                <button class="btn btn-primary" style="flex: 1;" onclick="payWithPaypal()">PayPal</button>
+            </div>
+            <p style="font-size: 0.8em; color: #868e96; text-align: center; margin-top: 16px;" id="paymentTerms">
+                Payment means you agree
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // ==================== 22种语言翻译 ====================
+        const TRANSLATIONS = {
+            en: {
+                headerDesc: "Your AI Agent · 22 Languages · 100 Skills",
+                langLabel: "🌐 Language:",
+                modeText: "Shared API Pool · 8100M+ Tokens",
+                userNotLogged: "Not logged in",
+                memberBadge: "👑 Member",
+                trialBadge: "30-day trial",
+                inviteBadge: "Invite · Free",
+                login: "Login",
+                logout: "Logout",
+                connect: "Connect",
+                disconnected: "Disconnected",
+                connected: "Connected",
+                welcome: "Hello! I'm MyClaw.\nClick 'Connect' to start using 100 skills.",
+                inputPlaceholder: "Type your question...",
+                learningIndicator: "Learning your preferences",
+                upgradeTitle: "✨ After trial ends",
+                perMonth: "/month",
+                upgradeDesc: "✓ Unlimited chats · ✓ All skills · ✓ Priority response",
+                upgradeBtn: "👉 Subscribe",
+                autoRenewText: "Auto-renewal, cancel anytime",
+                footerText: "🦞 MyClaw · 100 skills · 22 languages · 8100M+ Token Pool",
+                loginTitle: "Register MyClaw",
+                phoneLabel: "Phone *",
+                emailLabel: "Email *",
+                codeLabel: "Verification Code *",
+                sendCodeBtn: "Send Code",
+                loginBtn: "Login",
+                termsText: "I agree to Terms & Privacy",
+                paymentTitle: "Subscribe",
+                paymentDesc: "Monthly auto-renewal",
+                alipayBtn: "Alipay",
+                wechatBtn: "WeChat",
+                paymentTerms: "Payment means you agree",
+                alertLogin: "Please login first",
+                alertConnectFirst: "Please connect API first",
+                alertInvalidKey: "Invalid API Key",
+                alertConnecting: "Connecting...",
+                alertConnected: "Connected!",
+                alertConnectFailed: "Connection failed: ",
+                thinking: "MyClaw is thinking...",
+                skillSearch: "Search skills...",
+                skillsCount: "100 skills ready",
+                invitePlaceholder: "Enter invite code",
+                inviteActivate: "Activate",
+                inviteNote: "Provided by admin, free forever",
+                industryLabel: "Industry",
+                countryLabel: "Country",
+                cityLabel: "City",
+                companyLabel: "Company",
+                positionLabel: "Position",
+                ageLabel: "Age",
+                genderLabel: "Gender",
+                inviteCodeLabel: "Invite Code (if any)",
+                registerBtn: "Register",
+                loginModalTitle: "Login to MyClaw",
+                loginAccountLabel: "Phone / Email",
+                loginCodeLabel: "Verification Code",
+                switchToLoginBtn: "已有账号？登录",
+                switchToRegisterBtn: "Register"
+            },
+            zh: {
+                headerDesc: "你的AI智能体 · 22种语言 · 100大技能",
+                langLabel: "🌐 语言:",
+                modeText: "共享API池 · 8100万+ Tokens",
+                userNotLogged: "未登录",
+                memberBadge: "👑 会员",
+                trialBadge: "30天试用",
+                inviteBadge: "邀请码 · 免费",
+                login: "登录",
+                logout: "退出",
+                connect: "连接",
+                disconnected: "未连接",
+                connected: "已连接",
+                welcome: "你好！我是 MyClaw。\n点击'连接'开始使用100大技能。",
+                inputPlaceholder: "输入你的问题...",
+                learningIndicator: "正在学习你的偏好",
+                upgradeTitle: "✨ 试用期结束后",
+                perMonth: "/月",
+                upgradeDesc: "✓ 无限对话 · ✓ 所有技能 · ✓ 优先响应",
+                upgradeBtn: "👉 立即订阅",
+                autoRenewText: "自动续费，随时可取消",
+                footerText: "🦞 MyClaw · 100大技能 · 22种语言 · 8100万+ Token池",
+                loginTitle: "注册 MyClaw",
+                phoneLabel: "手机号 *",
+                emailLabel: "邮箱 *",
+                codeLabel: "验证码 *",
+                sendCodeBtn: "发送验证码",
+                loginBtn: "登录",
+                termsText: "我同意《服务条款》和《隐私政策》",
+                paymentTitle: "选择支付方式",
+                paymentDesc: "每月自动续费",
+                alipayBtn: "支付宝",
+                wechatBtn: "微信支付",
+                paymentTerms: "支付即表示同意",
+                alertLogin: "请先登录",
+                alertConnectFirst: "请先连接API",
+                alertInvalidKey: "API密钥无效",
+                alertConnecting: "连接中...",
+                alertConnected: "已连接！",
+                alertConnectFailed: "连接失败：",
+                thinking: "MyClaw 正在思考...",
+                skillSearch: "搜索技能...",
+                skillsCount: "100项技能已就绪",
+                invitePlaceholder: "输入邀请码",
+                inviteActivate: "激活",
+                inviteNote: "由管理员提供，永久免费",
+                industryLabel: "行业",
+                countryLabel: "国家",
+                cityLabel: "城市",
+                companyLabel: "公司名",
+                positionLabel: "职位",
+                ageLabel: "年龄",
+                genderLabel: "性别",
+                inviteCodeLabel: "邀请码（如有）",
+                registerBtn: "立即注册",
+                loginModalTitle: "登录 MyClaw",
+                loginAccountLabel: "手机号 / 邮箱",
+                loginCodeLabel: "验证码",
+                switchToLoginBtn: "已有账号？登录",
+                switchToRegisterBtn: "注册账号"
+            }
+        };
+
+        // ==================== 100大技能数据 ====================
+        const SKILLS = [
+            { icon: '📄', name: 'PDF全能处理', desc: '编辑/转换/合并/加密PDF', badge: 'nano-pdf' },
+            { icon: '📝', name: '文档总结', desc: '总结网页/PDF/视频/音频', badge: 'summarize' },
+            { icon: '📧', name: '邮件管家', desc: 'Gmail/Outlook收发管理', badge: 'gmail-manager' },
+            { icon: '📊', name: 'Excel数据分析', desc: '处理表格/生成图表', badge: 'excel-pro' },
+            { icon: '📑', name: 'PPT生成', desc: '一键生成演示文稿', badge: 'ppt-creator' },
+            { icon: '📁', name: '文件管理', desc: '整理/重命名/备份文件', badge: 'file-manager' },
+            { icon: '📅', name: '日程管理', desc: '日历/提醒/会议安排', badge: 'calendar-pro' },
+            { icon: '📋', name: '会议纪要', desc: '自动生成会议记录', badge: 'meeting-notes' },
+            { icon: '📚', name: '知识库管理', desc: 'Notion/Obsidian打通', badge: 'knowledge-base' },
+            { icon: '📎', name: '附件处理', desc: '批量下载/压缩附件', badge: 'attachment-pro' },
+            { icon: '🎨', name: 'AI绘画', desc: '文本生成图像', badge: 'nano-banana' },
+            { icon: '✍️', name: '人性化表达', desc: '去除AI味，自然口语', badge: 'humanizer' },
+            { icon: '📝', name: '文案写作', desc: '小红书/公众号文案', badge: 'copywriter' },
+            { icon: '🎬', name: '视频脚本', desc: '短视频/TikTok脚本', badge: 'video-script' },
+            { icon: '🎵', name: '音乐生成', desc: 'AI作曲配乐', badge: 'music-gen' },
+            { icon: '📖', name: '小说创作', desc: '续写/改写/润色', badge: 'novel-ai' },
+            { icon: '🎭', name: '角色扮演', desc: '模拟各种角色对话', badge: 'role-play' },
+            { icon: '🎪', name: 'PPT美化', desc: '设计/排版/动画', badge: 'ppt-designer' },
+            { icon: '📷', name: '图片处理', desc: '修图/抠图/滤镜', badge: 'image-editor' },
+            { icon: '🎥', name: '视频剪辑', desc: '剪辑/转场/字幕', badge: 'video-editor' },
+            { icon: '💻', name: '代码生成', desc: 'Python/JS/Java等', badge: 'coding-agent' },
+            { icon: '🐞', name: '代码调试', desc: '自动找bug/修复', badge: 'debug-pro' },
+            { icon: '📦', name: 'GitHub管理', desc: '仓库/issue/PR', badge: 'github' },
+            { icon: '🐳', name: 'Docker管理', desc: '容器/镜像/部署', badge: 'docker-pro' },
+            { icon: '☁️', name: '云服务器管理', desc: 'ECS/LightHouse', badge: 'cloud-cli' },
+            { icon: '📊', name: 'API测试', desc: '接口调试/文档生成', badge: 'api-tester' },
+            { icon: '📝', name: '代码注释', desc: '自动添加注释', badge: 'code-doc' },
+            { icon: '🔧', name: '代码重构', desc: '优化/重写', badge: 'code-refactor' },
+            { icon: '📈', name: '性能分析', desc: '代码性能优化', badge: 'perf-analyzer' },
+            { icon: '🔐', name: '安全审计', desc: '代码漏洞检测', badge: 'code-audit' },
+            { icon: '📈', name: '数据可视化', desc: '生成图表/仪表盘', badge: 'data-viz' },
+            { icon: '📊', name: '统计分析', desc: '回归/预测/分析', badge: 'stats-pro' },
+            { icon: '📉', name: '股票分析', desc: 'K线/技术指标', badge: 'stock-pro' },
+            { icon: '📋', name: '爬虫工具', desc: '网页数据抓取', badge: 'web-scraper' },
+            { icon: '📦', name: '数据库查询', desc: 'SQL生成/优化', badge: 'sql-pro' },
+            { icon: '📊', name: 'Excel高级分析', desc: '透视表/宏', badge: 'excel-advanced' },
+            { icon: '📈', name: '商业智能', desc: 'BI报表生成', badge: 'bi-pro' },
+            { icon: '📉', name: '金融分析', desc: '投资/风险评估', badge: 'finance-pro' },
+            { icon: '📊', name: '市场调研', desc: '竞品分析/报告', badge: 'market-research' },
+            { icon: '📋', name: '问卷分析', desc: '自动生成报告', badge: 'survey-analyzer' },
+            { icon: '🤖', name: 'RPA自动化', desc: '模拟人工操作', badge: 'rpa-pro' },
+            { icon: '⏰', name: '定时任务', desc: 'Cron计划任务', badge: 'cron-scheduler' },
+            { icon: '🔄', name: '工作流编排', desc: '多步骤自动化', badge: 'workflow' },
+            { icon: '📁', name: '文件同步', desc: '自动备份/同步', badge: 'file-sync' },
+            { icon: '📧', name: '邮件自动化', desc: '自动回复/分类', badge: 'email-auto' },
+            { icon: '📱', name: '短信通知', desc: '重要提醒', badge: 'sms-notify' },
+            { icon: '🤖', name: '主动行动', desc: 'AI预判需求', badge: 'proactive' },
+            { icon: '🔄', name: '自我进化', desc: '记录错误/优化', badge: 'self-improve' },
+            { icon: '📊', name: '数据同步', desc: '多平台同步', badge: 'data-sync' },
+            { icon: '🤖', name: '技能创建器', desc: 'AI自己创建技能', badge: 'skill-creator' },
+            { icon: '💬', name: '飞书集成', desc: '消息/文档', badge: 'feishu' },
+            { icon: '💬', name: '钉钉集成', desc: '消息/审批', badge: 'dingtalk' },
+            { icon: '💬', name: '企业微信', desc: '消息/通讯录', badge: 'wecom' },
+            { icon: '💬', name: 'Slack集成', desc: '频道/消息', badge: 'slack' },
+            { icon: '💬', name: 'Discord集成', desc: '服务器/机器人', badge: 'discord' },
+            { icon: '💬', name: 'Telegram', desc: '消息/群组', badge: 'telegram' },
+            { icon: '💬', name: 'WhatsApp', desc: '消息/群发', badge: 'whatsapp' },
+            { icon: '💬', name: 'QQ机器人', desc: '群消息管理', badge: 'qqbot' },
+            { icon: '📢', name: '群发助手', desc: '多平台群发', badge: 'mass-sender' },
+            { icon: '🤝', name: '团队协作', desc: '任务分配/进度', badge: 'team-collab' },
+            { icon: '🌤️', name: '天气查询', desc: '实时/预报', badge: 'weather' },
+            { icon: '🗺️', name: '地图导航', desc: '路线/周边', badge: 'map-pro' },
+            { icon: '🍽️', name: '菜谱推荐', desc: '根据食材生成', badge: 'recipe' },
+            { icon: '💪', name: '健康助手', desc: '运动/饮食建议', badge: 'health' },
+            { icon: '🧘', name: '冥想引导', desc: '放松/专注', badge: 'meditation' }
+        ];
+
+        // ==================== 配置 ====================
+        const CONFIG = {
+            API_KEY: 'sk-d3e8577e5c24424c9f17e00fb737c2e8',
+            PRICES_CN: {
+                personal: { basic: 9.9, pro: 19.9, elite: 99 },
+                business: { startup: 399, growth: 999, professional: 3999, enterprise: 9999 }
+            },
+            PRICES_US: {
+                personal: { basic: 1.9, pro: 3, elite: 19 },
+                business: { startup: 60, growth: 190, professional: 600, enterprise: 1900 }
+            }
+        };
+
+        // ==================== 状态 ====================
+        let currentUser = null;
+        let currentLang = 'zh';
+        let currentRegion = 'china';
+        let currentPlanTab = 'personal';
+        let isConnected = false;
+        let isInviteUser = false;
+        let apiMode = 'shared'; // 'shared' or 'self'
+        let userAPIKey = '';
+
+        // ==================== 初始化 ====================
+        document.addEventListener('DOMContentLoaded', function() {
+            loadSkills();
+            renderPlans();
+            checkLogin();
+            changeLanguage('zh');
+        });
+
+        function loadSkills() {
+            const grid = document.getElementById('skillsGrid');
+            grid.innerHTML = '';
+            SKILLS.forEach(skill => {
+                const el = document.createElement('div');
+                el.className = 'skill-item';
+                el.innerHTML = `
+                    <div class="skill-icon">${skill.icon}</div>
+                    <div class="skill-name">${skill.name}</div>
+                    <div class="skill-desc">${skill.desc}</div>
+                    <div class="skill-badge">${skill.badge}</div>
+                `;
+                grid.appendChild(el);
+            });
+        }
+
+        function filterSkills() {
+            const search = document.getElementById('skillSearch').value.toLowerCase();
+            document.querySelectorAll('.skill-item').forEach(item => {
+                const text = item.textContent.toLowerCase();
+                item.style.display = text.includes(search) ? 'block' : 'none';
+            });
+        }
+
+        function renderPlans() {
+            const prices = currentRegion === 'china' ? CONFIG.PRICES_CN : CONFIG.PRICES_US;
+            const currency = currentRegion === 'china' ? '¥' : '$';
+            const grid = document.getElementById('plansGrid');
+            const t = TRANSLATIONS[currentLang] || TRANSLATIONS.en;
+            
+            if (currentPlanTab === 'personal') {
+                grid.innerHTML = `
+                    <div class="plan-card">
+                        <div class="plan-name">Basic</div>
+                        <div class="plan-price">${currency}${prices.personal.basic}<small>${t.perMonth}</small></div>
+                        <div class="plan-period">${t.trialBadge}</div>
+                        <ul class="plan-features">
+                            <li>100 skills</li>
+                            <li>100 chats/day</li>
+                            <li>Web/Mobile</li>
+                            <li>Basic support</li>
+                        </ul>
+                        <button class="plan-btn" onclick="selectPlan('personal-basic', ${prices.personal.basic})">${t.upgradeBtn}</button>
+                    </div>
+                    <div class="plan-card popular">
+                        <div class="popular-badge">Popular</div>
+                        <div class="plan-name">Pro</div>
+                        <div class="plan-price">${currency}${prices.personal.pro}<small>${t.perMonth}</small></div>
+                        <div class="plan-period">Best value</div>
+                        <ul class="plan-features">
+                            <li>100 skills</li>
+                            <li>Unlimited chats</li>
+                            <li>Priority response</li>
+                            <li>Custom skills</li>
+                        </ul>
+                        <button class="plan-btn popular" onclick="selectPlan('personal-pro', ${prices.personal.pro})">${t.upgradeBtn}</button>
+                    </div>
+                    <div class="plan-card">
+                        <div class="plan-name">Elite</div>
+                        <div class="plan-price">${currency}${prices.personal.elite}<small>${t.perMonth}</small></div>
+                        <div class="plan-period">Power user</div>
+                        <ul class="plan-features">
+                            <li>100 skills</li>
+                            <li>Unlimited chats</li>
+                            <li>Dedicated channel</li>
+                            <li>1-on-1 support</li>
+                        </ul>
+                        <button class="plan-btn" onclick="selectPlan('personal-elite', ${prices.personal.elite})">${t.upgradeBtn}</button>
+                    </div>
+                `;
+            } else {
+                grid.innerHTML = `
+                    <div class="plan-card">
+                        <div class="plan-name">Startup</div>
+                        <div class="plan-price">${currency}${prices.business.startup}<small>${t.perMonth}</small></div>
+                        <div class="plan-period">10 users</div>
+                        <ul class="plan-features">
+                            <li>100 skills</li>
+                            <li>10 sub-accounts</li>
+                            <li>Team knowledge</li>
+                            <li>Basic admin</li>
+                        </ul>
+                        <button class="plan-btn" onclick="selectPlan('business-startup', ${prices.business.startup})">${t.upgradeBtn}</button>
+                    </div>
+                    <div class="plan-card">
+                        <div class="plan-name">Growth</div>
+                        <div class="plan-price">${currency}${prices.business.growth}<small>${t.perMonth}</small></div>
+                        <div class="plan-period">30 users</div>
+                        <ul class="plan-features">
+                            <li>100 skills</li>
+                            <li>30 sub-accounts</li>
+                            <li>Team knowledge</li>
+                            <li>Admin console</li>
+                        </ul>
+                        <button class="plan-btn" onclick="selectPlan('business-growth', ${prices.business.growth})">${t.upgradeBtn}</button>
+                    </div>
+                    <div class="plan-card popular">
+                        <div class="popular-badge">Popular</div>
+                        <div class="plan-name">Professional</div>
+                        <div class="plan-price">${currency}${prices.business.professional}<small>${t.perMonth}</small></div>
+                        <div class="plan-period">100 users</div>
+                        <ul class="plan-features">
+                            <li>100 skills</li>
+                            <li>100 sub-accounts</li>
+                            <li>SSO</li>
+                            <li>Audit logs</li>
+                        </ul>
+                        <button class="plan-btn popular" onclick="selectPlan('business-professional', ${prices.business.professional})">${t.upgradeBtn}</button>
+                    </div>
+                    <div class="plan-card">
+                        <div class="plan-name">Enterprise</div>
+                        <div class="plan-price">${currency}${prices.business.enterprise}<small>${t.perMonth}</small></div>
+                        <div class="plan-period">300 users</div>
+                        <ul class="plan-features">
+                            <li>100 skills</li>
+                            <li>300 sub-accounts</li>
+                            <li>Private deployment</li>
+                            <li>Customer success</li>
+                        </ul>
+                        <button class="plan-btn" onclick="selectPlan('business-enterprise', ${prices.business.enterprise})">${t.upgradeBtn}</button>
+                    </div>
+                `;
+            }
+        }
+
+        function switchRegion(region) {
+            currentRegion = region;
+            renderPlans();
+            document.getElementById('usdPayment').style.display = region === 'global' ? 'flex' : 'none';
+        }
+
+        function switchPlanTab(tab) {
+            currentPlanTab = tab;
+            document.querySelectorAll('.plan-tab').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            renderPlans();
+        }
+
+        function selectPlan(plan, price) {
+            if (!currentUser) {
+                alert(TRANSLATIONS[currentLang].alertLogin);
+                showRegisterModal();
+                return;
+            }
+            document.getElementById('paymentAmount').textContent = (currentRegion === 'china' ? '¥' : '$') + price + '/月';
+            document.getElementById('paymentPlan').textContent = '套餐：' + plan;
+            showPaymentModal();
+        }
+
+        function switchAPIMode(mode) {
+            apiMode = mode;
+            document.getElementById('sharedModeTab').classList.toggle('active', mode === 'shared');
+            document.getElementById('selfModeTab').classList.toggle('active', mode === 'self');
+            document.getElementById('selfAPIInput').style.display = mode === 'self' ? 'block' : 'none';
+            document.getElementById('sharedAPIInfo').style.display = mode === 'shared' ? 'block' : 'none';
+            
+            const sourceEl = document.getElementById('currentAPISource');
+            if (mode === 'shared') {
+                sourceEl.className = 'api-source shared';
+                sourceEl.innerHTML = '🌐 Shared Pool';
+            } else {
+                sourceEl.className = 'api-source self';
+                sourceEl.innerHTML = '🔑 Your API Key';
+            }
+        }
+
+        function saveUserAPIKey() {
+            const key = document.getElementById('userAPIKey').value;
+            if (key && key.startsWith('sk-')) {
+                userAPIKey = key;
+                document.getElementById('userAPIStatusDot').className = 'status-dot';
+                document.getElementById('userAPIStatus').textContent = 'Saved';
+                alert('API Key saved successfully');
+            } else {
+                alert('Please enter a valid API Key (starts with sk-)');
+            }
+        }
+
+        function redeemInviteCode() {
+            const code = document.getElementById('inviteCode').value;
+            if (!code) {
+                alert('请输入邀请码');
+                return;
+            }
+            if (code.startsWith('TEST') || code.startsWith('MYCLAW')) {
+                isInviteUser = true;
+                document.getElementById('inviteBadge').style.display = 'inline-block';
+                alert('邀请码激活成功！您现在可以免费使用所有功能');
+                if (currentUser) {
+                    currentUser.isInvite = true;
+                    document.getElementById('userPlan').textContent = '邀请码用户 · 永久免费';
+                }
+            } else {
+                alert('邀请码无效');
+            }
+        }
+
+        function changeLanguage(lang) {
+            currentLang = lang;
+            const t = TRANSLATIONS[lang] || TRANSLATIONS.en;
+            
+            document.getElementById('headerDesc').innerHTML = t.headerDesc + ' <span class="skill-count">100 skills</span>';
+            document.getElementById('langLabel').textContent = t.langLabel;
+            document.getElementById('modeText').textContent = t.modeText;
+            
+            if (!currentUser) {
+                document.getElementById('userName').textContent = t.userNotLogged;
+            }
+            document.getElementById('authBtn').textContent = t.login;
+            document.getElementById('logoutBtn').textContent = t.logout;
+            document.getElementById('connectBtn').textContent = t.connect;
+            document.getElementById('apiStatusText').textContent = t.connected;
+            document.getElementById('welcomeMessage').innerHTML = t.welcome.replace('\n', '<br>');
+            document.getElementById('userInput').placeholder = t.inputPlaceholder;
+            document.getElementById('learningIndicator').innerHTML = `<span>${t.learningIndicator}</span>`;
+            document.getElementById('footerText').textContent = t.footerText;
+            
+            document.getElementById('loginTitle').textContent = t.loginTitle;
+            document.getElementById('phoneLabel').textContent = t.phoneLabel;
+            document.getElementById('emailLabel').textContent = t.emailLabel;
+            document.getElementById('codeLabel').textContent = t.codeLabel;
+            document.getElementById('sendCodeBtn').textContent = t.sendCodeBtn;
+            document.getElementById('termsText').textContent = t.termsText;
+            document.getElementById('registerBtn').textContent = t.registerBtn;
+            document.getElementById('switchToLoginBtn').textContent = t.switchToLoginBtn;
+            
+            document.getElementById('loginModalTitle').textContent = t.loginModalTitle;
+            document.getElementById('loginAccountLabel').textContent = t.loginAccountLabel;
+            document.getElementById('loginCodeLabel').textContent = t.loginCodeLabel;
+            document.getElementById('loginBtn').textContent = t.loginBtn;
+            document.getElementById('switchToRegisterBtn').textContent = t.switchToRegisterBtn;
+            
+            document.getElementById('paymentTitle').textContent = t.paymentTitle;
+            document.getElementById('alipayBtn').textContent = t.alipayBtn;
+            document.getElementById('wechatBtn').textContent = t.wechatBtn;
+            document.getElementById('paymentTerms').textContent = t.paymentTerms;
+            
+            document.getElementById('skillSearch').placeholder = t.skillSearch;
+            document.getElementById('skillsCount').textContent = t.skillsCount;
+            
+            document.getElementById('inviteCode').placeholder = t.invitePlaceholder;
+            document.querySelector('.invite-input button').textContent = t.inviteActivate;
+            document.querySelector('.invite-note').textContent = t.inviteNote;
+            
+            document.getElementById('industryLabel').textContent = t.industryLabel;
+            document.getElementById('countryLabel').textContent = t.countryLabel;
+            document.getElementById('cityLabel').textContent = t.cityLabel;
+            document.getElementById('companyLabel').textContent = t.companyLabel;
+            document.getElementById('positionLabel').textContent = t.positionLabel;
+            document.getElementById('ageLabel').textContent = t.ageLabel;
+            document.getElementById('genderLabel').textContent = t.genderLabel;
+            document.getElementById('inviteCodeLabel').textContent = t.inviteCodeLabel;
+            
+            renderPlans();
+        }
+
+        function checkLogin() {
+            const saved = localStorage.getItem('myclaw_user');
+            if (saved) {
+                currentUser = JSON.parse(saved);
+                document.getElementById('userName').textContent = currentUser.email || currentUser.phone;
+                document.getElementById('userPlan').textContent = currentUser.isInvite ? '邀请码用户 · 永久免费' : '试用期';
+                document.getElementById('authBtn').style.display = 'none';
+                document.getElementById('logoutBtn').style.display = 'inline-block';
+                if (currentUser.isInvite) {
+                    document.getElementById('inviteBadge').style.display = 'inline-block';
+                }
+            }
+        }
+
+        function showRegisterModal() {
+            document.getElementById('registerModal').classList.add('active');
+        }
+
+        function hideRegisterModal() {
+            document.getElementById('registerModal').classList.remove('active');
+        }
+
+        function showLoginModal() {
+            document.getElementById('loginModal').classList.add('active');
+        }
+
+        function hideLoginModal() {
+            document.getElementById('loginModal').classList.remove('active');
+        }
+
+        function switchToLogin() {
+            hideRegisterModal();
+            showLoginModal();
+        }
+
+        function switchToRegister() {
+            hideLoginModal();
+            showRegisterModal();
+        }
+
+        function sendVerifyCode() {
+            alert('验证码已发送（演示模式）');
+        }
+
+        function register() {
+            const userData = {
+                phone: document.getElementById('regPhone').value,
+                email: document.getElementById('regEmail').value,
+                industry: document.getElementById('regIndustry').value,
+                country: document.getElementById('regCountry').value,
+                city: document.getElementById('regCity').value,
+                company: document.getElementById('regCompany').value,
+                position: document.getElementById('regPosition').value,
+                age: document.getElementById('regAge').value,
+                gender: document.querySelector('input[name="gender"]:checked')?.value || '',
+                inviteCode: document.getElementById('regInviteCode').value,
+                registerTime: new Date().toISOString(),
+                isMember: false,
+                isInvite: !!document.getElementById('regInviteCode').value
+            };
+            
+            currentUser = userData;
+            localStorage.setItem('myclaw_user', JSON.stringify(userData));
+            hideRegisterModal();
+            alert('注册成功！您有30天免费试用期');
+            
+            document.getElementById('userName').textContent = userData.email || userData.phone;
+            document.getElementById('userPlan').textContent = userData.isInvite ? '邀请码用户 · 永久免费' : '试用期';
+            document.getElementById('authBtn').style.display = 'none';
+            document.getElementById('logoutBtn').style.display = 'inline-block';
+            if (userData.isInvite) {
+                document.getElementById('inviteBadge').style.display = 'inline-block';
+            }
+        }
+
+        function login() {
+            alert('登录成功（演示模式）');
+            hideLoginModal();
+        }
+
+        function logout() {
+            localStorage.removeItem('myclaw_user');
+            currentUser = null;
+            isInviteUser = false;
+            document.getElementById('userName').textContent = TRANSLATIONS[currentLang].userNotLogged;
+            document.getElementById('userPlan').textContent = '-';
+            document.getElementById('authBtn').style.display = 'inline-block';
+            document.getElementById('logoutBtn').style.display = 'none';
+            document.getElementById('inviteBadge').style.display = 'none';
+            if (isConnected) {
+                isConnected = false;
+                document.getElementById('statusDot').className = 'status-dot disconnected';
+                document.getElementById('apiStatusText').textContent = TRANSLATIONS[currentLang].disconnected;
+            }
+        }
+
+        async function connectAPI() {
+            if (!currentUser) {
+                alert(TRANSLATIONS[currentLang].alertLogin);
+                showRegisterModal();
+                return;
+            }
+            
+            document.getElementById('connectBtn').disabled = true;
+            document.getElementById('connectBtn').textContent = TRANSLATIONS[currentLang].alertConnecting;
+            
+            setTimeout(() => {
+                isConnected = true;
+                document.getElementById('statusDot').className = 'status-dot';
+                document.getElementById('apiStatusText').textContent = TRANSLATIONS[currentLang].connected;
+                document.getElementById('userInput').disabled = false;
+                document.getElementById('sendBtn').disabled = false;
+                document.getElementById('connectBtn').disabled = false;
+                document.getElementById('connectBtn').textContent = TRANSLATIONS[currentLang].connect;
+                addMessage('bot', '✅ ' + TRANSLATIONS[currentLang].alertConnected + ' 100 skills ready. Using ' + (apiMode === 'shared' ? 'shared API pool (8100M+ tokens)' : 'your own API key'));
+            }, 1000);
+        }
+
+        async function sendMessage() {
+            if (!isConnected) {
+                alert(TRANSLATIONS[currentLang].alertConnectFirst);
+                return;
+            }
+            
+            const input = document.getElementById('userInput');
+            const message = input.value.trim();
+            if (!message) return;
+            
+            input.value = '';
+            addMessage('user', message);
+            
+            const typingId = addTypingIndicator();
+            
+            setTimeout(() => {
+                removeTypingIndicator(typingId);
+                addMessage('bot', `This is a demo response using ${apiMode === 'shared' ? 'shared API pool' : 'your API key'}. In production, this would call the actual API with your 100 skills.`);
+            }, 1500);
+        }
+
+        function addMessage(role, content) {
+            const container = document.getElementById('chatContainer');
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `message ${role === 'user' ? 'user-message' : 'bot-message'}`;
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'message-content';
+            contentDiv.innerHTML = content.replace(/\n/g, '<br>');
+            msgDiv.appendChild(contentDiv);
+            container.appendChild(msgDiv);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function addTypingIndicator() {
+            const container = document.getElementById('chatContainer');
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'message bot-message typing';
+            typingDiv.id = 'typing-' + Date.now();
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'message-content';
+            contentDiv.textContent = TRANSLATIONS[currentLang].thinking;
+            typingDiv.appendChild(contentDiv);
+            container.appendChild(typingDiv);
+            container.scrollTop = container.scrollHeight;
+            return typingDiv.id;
+        }
+
+        function removeTypingIndicator(id) {
+            const el = document.getElementById(id);
+            if (el) el.remove();
+        }
+
+        document.getElementById('userInput')?.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+
+        function showPaymentModal() {
+            document.getElementById('paymentModal').classList.add('active');
+        }
+
+        function hidePaymentModal() {
+            document.getElementById('paymentModal').classList.remove('active');
+        }
+
+        function payWithAlipay() {
+            alert('支付宝支付（演示模式）');
+            hidePaymentModal();
+        }
+
+        function payWithWechat() {
+            alert('微信支付（演示模式）');
+            hidePaymentModal();
+        }
+
+        function payWithStripe() {
+            alert('Stripe支付（演示模式）');
+            hidePaymentModal();
+        }
+
+        function payWithPaypal() {
+            alert('PayPal支付（演示模式）');
+            hidePaymentModal();
+        }
+    </script>
+</body>
+</html>
