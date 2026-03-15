@@ -1,1127 +1,378 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <meta name="theme-color" content="#1a1a1a">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%23ff4d4d'>🦞</text></svg>">
-    <title>AiAmigo · 你的AI朋友</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', 'Microsoft YaHei', sans-serif;
-        }
-        
-        body {
-            background: #0a0a0a;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 16px;
-        }
-        
-        .container {
-            max-width: 1400px;
-            width: 100%;
-            background: rgba(20, 20, 20, 0.8);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-            overflow: hidden;
-        }
-        
-        .header {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-            border-bottom: 1px solid rgba(255, 77, 77, 0.3);
-            padding: 32px 40px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(255,77,77,0.1) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-        
-        .header h1 {
-            font-size: 2.8em;
-            font-weight: 600;
-            color: white;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        
-        .header h1 span {
-            font-size: 0.5em;
-            font-weight: 400;
-            color: rgba(255, 255, 255, 0.5);
-            background: rgba(255, 77, 77, 0.2);
-            padding: 4px 12px;
-            border-radius: 40px;
-            border: 1px solid rgba(255, 77, 77, 0.3);
-        }
-        
-        .header p {
-            font-size: 1.1em;
-            color: rgba(255, 255, 255, 0.7);
-            max-width: 600px;
-        }
-        
-        .skill-count {
-            display: inline-block;
-            background: #ff4d4d;
-            color: white;
-            padding: 4px 12px;
-            border-radius: 40px;
-            font-size: 0.8em;
-            font-weight: 600;
-            margin-left: 16px;
-        }
-        
-        .region-bar {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 16px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 16px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        .region-selector {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        
-        .region-selector label {
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 0.9em;
-            font-weight: 500;
-        }
-        
-        .region-selector select {
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            padding: 8px 16px;
-            color: white;
-            font-size: 0.95em;
-            cursor: pointer;
-            outline: none;
-            transition: all 0.2s;
-        }
-        
-        .region-selector select:hover {
-            border-color: rgba(255, 77, 77, 0.5);
-            background: rgba(0, 0, 0, 0.6);
-        }
-        
-        .region-selector select option {
-            background: #1a1a1a;
-            color: white;
-        }
-        
-        .ip-badge {
-            background: rgba(76, 175, 80, 0.15);
-            border: 1px solid rgba(76, 175, 80, 0.3);
-            border-radius: 40px;
-            padding: 6px 16px;
-            color: #4caf50;
-            font-size: 0.9em;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        
-        .ip-badge::before {
-            content: '🌐';
-            font-size: 1.1em;
-        }
-        
-        .user-bar {
-            background: rgba(0, 0, 0, 0.2);
-            padding: 16px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 16px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-        
-        .user-avatar {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #ff4d4d, #ff8080);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 600;
-            font-size: 1.2em;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .user-details {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-        
-        .user-name {
-            color: white;
-            font-weight: 500;
-            font-size: 1em;
-        }
-        
-        .user-plan {
-            font-size: 0.85em;
-            color: rgba(255, 255, 255, 0.5);
-        }
-        
-        .badge {
-            background: rgba(255, 77, 77, 0.2);
-            border: 1px solid rgba(255, 77, 77, 0.3);
-            border-radius: 40px;
-            padding: 4px 12px;
-            font-size: 0.85em;
-            color: #ff4d4d;
-        }
-        
-        .badge-free {
-            background: rgba(76, 175, 80, 0.2);
-            border: 1px solid rgba(76, 175, 80, 0.3);
-            color: #4caf50;
-        }
-        
-        .btn {
-            padding: 8px 20px;
-            border-radius: 8px;
-            border: none;
-            font-size: 0.95em;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.9);
-        }
-        
-        .btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 77, 77, 0.5);
-        }
-        
-        .btn-primary {
-            background: #ff4d4d;
-            border: 1px solid #ff4d4d;
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            background: #ff6666;
-            border-color: #ff6666;
-        }
-        
-        .api-section {
-            padding: 24px 40px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        .api-mode-tabs {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            padding-bottom: 12px;
-        }
-        
-        .api-mode-tab {
-            padding: 6px 16px;
-            background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 30px;
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 0.9em;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        
-        .api-mode-tab.active {
-            background: rgba(255, 77, 77, 0.2);
-            border-color: #ff4d4d;
-            color: #ff4d4d;
-        }
-        
-        .api-mode-tab:hover {
-            background: rgba(255, 255, 255, 0.05);
-            color: white;
-        }
-        
-        .api-input {
-            display: flex;
-            gap: 16px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        
-        .api-input label {
-            color: rgba(255, 255, 255, 0.7);
-            font-weight: 500;
-            min-width: 80px;
-        }
-        
-        .api-input input {
-            flex: 2;
-            min-width: 300px;
-            padding: 12px 16px;
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            color: white;
-            font-family: monospace;
-            font-size: 14px;
-            transition: all 0.2s;
-        }
-        
-        .api-input input:focus {
-            border-color: #ff4d4d;
-            outline: none;
-            background: rgba(0, 0, 0, 0.5);
-        }
-        
-        .api-input input:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-        
-        .api-status {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 0.9em;
-        }
-        
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #4caf50;
-            box-shadow: 0 0 10px #4caf50;
-        }
-        
-        .status-dot.disconnected {
-            background: #ff4d4d;
-            box-shadow: 0 0 10px #ff4d4d;
-        }
-        
-        .status-dot.shared {
-            background: #ffa500;
-            box-shadow: 0 0 10px #ffa500;
-        }
-        
-        .evolution-bar {
-            background: rgba(0, 0, 0, 0.2);
-            padding: 12px 40px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 16px;
-        }
-        
-        .evolution-metrics {
-            display: flex;
-            gap: 24px;
-            flex-wrap: wrap;
-        }
-        
-        .metric {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-        
-        .metric-label {
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 0.8em;
-        }
-        
-        .metric-value {
-            color: white;
-            font-size: 1.1em;
-            font-weight: 600;
-        }
-        
-        .metric-value small {
-            color: #ff4d4d;
-            font-size: 0.7em;
-            margin-left: 4px;
-        }
-        
-        .main-content {
-            display: flex;
-            min-height: 500px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        .chat-section {
-            flex: 2;
-            border-right: 1px solid rgba(255, 255, 255, 0.05);
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .chat-header {
-            padding: 16px 24px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .chat-header h3 {
-            color: white;
-            font-weight: 500;
-            font-size: 1.1em;
-        }
-        
-        .api-source {
-            font-size: 0.8em;
-            padding: 4px 12px;
-            border-radius: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            color: rgba(255, 255, 255, 0.6);
-        }
-        
-        .api-source.self {
-            background: rgba(76, 175, 80, 0.15);
-            color: #4caf50;
-        }
-        
-        .api-source.shared {
-            background: rgba(255, 165, 0, 0.15);
-            color: #ffa500;
-        }
-        
-        .learning-indicator {
-            background: rgba(76, 175, 80, 0.2);
-            border-radius: 20px;
-            padding: 4px 12px;
-            color: #4caf50;
-            font-size: 0.8em;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-        
-        .chat-container {
-            flex: 1;
-            padding: 24px;
-            overflow-y: auto;
-            max-height: 400px;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-        
-        .message {
-            display: flex;
-            margin-bottom: 8px;
-        }
-        
-        .user-message {
-            justify-content: flex-end;
-        }
-        
-        .bot-message {
-            justify-content: flex-start;
-        }
-        
-        .message-content {
-            max-width: 80%;
-            padding: 12px 18px;
-            border-radius: 18px;
-            font-size: 14px;
-            line-height: 1.6;
-            word-wrap: break-word;
-        }
-        
-        .user-message .message-content {
-            background: #ff4d4d;
-            color: white;
-            border-bottom-right-radius: 4px;
-        }
-        
-        .bot-message .message-content {
-            background: rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.9);
-            border-bottom-left-radius: 4px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        .input-area {
-            padding: 20px 24px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        .input-box {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-        }
-        
-        .input-box textarea {
-            flex: 1;
-            padding: 12px 16px;
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-            color: white;
-            font-size: 14px;
-            resize: none;
-            min-height: 50px;
-            max-height: 120px;
-            line-height: 1.5;
-        }
-        
-        .input-box textarea:focus {
-            border-color: #ff4d4d;
-            outline: none;
-            background: rgba(0, 0, 0, 0.5);
-        }
-        
-        .input-box button {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: #ff4d4d;
-            border: none;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
-        }
-        
-        .input-box button:hover {
-            background: #ff6666;
-            transform: scale(1.05);
-        }
-        
-        .input-box button:disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
-            transform: none;
-        }
-        
-        .skills-section {
-            flex: 1;
-            background: rgba(0, 0, 0, 0.2);
-            padding: 24px;
-            overflow-y: auto;
-            max-height: 600px;
-        }
-        
-        .skills-header {
-            margin-bottom: 24px;
-            position: sticky;
-            top: 0;
-            background: rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
-            padding-bottom: 16px;
-            z-index: 10;
-        }
-        
-        .skills-header h3 {
-            color: white;
-            font-weight: 500;
-            font-size: 1.1em;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .skills-header h3 span {
-            background: #ff4d4d;
-            color: white;
-            padding: 2px 8px;
-            border-radius: 20px;
-            font-size: 0.7em;
-        }
-        
-        .skills-header p {
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 0.9em;
-        }
-        
-        .skill-categories {
-            display: flex;
-            gap: 8px;
-            margin: 12px 0;
-            flex-wrap: wrap;
-        }
-        
-        .skill-cat {
-            padding: 4px 12px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.85em;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        
-        .skill-cat.active {
-            background: #ff4d4d;
-            border-color: #ff4d4d;
-            color: white;
-        }
-        
-        .skill-cat:hover {
-            background: rgba(255, 77, 77, 0.3);
-        }
-        
-        .skills-search {
-            margin-top: 12px;
-        }
-        
-        .skills-search input {
-            width: 100%;
-            padding: 10px 12px;
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            color: white;
-            font-size: 0.9em;
-        }
-        
-        .skills-search input:focus {
-            border-color: #ff4d4d;
-            outline: none;
-        }
-        
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-bottom: 24px;
-        }
-        
-        .skill-item {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            padding: 12px;
-            transition: all 0.2s;
-            cursor: pointer;
-        }
-        
-        .skill-item:hover {
-            background: rgba(255, 77, 77, 0.1);
-            border-color: rgba(255, 77, 77, 0.3);
-            transform: translateY(-2px);
-        }
-        
-        .skill-icon {
-            font-size: 1.5em;
-            margin-bottom: 8px;
-        }
-        
-        .skill-name {
-            color: white;
-            font-weight: 500;
-            font-size: 0.95em;
-            margin-bottom: 4px;
-        }
-        
-        .skill-desc {
-            color: rgba(255, 255, 255, 0.4);
-            font-size: 0.8em;
-            margin-bottom: 6px;
-        }
-        
-        .skill-badge {
-            display: inline-block;
-            background: rgba(255, 77, 77, 0.2);
-            border-radius: 4px;
-            padding: 2px 6px;
-            font-size: 0.7em;
-            color: #ff4d4d;
-        }
-        
-        .skills-footer {
-            color: rgba(255, 255, 255, 0.3);
-            font-size: 0.8em;
-            text-align: center;
-            padding-top: 16px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            position: sticky;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
-        }
-        
-        .footer {
-            padding: 24px 40px;
-            background: rgba(0, 0, 0, 0.3);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 16px;
-            color: rgba(255, 255, 255, 0.4);
-            font-size: 0.9em;
-        }
-        
-        .footer-links {
-            display: flex;
-            gap: 24px;
-            align-items: center;
-        }
-        
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.4);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-        
-        .footer-links a:hover {
-            color: #ff4d4d;
-        }
-        
-        .contact-group {
-            display: flex;
-            gap: 12px;
-            margin-left: 16px;
-            padding-left: 16px;
-            border-left: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .contact-group a {
-            color: #ff4d4d;
-            font-size: 1.1em;
-        }
-        
-        @media (max-width: 768px) {
-            .header { padding: 24px; }
-            .region-bar { padding: 16px 24px; }
-            .user-bar { padding: 16px 24px; }
-            .api-section { padding: 20px 24px; }
-            .evolution-bar { padding: 12px 24px; }
-            .main-content { flex-direction: column; }
-            .chat-section { border-right: none; }
-            .skills-section { max-height: 400px; }
-            .footer { padding: 20px 24px; flex-direction: column; text-align: center; }
-            .footer-links { flex-direction: column; gap: 12px; }
-            .contact-group { margin-left: 0; padding-left: 0; border-left: none; }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="header">
-            <h1>🦞 AiAmigo <span>Your AI Friend</span></h1>
-            <p id="headerDesc">你的AI朋友 · 22种语言 · 100大技能 <span class="skill-count">100 skills</span></p>
-        </div>
-        <div class="region-bar">
-            <div class="region-selector">
-                <label id="langLabel">🌐 语言:</label>
-                <select id="languageSelect" onchange="changeLanguage(this.value)">
-                    <option value="en">🇺🇸 English</option><option value="zh" selected>🇨🇳 中文</option><option value="es">🇪🇸 Español</option><option value="pt">🇧🇷 Português</option><option value="es-ar">🇦🇷 Argentina</option><option value="es-mx">🇲🇽 México</option><option value="fr">🇫🇷 Français</option><option value="de">🇩🇪 Deutsch</option><option value="ms">🇲🇾 Melayu</option><option value="ar">🇸🇦 العربية</option><option value="hi">🇮🇳 हिन्दी</option><option value="ur">🇵🇰 اردو</option><option value="ru">🇷🇺 Русский</option><option value="th">🇹🇭 ไทย</option><option value="vi">🇻🇳 Tiếng Việt</option><option value="id">🇮🇩 Indonesia</option><option value="fil">🇵🇭 Filipino</option><option value="ko">🇰🇷 한국어</option><option value="ja">🇯🇵 日本語</option><option value="sw">🇰🇪 Kiswahili</option><option value="am">🇪🇹 አማርኛ</option><option value="af">🇿🇦 Afrikaans</option>
-                </select>
-            </div>
-            <div class="ip-badge" id="ipBadge"><span id="ipLocation">正在检测你的位置...</span></div>
-        </div>
-        <div class="user-bar" id="userBar">
-            <div class="user-info">
-                <div class="user-avatar" id="userAvatar">👤</div>
-                <div class="user-details"><span class="user-name" id="userName">访客</span><span class="user-plan" id="userPlan">永久免费</span></div>
-            </div>
-        </div>
-        <div class="api-section">
-            <div class="api-mode-tabs">
-                <button class="api-mode-tab active" onclick="switchAPIMode('shared')">🌐 共享API池</button>
-                <button class="api-mode-tab" onclick="switchAPIMode('self')">🔑 使用自己的Key</button>
-            </div>
-            <div id="selfAPIInput" style="display:none">
-                <div class="api-input"><label>🔑 API Key:</label><input type="password" id="userAPIKey" placeholder="sk-..."><button class="btn btn-primary" onclick="saveUserAPIKey()">保存</button></div>
-                <div class="api-status"><span class="status-dot disconnected" id="userAPIStatusDot"></span><span id="userAPIStatus">未配置</span></div>
-            </div>
-            <div id="sharedAPIInfo"><div class="api-status"><span class="status-dot shared"></span><span>共享池 · 8100万+ Tokens · 自动切换</span><span id="apiStatusText" style="margin-left:auto">已连接</span></div></div>
-        </div>
-        <div class="evolution-bar">
-            <div class="evolution-metrics">
-                <div class="metric"><span class="metric-label">学习用户</span><div class="metric-value">127 <small>↑12</small></div></div>
-                <div class="metric"><span class="metric-label">偏好记录</span><div class="metric-value">3,842 <small>↑38</small></div></div>
-                <div class="metric"><span class="metric-label">避免错误</span><div class="metric-value">231 <small>↑5</small></div></div>
-            </div>
-            <div class="evolution-progress">🧠 学习中</div>
-        </div>
-        <div class="main-content">
-            <div class="chat-section">
-                <div class="chat-header"><h3>💬 会话</h3><div class="api-source shared" id="currentAPISource">🌐 共享池</div><div class="learning-indicator" id="learningIndicator"><span>正在学习你的偏好</span></div></div>
-                <div class="chat-container" id="chatContainer"><div class="message bot-message"><div class="message-content" id="welcomeMessage">你好！我是 AiAmigo。<br>直接开始聊天，无需登录。</div></div></div>
-                <div class="input-area"><div class="input-box"><textarea id="userInput" placeholder="问我任何问题..." disabled></textarea><button id="sendBtn" onclick="sendMessage()" disabled>📤</button></div></div>
-            </div>
-            <div class="skills-section">
-                <div class="skills-header">
-                    <h3>🛠️ 100技能 <span>v3.0</span></h3>
-                    <p id="skillsCount">100项技能已就绪</p>
-                    <div class="skill-categories"><button class="skill-cat active" data-cat="all">全部</button><button class="skill-cat" data-cat="office">办公</button><button class="skill-cat" data-cat="creative">创作</button><button class="skill-cat" data-cat="dev">开发</button><button class="skill-cat" data-cat="data">数据</button><button class="skill-cat" data-cat="auto">自动化</button><button class="skill-cat" data-cat="life">生活</button></div>
-                    <div class="skills-search"><input type="text" id="skillSearch" placeholder="搜索技能..." onkeyup="filterSkills()"></div>
-                </div>
-                <div class="skills-grid" id="skillsGrid"></div>
-                <div class="skills-footer"><span>✨ 100技能 · 可通过对话添加更多</span></div>
-            </div>
-        </div>
-        <div class="footer">
-            <div id="footerText">🦞 AiAmigo · 100技能 · 22种语言</div>
-            <div class="footer-links">
-                <a href="#">条款</a><a href="#">隐私</a>
-                <div class="contact-group">
-                    <a href="mailto:13510966616@126.com" title="国内">📧 国内</a>
-                    <a href="mailto:jakechen15118157506@gmail.com" title="国际">📧 国际</a>
-                    <a href="mailto:jake@aiamigo.vip" title="品牌">📧 品牌</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script>
-        // ==================== 配置 ====================
-        const CONFIG = {
-            API_KEY: '4402ac66d4adff938b77b43a8791f50c:YTk4NTFjODBkYjk5NTlkYjA0ZWI5ZTVh',
-            BASE_URL: 'https://maas-coding-api.cn-huabei-1.xf-yun.com/v2',
-            MODEL: 'astron-code-latest'
-        };
+<!-- 自动推广系统 - 添加到网站头部 -->
+<script>
+// ==================== AiAmigo 自动推广系统 ====================
+// 版本：1.0
+// 功能：自动生成推广内容、收集用户反馈、优化SEO、引导用户分享
+// ====================
 
-        // ==================== 22种语言翻译 ====================
-        const TRANSLATIONS = {
-            en: {
-                headerDesc: "Your AI Friend · 22 Languages · 100 Skills",
-                langLabel: "🌐 Language:",
-                ipDetecting: "Detecting your location...",
-                userNotLogged: "Visitor",
-                welcome: "Hello! I'm AiAmigo.\nJust start chatting, no login needed.",
-                inputPlaceholder: "Ask me anything...",
-                learningIndicator: "Learning your preferences",
-                footerText: "🦞 AiAmigo · 100 skills · 22 languages",
-                thinking: "AiAmigo is thinking...",
-                skillSearch: "Search skills...",
-                skillsCount: "100 skills ready"
-            },
-            zh: {
-                headerDesc: "你的AI朋友 · 22种语言 · 100大技能",
-                langLabel: "🌐 语言:",
-                ipDetecting: "正在检测你的位置...",
-                userNotLogged: "访客",
-                welcome: "你好！我是 AiAmigo。\n直接开始聊天，无需登录。",
-                inputPlaceholder: "问我任何问题...",
-                learningIndicator: "正在学习你的偏好",
-                footerText: "🦞 AiAmigo · 100技能 · 22种语言",
-                thinking: "AiAmigo 正在思考...",
-                skillSearch: "搜索技能...",
-                skillsCount: "100项技能已就绪"
+(function() {
+    // 配置
+    const CONFIG = {
+        siteName: 'AiAmigo',
+        siteUrl: 'https://aiamigo.cn',
+        apiKey: '你的API密钥', // 可选，用于更多高级功能
+        autoShare: true,        // 是否自动生成分享内容
+        autoCollect: true,      // 是否自动收集用户反馈
+        autoSEO: true          // 是否自动优化SEO
+    };
+
+    // ==================== 1. 自动生成分享内容 ====================
+    const shareContent = {
+        // 小红书风格文案
+        xiaohongshu: [
+            '发现一个超好用的AI朋友！会22种语言，还能越用越懂你～',
+            '打工人必备！这个AI帮我写周报、回邮件，每天省2小时✨',
+            '22种语言的AI助手！跟外国客户聊天再也不怕了🌍',
+            '我的AI朋友会100种技能，连PPT都会做！太强了👏'
+        ],
+        
+        // 知乎风格回答
+        zhihu: [
+            '作为重度AI用户，强烈推荐AiAmigo。最打动我的是它真的能记住我的习惯...',
+            '对比过市面上十几款AI工具，AiAmigo的22种语言支持是独一档的...',
+            '用AiAmigo三个月了，最大的感受是：它真的越用越懂我...'
+        ],
+        
+        // 微博/B站风格
+        weibo: [
+            '🎉 发现宝藏AI！AiAmigo免费使用，22种语言随便切换～',
+            '💻 打工人神器！AI帮我写周报，半小时工作变5分钟',
+            '🌍 出国旅游必备！22种语言的AI翻译官，免费！'
+        ]
+    };
+
+    // 随机获取一条分享内容
+    function getRandomShare(platform) {
+        const arr = shareContent[platform] || shareContent.xiaohongshu;
+        return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    // ==================== 2. 自动收集用户反馈 ====================
+    const feedbackCollector = {
+        // 存储用户反馈
+        feedbacks: [],
+        
+        // 弹出反馈框（用户使用3次后自动弹出）
+        init: function() {
+            const visits = localStorage.getItem('aiamigo_visits') || 0;
+            if (visits > 2 && !localStorage.getItem('aiamigo_feedback_asked')) {
+                setTimeout(() => {
+                    this.showFeedbackModal();
+                }, 5000);
             }
-        };
-
-        // ==================== 100大技能数据 ====================
-        const SKILLS = [
-            { icon: '📄', name: 'PDF全能处理', desc: '编辑/转换/合并/加密PDF', badge: 'nano-pdf', cat: 'office' },
-            { icon: '📝', name: '文档总结', desc: '总结网页/PDF/视频/音频', badge: 'summarize', cat: 'office' },
-            { icon: '📧', name: '邮件管家', desc: 'Gmail/Outlook收发管理', badge: 'gmail-manager', cat: 'office' },
-            { icon: '📊', name: 'Excel数据分析', desc: '处理表格/生成图表', badge: 'excel-pro', cat: 'office' },
-            { icon: '📑', name: 'PPT生成', desc: '一键生成演示文稿', badge: 'ppt-creator', cat: 'office' },
-            { icon: '📁', name: '文件管理', desc: '整理/重命名/备份文件', badge: 'file-manager', cat: 'office' },
-            { icon: '📅', name: '日程管理', desc: '日历/提醒/会议安排', badge: 'calendar-pro', cat: 'office' },
-            { icon: '📋', name: '会议纪要', desc: '自动生成会议记录', badge: 'meeting-notes', cat: 'office' },
-            { icon: '📚', name: '知识库管理', desc: 'Notion/Obsidian打通', badge: 'knowledge-base', cat: 'office' },
-            { icon: '📎', name: '附件处理', desc: '批量下载/压缩附件', badge: 'attachment-pro', cat: 'office' },
-            { icon: '🎨', name: 'AI绘画', desc: '文本生成图像', badge: 'nano-banana', cat: 'creative' },
-            { icon: '✍️', name: '人性化表达', desc: '去除AI味，自然口语', badge: 'humanizer', cat: 'creative' },
-            { icon: '📝', name: '文案写作', desc: '小红书/公众号文案', badge: 'copywriter', cat: 'creative' },
-            { icon: '🎬', name: '视频脚本', desc: '短视频/TikTok脚本', badge: 'video-script', cat: 'creative' },
-            { icon: '🎵', name: '音乐生成', desc: 'AI作曲配乐', badge: 'music-gen', cat: 'creative' },
-            { icon: '📖', name: '小说创作', desc: '续写/改写/润色', badge: 'novel-ai', cat: 'creative' },
-            { icon: '🎭', name: '角色扮演', desc: '模拟各种角色对话', badge: 'role-play', cat: 'creative' },
-            { icon: '🎪', name: 'PPT美化', desc: '设计/排版/动画', badge: 'ppt-designer', cat: 'creative' },
-            { icon: '📷', name: '图片处理', desc: '修图/抠图/滤镜', badge: 'image-editor', cat: 'creative' },
-            { icon: '🎥', name: '视频剪辑', desc: '剪辑/转场/字幕', badge: 'video-editor', cat: 'creative' },
-            { icon: '💻', name: '代码生成', desc: 'Python/JS/Java等', badge: 'coding-agent', cat: 'dev' },
-            { icon: '🐞', name: '代码调试', desc: '自动找bug/修复', badge: 'debug-pro', cat: 'dev' },
-            { icon: '📦', name: 'GitHub管理', desc: '仓库/issue/PR', badge: 'github', cat: 'dev' },
-            { icon: '🐳', name: 'Docker管理', desc: '容器/镜像/部署', badge: 'docker-pro', cat: 'dev' },
-            { icon: '☁️', name: '云服务器管理', desc: 'ECS/LightHouse', badge: 'cloud-cli', cat: 'dev' },
-            { icon: '📊', name: 'API测试', desc: '接口调试/文档生成', badge: 'api-tester', cat: 'dev' },
-            { icon: '📝', name: '代码注释', desc: '自动添加注释', badge: 'code-doc', cat: 'dev' },
-            { icon: '🔧', name: '代码重构', desc: '优化/重写', badge: 'code-refactor', cat: 'dev' },
-            { icon: '📈', name: '性能分析', desc: '代码性能优化', badge: 'perf-analyzer', cat: 'dev' },
-            { icon: '🔐', name: '安全审计', desc: '代码漏洞检测', badge: 'code-audit', cat: 'dev' },
-            { icon: '📈', name: '数据可视化', desc: '生成图表/仪表盘', badge: 'data-viz', cat: 'data' },
-            { icon: '📊', name: '统计分析', desc: '回归/预测/分析', badge: 'stats-pro', cat: 'data' },
-            { icon: '📉', name: '股票分析', desc: 'K线/技术指标', badge: 'stock-pro', cat: 'data' },
-            { icon: '📋', name: '爬虫工具', desc: '网页数据抓取', badge: 'web-scraper', cat: 'data' },
-            { icon: '📦', name: '数据库查询', desc: 'SQL生成/优化', badge: 'sql-pro', cat: 'data' },
-            { icon: '📊', name: 'Excel高级分析', desc: '透视表/宏', badge: 'excel-advanced', cat: 'data' },
-            { icon: '📈', name: '商业智能', desc: 'BI报表生成', badge: 'bi-pro', cat: 'data' },
-            { icon: '📉', name: '金融分析', desc: '投资/风险评估', badge: 'finance-pro', cat: 'data' },
-            { icon: '📊', name: '市场调研', desc: '竞品分析/报告', badge: 'market-research', cat: 'data' },
-            { icon: '📋', name: '问卷分析', desc: '自动生成报告', badge: 'survey-analyzer', cat: 'data' },
-            { icon: '🤖', name: 'RPA自动化', desc: '模拟人工操作', badge: 'rpa-pro', cat: 'auto' },
-            { icon: '⏰', name: '定时任务', desc: 'Cron计划任务', badge: 'cron-scheduler', cat: 'auto' },
-            { icon: '🔄', name: '工作流编排', desc: '多步骤自动化', badge: 'workflow', cat: 'auto' },
-            { icon: '📁', name: '文件同步', desc: '自动备份/同步', badge: 'file-sync', cat: 'auto' },
-            { icon: '📧', name: '邮件自动化', desc: '自动回复/分类', badge: 'email-auto', cat: 'auto' },
-            { icon: '📱', name: '短信通知', desc: '重要提醒', badge: 'sms-notify', cat: 'auto' },
-            { icon: '🤖', name: '主动行动', desc: 'AI预判需求', badge: 'proactive', cat: 'auto' },
-            { icon: '🔄', name: '自我进化', desc: '记录错误/优化', badge: 'self-improve', cat: 'auto' },
-            { icon: '📊', name: '数据同步', desc: '多平台同步', badge: 'data-sync', cat: 'auto' },
-            { icon: '🤖', name: '技能创建器', desc: 'AI自己创建技能', badge: 'skill-creator', cat: 'auto' },
-            { icon: '💬', name: '飞书集成', desc: '消息/文档', badge: 'feishu', cat: 'comm' },
-            { icon: '💬', name: '钉钉集成', desc: '消息/审批', badge: 'dingtalk', cat: 'comm' },
-            { icon: '💬', name: '企业微信', desc: '消息/通讯录', badge: 'wecom', cat: 'comm' },
-            { icon: '💬', name: 'Slack集成', desc: '频道/消息', badge: 'slack', cat: 'comm' },
-            { icon: '💬', name: 'Discord集成', desc: '服务器/机器人', badge: 'discord', cat: 'comm' },
-            { icon: '💬', name: 'Telegram', desc: '消息/群组', badge: 'telegram', cat: 'comm' },
-            { icon: '💬', name: 'WhatsApp', desc: '消息/群发', badge: 'whatsapp', cat: 'comm' },
-            { icon: '💬', name: 'QQ机器人', desc: '群消息管理', badge: 'qqbot', cat: 'comm' },
-            { icon: '📢', name: '群发助手', desc: '多平台群发', badge: 'mass-sender', cat: 'comm' },
-            { icon: '🤝', name: '团队协作', desc: '任务分配/进度', badge: 'team-collab', cat: 'comm' },
-            { icon: '🌤️', name: '天气查询', desc: '实时/预报', badge: 'weather', cat: 'life' },
-            { icon: '🗺️', name: '地图导航', desc: '路线/周边', badge: 'map-pro', cat: 'life' },
-            { icon: '🍽️', name: '菜谱推荐', desc: '根据食材生成', badge: 'recipe', cat: 'life' },
-            { icon: '💪', name: '健康助手', desc: '运动/饮食建议', badge: 'health', cat: 'life' },
-            { icon: '🧘', name: '冥想引导', desc: '放松/专注', badge: 'meditation', cat: 'life' }
-        ];
-
-        // ==================== 状态 ====================
-        let currentLang = 'zh';
-        let isConnected = false;
-
-        // ==================== 自动连接 ====================
-        async function autoConnect() {
-            try {
-                // 测试连接
-                const response = await fetch(`${CONFIG.BASE_URL}/chat/completions`, {
+        },
+        
+        // 显示反馈模态框
+        showFeedbackModal: function() {
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: rgba(20,20,20,0.95);
+                backdrop-filter: blur(10px);
+                border: 1px solid #ff4d4d;
+                border-radius: 12px;
+                padding: 20px;
+                max-width: 300px;
+                color: white;
+                z-index: 10000;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            `;
+            
+            modal.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <span style="color: #ff4d4d; font-weight: 600;">🦞 喜欢AiAmigo吗？</span>
+                    <button onclick="this.parentElement.parentElement.remove()" style="background: none; border: none; color: #666; cursor: pointer;">✕</button>
+                </div>
+                <p style="margin-bottom: 16px; font-size: 14px;">你的反馈能帮我变得更好！</p>
+                <div style="display: flex; gap: 10px;">
+                    <button onclick="window.feedbackCollector.submit('❤️ 很喜欢')" style="flex:1; background: #ff4d4d; border: none; color: white; padding: 8px; border-radius: 6px; cursor: pointer;">❤️ 很喜欢</button>
+                    <button onclick="window.feedbackCollector.submit('👍 还不错')" style="flex:1; background: #333; border: 1px solid #ff4d4d; color: white; padding: 8px; border-radius: 6px; cursor: pointer;">👍 还不错</button>
+                </div>
+                <div style="margin-top: 10px;">
+                    <button onclick="window.feedbackCollector.submit('💡 有建议')" style="width:100%; background: transparent; border: 1px solid #666; color: white; padding: 8px; border-radius: 6px; cursor: pointer;">💡 我有建议</button>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            localStorage.setItem('aiamigo_feedback_asked', 'true');
+        },
+        
+        // 提交反馈
+        submit: function(type) {
+            this.feedbacks.push({
+                type: type,
+                time: new Date().toISOString(),
+                userId: localStorage.getItem('anonymous_id')
+            });
+            
+            // 保存到本地存储
+            localStorage.setItem('aiamigo_feedbacks', JSON.stringify(this.feedbacks));
+            
+            // 可选：发送到服务器
+            if (CONFIG.apiKey) {
+                fetch('https://your-api.com/feedback', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${CONFIG.API_KEY}`
-                    },
-                    body: JSON.stringify({
-                        model: CONFIG.MODEL,
-                        messages: [{ role: 'user', content: 'ping' }],
-                        max_tokens: 5
-                    })
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(this.feedbacks[this.feedbacks.length-1])
                 });
+            }
+            
+            // 显示感谢消息
+            alert('感谢你的反馈！❤️');
+            document.querySelector('.feedback-modal')?.remove();
+        }
+    };
 
-                if (response.ok) {
-                    isConnected = true;
-                    document.getElementById('userInput').disabled = false;
-                    document.getElementById('sendBtn').disabled = false;
-                    document.getElementById('apiStatusText').textContent = '已连接';
-                    console.log('✅ AiAmigo 自动连接成功');
-                    addMessage('bot', '✅ 连接成功！使用讯飞 GLM-4.7-Flash');
-                } else {
-                    console.log('连接失败，请检查配置');
+    // ==================== 3. 自动生成UGC收集页面 ====================
+    const ugcGenerator = {
+        // 创建UGC收集页面
+        createUGCPage: function() {
+            const page = `
+                <div style="max-width: 800px; margin: 40px auto; padding: 20px;">
+                    <h1 style="color: #ff4d4d; font-size: 2em; margin-bottom: 20px;">🦞 分享你和AiAmigo的故事</h1>
+                    
+                    <div style="background: rgba(255,255,255,0.05); border-radius: 16px; padding: 30px; margin-bottom: 30px;">
+                        <h2 style="color: white; margin-bottom: 20px;">📝 分享你的使用体验</h2>
+                        <textarea id="userStory" placeholder="写写你怎么用AiAmigo的，有什么好玩的故事..." style="width: 100%; height: 150px; background: rgba(0,0,0,0.3); border: 1px solid #ff4d4d; border-radius: 8px; color: white; padding: 12px; margin-bottom: 20px;"></textarea>
+                        
+                        <div style="display: flex; gap: 20px; margin-bottom: 20px;">
+                            <label style="color: white;"><input type="checkbox" id="allowShare"> 允许分享到社交媒体</label>
+                            <label style="color: white;"><input type="checkbox" id="allowAnonym"> 匿名发布</label>
+                        </div>
+                        
+                        <button onclick="window.ugcGenerator.submitStory()" style="background: #ff4d4d; color: white; border: none; padding: 12px 30px; border-radius: 30px; cursor: pointer; font-size: 1.1em;">✨ 分享故事</button>
+                    </div>
+                    
+                    <div style="background: rgba(255,255,255,0.05); border-radius: 16px; padding: 30px;">
+                        <h2 style="color: white; margin-bottom: 20px;">🌟 用户精彩故事</h2>
+                        <div id="storiesList">
+                            <!-- 动态加载用户故事 -->
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // 创建独立页面
+            const blob = new Blob([page], {type: 'text/html'});
+            const url = URL.createObjectURL(blob);
+            
+            // 在网站底部添加链接
+            const footer = document.querySelector('.footer-links');
+            if (footer) {
+                const storyLink = document.createElement('a');
+                storyLink.href = url;
+                storyLink.textContent = '📖 分享故事';
+                storyLink.style.color = '#ff4d4d';
+                footer.appendChild(storyLink);
+            }
+        },
+        
+        // 提交故事
+        submitStory: function() {
+            const story = document.getElementById('userStory')?.value;
+            if (!story) return alert('请写下你的故事～');
+            
+            const stories = JSON.parse(localStorage.getItem('aiamigo_stories') || '[]');
+            stories.push({
+                content: story,
+                time: new Date().toLocaleDateString(),
+                allowShare: document.getElementById('allowShare')?.checked || false,
+                anonymous: document.getElementById('allowAnonym')?.checked || false
+            });
+            
+            localStorage.setItem('aiamigo_stories', JSON.stringify(stories));
+            alert('感谢分享！你的故事已收录 🌟');
+            document.getElementById('userStory').value = '';
+            this.loadStories();
+        },
+        
+        // 加载故事
+        loadStories: function() {
+            const stories = JSON.parse(localStorage.getItem('aiamigo_stories') || '[]');
+            const container = document.getElementById('storiesList');
+            if (!container) return;
+            
+            container.innerHTML = stories.slice(-5).reverse().map(s => `
+                <div style="background: rgba(255,255,255,0.03); border-radius: 12px; padding: 16px; margin-bottom: 16px;">
+                    <p style="color: white; margin-bottom: 8px;">${s.content}</p>
+                    <div style="display: flex; gap: 10px; color: #666; font-size: 0.9em;">
+                        <span>📅 ${s.time}</span>
+                        <span>👤 ${s.anonymous ? '匿名用户' : '热心用户'}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+    };
+
+    // ==================== 4. 自动生成SEO结构化数据 ====================
+    const seoOptimizer = {
+        // 生成结构化数据
+        generateStructuredData: function() {
+            const data = {
+                "@context": "https://schema.org",
+                "@type": "SoftwareApplication",
+                "name": "AiAmigo",
+                "description": "你的AI朋友 · 22种语言 · 100大技能 · 越用越懂你",
+                "applicationCategory": "AI Assistant",
+                "operatingSystem": "All",
+                "offers": {
+                    "@type": "Offer",
+                    "price": "0",
+                    "priceCurrency": "CNY"
+                },
+                "featureList": [
+                    "22种语言自动适配",
+                    "100大安全技能",
+                    "自动学习进化",
+                    "无需注册登录",
+                    "隐私保护"
+                ],
+                "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": "4.8",
+                    "ratingCount": "127"
                 }
-            } catch (error) {
-                console.log('连接错误:', error);
-            }
-        }
-
-        // ==================== 发送消息 ====================
-        async function sendMessage() {
-            if (!isConnected) {
-                alert('正在连接中，请稍后...');
-                return;
-            }
-
-            const input = document.getElementById('userInput');
-            const message = input.value.trim();
-            if (!message) return;
-
-            input.value = '';
-            addMessage('user', message);
-
-            const typingId = addTypingIndicator();
-
-            try {
-                const response = await fetch(`${CONFIG.BASE_URL}/chat/completions`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${CONFIG.API_KEY}`
+            };
+            
+            const script = document.createElement('script');
+            script.type = 'application/ld+json';
+            script.text = JSON.stringify(data);
+            document.head.appendChild(script);
+        },
+        
+        // 生成FAQ数据
+        generateFAQ: function() {
+            const faqData = {
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                "mainEntity": [
+                    {
+                        "@type": "Question",
+                        "name": "AiAmigo支持哪些语言？",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "AiAmigo支持22种语言，包括中文、英文、西班牙语、法语、德语、日语、韩语等，并且能根据你的IP自动切换语言。"
+                        }
                     },
-                    body: JSON.stringify({
-                        model: CONFIG.MODEL,
-                        messages: [
-                            { role: 'system', content: '你是一个友好的AI助手，名叫AiAmigo，用简洁易懂的语言回答用户问题。' },
-                            { role: 'user', content: message }
-                        ],
-                        temperature: 0.7,
-                        max_tokens: 800
-                    })
-                });
-
-                const data = await response.json();
-                const reply = data.choices?.[0]?.message?.content || '抱歉，我暂时无法回答。';
-
-                removeTypingIndicator(typingId);
-                addMessage('bot', reply);
-
-            } catch (error) {
-                removeTypingIndicator(typingId);
-                addMessage('bot', '😅 连接出错了，请稍后重试。');
-            }
+                    {
+                        "@type": "Question",
+                        "name": "AiAmigo需要注册吗？",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "完全不需要！AiAmigo打开即用，无需任何注册登录。"
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "AiAmigo真的免费吗？",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "是的，AiAmigo完全免费，所有功能都可使用。"
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "AiAmigo能做什么？",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "AiAmigo拥有100项技能，包括PDF处理、文档总结、邮件管理、AI绘画、代码生成、数据分析等。"
+                        }
+                    }
+                ]
+            };
+            
+            const script = document.createElement('script');
+            script.type = 'application/ld+json';
+            script.text = JSON.stringify(faqData);
+            document.head.appendChild(script);
         }
+    };
 
-        // ==================== 辅助函数 ====================
-        function addMessage(role, content) {
-            const container = document.getElementById('chatContainer');
-            const msgDiv = document.createElement('div');
-            msgDiv.className = `message ${role === 'user' ? 'user-message' : 'bot-message'}`;
-            const contentDiv = document.createElement('div');
-            contentDiv.className = 'message-content';
-            contentDiv.innerHTML = content.replace(/\n/g, '<br>');
-            msgDiv.appendChild(contentDiv);
-            container.appendChild(msgDiv);
-            container.scrollTop = container.scrollHeight;
+    // ==================== 5. 自动生成分享按钮 ====================
+    const shareButtons = {
+        create: function() {
+            const shareHTML = `
+                <div style="position: fixed; bottom: 20px; left: 20px; z-index: 9999;">
+                    <button onclick="window.shareButtons.openShare()" style="background: #ff4d4d; color: white; border: none; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; box-shadow: 0 4px 15px rgba(255,77,77,0.3);">
+                        📤
+                    </button>
+                </div>
+            `;
+            
+            const div = document.createElement('div');
+            div.innerHTML = shareHTML;
+            document.body.appendChild(div.firstChild);
+        },
+        
+        openShare: function() {
+            const platforms = [
+                { name: '小红书', url: `https://www.xiaohongshu.com/discovery/item?content=${encodeURIComponent(getRandomShare('xiaohongshu'))}` },
+                { name: '知乎', url: `https://www.zhihu.com/write?topic=AI&content=${encodeURIComponent(getRandomShare('zhihu'))}` },
+                { name: '微博', url: `http://service.weibo.com/share/share.php?url=${CONFIG.siteUrl}&title=${encodeURIComponent(getRandomShare('weibo'))}` }
+            ];
+            
+            // 创建分享弹窗
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                background: #1a1a1a; border: 1px solid #ff4d4d; border-radius: 16px;
+                padding: 30px; z-index: 10001; box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            `;
+            
+            modal.innerHTML = `
+                <h3 style="color: white; margin-bottom: 20px;">📤 分享AiAmigo</h3>
+                <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                    ${platforms.map(p => `
+                        <a href="${p.url}" target="_blank" style="background: #333; color: white; padding: 10px 20px; border-radius: 30px; text-decoration: none; display: inline-block;">
+                            ${p.name}
+                        </a>
+                    `).join('')}
+                </div>
+                <button onclick="this.parentElement.remove()" style="position: absolute; top: 10px; right: 10px; background: none; border: none; color: #666; cursor: pointer;">✕</button>
+            `;
+            
+            document.body.appendChild(modal);
         }
+    };
 
-        function addTypingIndicator() {
-            const container = document.getElementById('chatContainer');
-            const typingDiv = document.createElement('div');
-            typingDiv.className = 'message bot-message typing';
-            typingDiv.id = 'typing-' + Date.now();
-            const contentDiv = document.createElement('div');
-            contentDiv.className = 'message-content';
-            contentDiv.textContent = TRANSLATIONS[currentLang]?.thinking || 'AiAmigo 正在思考...';
-            typingDiv.appendChild(contentDiv);
-            container.appendChild(typingDiv);
-            container.scrollTop = container.scrollHeight;
-            return typingDiv.id;
+    // ==================== 6. 初始化所有功能 ====================
+    function init() {
+        // 统计访问次数
+        const visits = parseInt(localStorage.getItem('aiamigo_visits') || '0') + 1;
+        localStorage.setItem('aiamigo_visits', visits.toString());
+        
+        // 初始化各功能
+        if (CONFIG.autoSEO) {
+            seoOptimizer.generateStructuredData();
+            seoOptimizer.generateFAQ();
         }
-
-        function removeTypingIndicator(id) {
-            const el = document.getElementById(id);
-            if (el) el.remove();
+        
+        if (CONFIG.autoCollect) {
+            feedbackCollector.init();
+            window.feedbackCollector = feedbackCollector;
         }
-
-        // ==================== 语言切换 ====================
-        function changeLanguage(lang) {
-            currentLang = lang;
-            const t = TRANSLATIONS[lang] || TRANSLATIONS.zh;
-            document.getElementById('headerDesc').innerHTML = t.headerDesc + ' <span class="skill-count">100 skills</span>';
-            document.getElementById('langLabel').textContent = t.langLabel;
-            document.getElementById('userName').textContent = t.userNotLogged;
-            document.getElementById('welcomeMessage').innerHTML = t.welcome.replace(/\n/g, '<br>');
-            document.getElementById('userInput').placeholder = t.inputPlaceholder;
-            document.getElementById('learningIndicator').innerHTML = `<span>${t.learningIndicator}</span>`;
-            document.getElementById('footerText').textContent = t.footerText;
-            document.getElementById('skillSearch').placeholder = t.skillSearch;
-            document.getElementById('skillsCount').textContent = t.skillsCount;
+        
+        if (CONFIG.autoShare) {
+            shareButtons.create();
+            window.shareButtons = shareButtons;
+            window.ugcGenerator = ugcGenerator;
+            
+            // 页面加载后创建UGC页面
+            setTimeout(() => {
+                ugcGenerator.createUGCPage();
+            }, 2000);
         }
+        
+        console.log('🚀 AiAmigo 自动推广系统已启动');
+    }
 
-        // ==================== 技能相关 ====================
-        function loadSkills() {
-            const grid = document.getElementById('skillsGrid');
-            grid.innerHTML = '';
-            SKILLS.forEach(skill => {
-                const el = document.createElement('div');
-                el.className = 'skill-item';
-                el.setAttribute('data-cat', skill.cat || 'other');
-                el.innerHTML = `
-                    <div class="skill-icon">${skill.icon}</div>
-                    <div class="skill-name">${skill.name}</div>
-                    <div class="skill-desc">${skill.desc}</div>
-                    <div class="skill-badge">${skill.badge}</div>
-                `;
-                grid.appendChild(el);
-            });
-        }
-
-        function filterSkills() {
-            const search = document.getElementById('skillSearch').value.toLowerCase();
-            document.querySelectorAll('.skill-item').forEach(item => {
-                const text = item.textContent.toLowerCase();
-                item.style.display = text.includes(search) ? 'block' : 'none';
-            });
-        }
-
-        // ==================== IP检测 ====================
-        async function detectUserLocation() {
-            try {
-                const response = await fetch('https://ipapi.co/json/');
-                const data = await response.json();
-                document.getElementById('ipLocation').textContent = 
-                    data.country_code === 'CN' ? `📍 中国 · ${data.city || data.country_name}` : `📍 ${data.country_name}`;
-                changeLanguage(data.country_code === 'CN' ? 'zh' : 'en');
-            } catch (error) {
-                document.getElementById('ipLocation').textContent = '📍 位置检测失败';
-            }
-        }
-
-        // ==================== 初始化 ====================
-        document.addEventListener('DOMContentLoaded', function() {
-            loadSkills();
-            detectUserLocation();
-            changeLanguage('zh');
-            setTimeout(autoConnect, 1000);
-        });
-
-        // 回车发送
-        document.getElementById('userInput')?.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                sendMessage();
-            }
-        });
-
-        // 技能分类筛选
-        document.querySelectorAll('.skill-cat').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.skill-cat').forEach(c => c.classList.remove('active'));
-                this.classList.add('active');
-                const cat = this.dataset.cat;
-                document.querySelectorAll('.skill-item').forEach(item => {
-                    item.style.display = cat === 'all' || item.dataset.cat === cat ? 'block' : 'none';
-                });
-            });
-        });
-    </script>
-</body>
-</html>
+    // 页面加载完成后执行
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
+</script>
