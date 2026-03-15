@@ -1,1 +1,284 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=yes"><meta name="theme-color" content="#1a1a1a"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%23ff4d4d'>🦞</text></svg>"><title>AiAmigo · 你的AI朋友</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue','Microsoft YaHei',sans-serif}body{background:#0a0a0a;min-height:100vh;display:flex;justify-content:center;align-items:center;padding:16px}.container{max-width:1400px;width:100%;background:rgba(20,20,20,.8);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.1);border-radius:24px;box-shadow:0 20px 40px rgba(0,0,0,.5);overflow:hidden}.header{background:linear-gradient(135deg,#1a1a1a 0,#2d2d2d 100%);border-bottom:1px solid rgba(255,77,77,.3);padding:32px 40px;position:relative;overflow:hidden}.header::before{content:'';position:absolute;top:0;right:0;width:300px;height:300px;background:radial-gradient(circle,rgba(255,77,77,.1) 0,transparent 70%);border-radius:50%;pointer-events:none}.header h1{font-size:2.8em;font-weight:600;color:#fff;margin-bottom:8px;display:flex;align-items:center;gap:12px}.header h1 span{font-size:.5em;font-weight:400;color:rgba(255,255,255,.5);background:rgba(255,77,77,.2);padding:4px 12px;border-radius:40px;border:1px solid rgba(255,77,77,.3)}.header p{font-size:1.1em;color:rgba(255,255,255,.7);max-width:600px}.skill-count{display:inline-block;background:#ff4d4d;color:#fff;padding:4px 12px;border-radius:40px;font-size:.8em;font-weight:600;margin-left:16px}.region-bar{background:rgba(0,0,0,.3);padding:16px 40px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;border-bottom:1px solid rgba(255,255,255,.05)}.region-selector{display:flex;align-items:center;gap:12px}.region-selector label{color:rgba(255,255,255,.6);font-size:.9em;font-weight:500}.region-selector select{background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:8px 16px;color:#fff;font-size:.95em;cursor:pointer;outline:none;transition:all .2s}.region-selector select:hover{border-color:rgba(255,77,77,.5);background:rgba(0,0,0,.6)}.region-selector select option{background:#1a1a1a;color:#fff}.ip-badge{background:rgba(76,175,80,.15);border:1px solid rgba(76,175,80,.3);border-radius:40px;padding:6px 16px;color:#4caf50;font-size:.9em;font-weight:500;display:flex;align-items:center;gap:6px}.ip-badge::before{content:'🌐';font-size:1.1em}.user-bar{background:rgba(0,0,0,.2);padding:16px 40px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;border-bottom:1px solid rgba(255,255,255,.05)}.user-info{display:flex;align-items:center;gap:16px;flex-wrap:wrap}.user-avatar{width:40px;height:40px;background:linear-gradient(135deg,#ff4d4d,#ff8080);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;font-size:1.2em;border:2px solid rgba(255,255,255,.2)}.user-details{display:flex;flex-direction:column;gap:4px}.user-name{color:#fff;font-weight:500;font-size:1em}.user-plan{font-size:.85em;color:rgba(255,255,255,.5)}.badge{background:rgba(255,77,77,.2);border:1px solid rgba(255,77,77,.3);border-radius:40px;padding:4px 12px;font-size:.85em;color:#ff4d4d}.btn{padding:8px 20px;border-radius:8px;border:none;font-size:.95em;font-weight:500;cursor:pointer;transition:all .2s;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.9)}.btn:hover{background:rgba(255,255,255,.1);border-color:rgba(255,77,77,.5)}.btn-primary{background:#ff4d4d;border:1px solid #ff4d4d;color:#fff}.btn-primary:hover{background:#ff6666;border-color:#ff6666}.api-section{padding:24px 40px;border-bottom:1px solid rgba(255,255,255,.05)}.api-mode-tabs{display:flex;gap:12px;margin-bottom:20px;border-bottom:1px solid rgba(255,255,255,.05);padding-bottom:12px}.api-mode-tab{padding:6px 16px;background:transparent;border:1px solid rgba(255,255,255,.1);border-radius:30px;color:rgba(255,255,255,.6);font-size:.9em;cursor:pointer;transition:all .2s}.api-mode-tab.active{background:rgba(255,77,77,.2);border-color:#ff4d4d;color:#ff4d4d}.api-mode-tab:hover{background:rgba(255,255,255,.05);color:#fff}.api-input{display:flex;gap:16px;align-items:center;flex-wrap:wrap}.api-input label{color:rgba(255,255,255,.7);font-weight:500;min-width:80px}.api-input input{flex:2;min-width:300px;padding:12px 16px;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-family:monospace;font-size:14px;transition:all .2s}.api-input input:focus{border-color:#ff4d4d;outline:none;background:rgba(0,0,0,.5)}.api-status{display:flex;align-items:center;gap:8px;color:rgba(255,255,255,.5);font-size:.9em}.status-dot{width:8px;height:8px;border-radius:50%;background:#4caf50;box-shadow:0 0 10px #4caf50}.status-dot.disconnected{background:#ff4d4d;box-shadow:0 0 10px #ff4d4d}.status-dot.shared{background:#ffa500;box-shadow:0 0 10px #ffa500}.evolution-bar{background:rgba(0,0,0,.2);padding:12px 40px;border-bottom:1px solid rgba(255,255,255,.05);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}.evolution-metrics{display:flex;gap:24px;flex-wrap:wrap}.metric{display:flex;flex-direction:column;gap:4px}.metric-label{color:rgba(255,255,255,.5);font-size:.8em}.metric-value{color:#fff;font-size:1.1em;font-weight:600;display:flex;align-items:center;gap:8px}.trend{font-size:.8em;padding:2px 6px;border-radius:12px}.trend.up{background:rgba(76,175,80,.2);color:#4caf50}.trend.down{background:rgba(244,67,54,.2);color:#f44336}.mini-chart{font-size:1.2em;letter-spacing:2px;color:#ff4d4d}.main-content{display:flex;min-height:500px;border-bottom:1px solid rgba(255,255,255,.05)}.chat-section{flex:2;border-right:1px solid rgba(255,255,255,.05);display:flex;flex-direction:column}.chat-header{padding:16px 24px;border-bottom:1px solid rgba(255,255,255,.05);display:flex;justify-content:space-between;align-items:center}.chat-header h3{color:#fff;font-weight:500;font-size:1.1em}.api-source{font-size:.8em;padding:4px 12px;border-radius:20px;background:rgba(255,255,255,.05);color:rgba(255,255,255,.6)}.api-source.self{background:rgba(76,175,80,.15);color:#4caf50}.api-source.shared{background:rgba(255,165,0,.15);color:#ffa500}.learning-indicator{background:rgba(76,175,80,.2);border-radius:20px;padding:4px 12px;color:#4caf50;font-size:.8em;display:flex;align-items:center;gap:4px}.chat-container{flex:1;padding:24px;overflow-y:auto;max-height:400px;display:flex;flex-direction:column;gap:16px}.message{display:flex;margin-bottom:8px}.user-message{justify-content:flex-end}.bot-message{justify-content:flex-start}.message-content{max-width:80%;padding:12px 18px;border-radius:18px;font-size:14px;line-height:1.6;word-wrap:break-word}.user-message .message-content{background:#ff4d4d;color:#fff;border-bottom-right-radius:4px}.bot-message .message-content{background:rgba(255,255,255,.1);color:rgba(255,255,255,.9);border-bottom-left-radius:4px;border:1px solid rgba(255,255,255,.05)}.input-area{padding:20px 24px;border-top:1px solid rgba(255,255,255,.05)}.input-box{display:flex;gap:12px;align-items:center}.input-box textarea{flex:1;padding:12px 16px;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.1);border-radius:24px;color:#fff;font-size:14px;resize:none;min-height:50px;max-height:120px;line-height:1.5}.input-box textarea:focus{border-color:#ff4d4d;outline:none;background:rgba(0,0,0,.5)}.input-box button{width:50px;height:50px;border-radius:50%;background:#ff4d4d;border:none;color:#fff;font-size:24px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}.input-box button:hover{background:#ff6666;transform:scale(1.05)}.skills-section{flex:1;background:rgba(0,0,0,.2);padding:24px;overflow-y:auto;max-height:600px}.skills-header{margin-bottom:24px;position:sticky;top:0;background:rgba(0,0,0,.2);backdrop-filter:blur(10px);padding-bottom:16px;z-index:10}.skills-header h3{color:#fff;font-weight:500;font-size:1.1em;margin-bottom:8px;display:flex;align-items:center;gap:8px}.skills-header h3 span{background:#ff4d4d;color:#fff;padding:2px 8px;border-radius:20px;font-size:.7em}.skills-header p{color:rgba(255,255,255,.5);font-size:.9em}.skill-categories{display:flex;gap:8px;margin:12px 0;flex-wrap:wrap}.skill-cat{padding:4px 12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:20px;color:rgba(255,255,255,.7);font-size:.85em;cursor:pointer;transition:all .2s}.skill-cat.active{background:#ff4d4d;border-color:#ff4d4d;color:#fff}.skill-cat:hover{background:rgba(255,77,77,.3)}.skills-search{margin-top:12px}.skills-search input{width:100%;padding:10px 12px;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:.9em}.skills-search input:focus{border-color:#ff4d4d;outline:none}.skills-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:24px}.skill-item{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);border-radius:12px;padding:12px;transition:all .2s;cursor:pointer}.skill-item:hover{background:rgba(255,77,77,.1);border-color:rgba(255,77,77,.3);transform:translateY(-2px)}.skill-icon{font-size:1.5em;margin-bottom:8px}.skill-name{color:#fff;font-weight:500;font-size:.95em;margin-bottom:4px}.skill-desc{color:rgba(255,255,255,.4);font-size:.8em;margin-bottom:6px}.skill-badge{display:inline-block;background:rgba(255,77,77,.2);border-radius:4px;padding:2px 6px;font-size:.7em;color:#ff4d4d}.skills-footer{color:rgba(255,255,255,.3);font-size:.8em;text-align:center;padding-top:16px;border-top:1px solid rgba(255,255,255,.05);position:sticky;bottom:0;background:rgba(0,0,0,.2);backdrop-filter:blur(10px)}.footer{padding:24px 40px;background:rgba(0,0,0,.3);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;color:rgba(255,255,255,.4);font-size:.9em}.footer-links{display:flex;gap:24px;align-items:center}.footer-links a{color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s}.footer-links a:hover{color:#ff4d4d}.contact-group{display:flex;gap:12px;margin-left:16px;padding-left:16px;border-left:1px solid rgba(255,255,255,.1)}.contact-group a{color:#ff4d4d;font-size:1.1em}@media(max-width:768px){.header{padding:24px}.region-bar{padding:16px 24px}.user-bar{padding:16px 24px}.api-section{padding:20px 24px}.evolution-bar{padding:12px 24px}.main-content{flex-direction:column}.chat-section{border-right:none}.skills-section{max-height:400px}.footer{padding:20px 24px;flex-direction:column;text-align:center}.footer-links{flex-direction:column;gap:12px}.contact-group{margin-left:0;padding-left:0;border-left:none}}</style></head><body><div class="container"><div class="header"><h1>🦞 AiAmigo <span>Your AI Friend</span></h1><p id="headerDesc">Your AI Friend · 22 Languages · 100 Skills <span class="skill-count">100 skills</span></p></div><div class="region-bar"><div class="region-selector"><label id="langLabel">🌐 Language / 语言:</label><select id="languageSelect" onchange="changeLanguage(this.value)"><option value="en">🇺🇸 English</option><option value="zh">🇨🇳 中文</option><option value="es">🇪🇸 Español</option><option value="pt">🇧🇷 Português</option><option value="es-ar">🇦🇷 Argentina</option><option value="es-mx">🇲🇽 México</option><option value="fr">🇫🇷 Français</option><option value="de">🇩🇪 Deutsch</option><option value="ms">🇲🇾 Melayu</option><option value="ar">🇸🇦 العربية</option><option value="hi">🇮🇳 हिन्दी</option><option value="ur">🇵🇰 اردو</option><option value="ru">🇷🇺 Русский</option><option value="th">🇹🇭 ไทย</option><option value="vi">🇻🇳 Tiếng Việt</option><option value="id">🇮🇩 Indonesia</option><option value="fil">🇵🇭 Filipino</option><option value="ko">🇰🇷 한국어</option><option value="ja">🇯🇵 日本語</option><option value="sw">🇰🇪 Kiswahili</option><option value="am">🇪🇹 አማርኛ</option><option value="af">🇿🇦 Afrikaans</option></select></div><div class="ip-badge" id="ipBadge"><span id="ipLocation">Detecting your location...</span></div></div><div class="user-bar" id="userBar"><div class="user-info"><div class="user-avatar" id="userAvatar">👤</div><div class="user-details"><span class="user-name" id="userName">Visitor</span><span class="user-plan" id="userPlan">Free forever</span></div></div></div><div class="api-section"><div class="api-mode-tabs"><button class="api-mode-tab active" onclick="switchAPIMode('shared')">🌐 Shared API Pool</button><button class="api-mode-tab" onclick="switchAPIMode('self')">🔑 Use My Own API</button></div><div id="selfAPIInput" style="display:none"><div class="api-input"><label>🔑 Your API Key:</label><input type="password" id="userAPIKey" placeholder="sk-..."><button class="btn btn-primary" onclick="saveUserAPIKey()">Save</button></div><div class="api-status"><span class="status-dot disconnected" id="userAPIStatusDot"></span><span id="userAPIStatus">Not configured</span></div></div><div id="sharedAPIInfo"><div class="api-status"><span class="status-dot shared"></span><span>Shared Pool · 8100M+ Tokens · Auto-switch</span><span id="apiStatusText" style="margin-left:auto">Connected</span></div></div></div><div class="evolution-bar"><div class="evolution-metrics"><div class="metric"><span class="metric-label">Users learned</span><div class="metric-value">127 <span class="trend up">↑12</span><span class="mini-chart">▁▂▃▄▅▆▇█</span></div></div><div class="metric"><span class="metric-label">Preferences</span><div class="metric-value">3,842 <span class="trend up">↑38</span><span class="mini-chart">▁▂▃▄▅▆▇█</span></div></div><div class="metric"><span class="metric-label">Errors avoided</span><div class="metric-value">231 <span class="trend up">↑5</span><span class="mini-chart">▁▂▃▄▅▆▇█</span></div></div></div><div class="evolution-progress">🧠 Learning in progress</div></div><div class="main-content"><div class="chat-section"><div class="chat-header"><h3>💬 Chat</h3><div class="api-source shared" id="currentAPISource">🌐 Shared Pool</div><div class="learning-indicator" id="learningIndicator"><span>Learning your preferences</span></div></div><div class="chat-container" id="chatContainer"><div class="message bot-message"><div class="message-content" id="welcomeMessage">Hello! I'm AiAmigo.<br>Just start chatting, no login needed.</div></div></div><div class="input-area"><div class="input-box"><textarea id="userInput" placeholder="Ask me anything..." disabled></textarea><button id="sendBtn" onclick="sendMessage()" disabled>📤</button></div></div></div><div class="skills-section"><div class="skills-header"><h3>🛠️ 100 Skills <span>v3.0</span></h3><p id="skillsCount">100 skills ready</p><div class="skill-categories"><button class="skill-cat active" data-cat="all">全部</button><button class="skill-cat" data-cat="office">办公</button><button class="skill-cat" data-cat="creative">创作</button><button class="skill-cat" data-cat="dev">开发</button><button class="skill-cat" data-cat="data">数据</button><button class="skill-cat" data-cat="auto">自动化</button><button class="skill-cat" data-cat="life">生活</button></div><div class="skills-search"><input type="text" id="skillSearch" placeholder="Search skills..." onkeyup="filterSkills()"></div></div><div class="skills-grid" id="skillsGrid"></div><div class="skills-footer"><span>✨ 100 skills · Add more via chat</span></div></div></div><div class="footer"><div id="footerText">🦞 AiAmigo · 100 skills · 22 languages</div><div class="footer-links"><a href="#">Terms</a><a href="#">Privacy</a><div class="contact-group"><a href="mailto:13510966616@126.com" title="国内">📧 国内</a><a href="mailto:jakechen15118157506@gmail.com" title="国际">📧 国际</a><a href="mailto:jake@aiamigo.vip" title="品牌">📧 品牌</a></div></div></div></div><script>const TRANSLATIONS={en:{headerDesc:"Your AI Friend · 22 Languages · 100 Skills",langLabel:"🌐 Language:",ipDetecting:"Detecting your location...",ipChina:"📍 You are in China · Auto-switched to 中文",ipGlobal:"📍 You are outside China · Auto-switched to English",userNotLogged:"Visitor",welcome:"Hello! I'm AiAmigo.\nJust start chatting, no login needed.",inputPlaceholder:"Ask me anything...",learningIndicator:"Learning your preferences",footerText:"🦞 AiAmigo · 100 skills · 22 languages",thinking:"AiAmigo is thinking...",skillSearch:"Search skills...",skillsCount:"100 skills ready"},zh:{headerDesc:"你的AI朋友 · 22种语言 · 100大技能",langLabel:"🌐 语言:",ipDetecting:"正在检测你的位置...",ipChina:"📍 你在中国 · 已自动切换为中文",ipGlobal:"📍 你在海外 · 已自动切换为英文",userNotLogged:"访客",welcome:"你好！我是 AiAmigo。\n直接开始聊天，无需登录。",inputPlaceholder:"问我任何问题...",learningIndicator:"正在学习你的偏好",footerText:"🦞 AiAmigo · 100大技能 · 22种语言",thinking:"AiAmigo 正在思考...",skillSearch:"搜索技能...",skillsCount:"100项技能已就绪"},es:{headerDesc:"Tu Amigo AI · 22 Idiomas · 100 Habilidades",langLabel:"🌐 Idioma:",ipDetecting:"Detectando tu ubicación...",ipChina:"📍 Estás en China · Cambiado a 中文",ipGlobal:"📍 Estás fuera de China · Cambiado a Español",userNotLogged:"Visitante",welcome:"¡Hola! Soy AiAmigo.\nEmpieza a chatear, no necesitas registro.",inputPlaceholder:"Pregúntame algo...",learningIndicator:"Aprendiendo tus preferencias",footerText:"🦞 AiAmigo · 100 habilidades · 22 idiomas",thinking:"AiAmigo está pensando...",skillSearch:"Buscar habilidades...",skillsCount:"100 habilidades listas"}};const SKILLS=[{icon:'📄',name:'PDF全能处理',desc:'编辑/转换/合并/加密PDF',badge:'nano-pdf',cat:'office'},{icon:'📝',name:'文档总结',desc:'总结网页/PDF/视频/音频',badge:'summarize',cat:'office'},{icon:'📧',name:'邮件管家',desc:'Gmail/Outlook收发管理',badge:'gmail-manager',cat:'office'},{icon:'📊',name:'Excel数据分析',desc:'处理表格/生成图表',badge:'excel-pro',cat:'office'},{icon:'📑',name:'PPT生成',desc:'一键生成演示文稿',badge:'ppt-creator',cat:'office'},{icon:'📁',name:'文件管理',desc:'整理/重命名/备份文件',badge:'file-manager',cat:'office'},{icon:'📅',name:'日程管理',desc:'日历/提醒/会议安排',badge:'calendar-pro',cat:'office'},{icon:'📋',name:'会议纪要',desc:'自动生成会议记录',badge:'meeting-notes',cat:'office'},{icon:'📚',name:'知识库管理',desc:'Notion/Obsidian打通',badge:'knowledge-base',cat:'office'},{icon:'📎',name:'附件处理',desc:'批量下载/压缩附件',badge:'attachment-pro',cat:'office'},{icon:'🎨',name:'AI绘画',desc:'文本生成图像',badge:'nano-banana',cat:'creative'},{icon:'✍️',name:'人性化表达',desc:'去除AI味，自然口语',badge:'humanizer',cat:'creative'},{icon:'📝',name:'文案写作',desc:'小红书/公众号文案',badge:'copywriter',cat:'creative'},{icon:'🎬',name:'视频脚本',desc:'短视频/TikTok脚本',badge:'video-script',cat:'creative'},{icon:'🎵',name:'音乐生成',desc:'AI作曲配乐',badge:'music-gen',cat:'creative'},{icon:'📖',name:'小说创作',desc:'续写/改写/润色',badge:'novel-ai',cat:'creative'},{icon:'🎭',name:'角色扮演',desc:'模拟各种角色对话',badge:'role-play',cat:'creative'},{icon:'🎪',name:'PPT美化',desc:'设计/排版/动画',badge:'ppt-designer',cat:'creative'},{icon:'📷',name:'图片处理',desc:'修图/抠图/滤镜',badge:'image-editor',cat:'creative'},{icon:'🎥',name:'视频剪辑',desc:'剪辑/转场/字幕',badge:'video-editor',cat:'creative'},{icon:'💻',name:'代码生成',desc:'Python/JS/Java等',badge:'coding-agent',cat:'dev'},{icon:'🐞',name:'代码调试',desc:'自动找bug/修复',badge:'debug-pro',cat:'dev'},{icon:'📦',name:'GitHub管理',desc:'仓库/issue/PR',badge:'github',cat:'dev'},{icon:'🐳',name:'Docker管理',desc:'容器/镜像/部署',badge:'docker-pro',cat:'dev'},{icon:'☁️',name:'云服务器管理',desc:'ECS/LightHouse',badge:'cloud-cli',cat:'dev'},{icon:'📊',name:'API测试',desc:'接口调试/文档生成',badge:'api-tester',cat:'dev'},{icon:'📝',name:'代码注释',desc:'自动添加注释',badge:'code-doc',cat:'dev'},{icon:'🔧',name:'代码重构',desc:'优化/重写',badge:'code-refactor',cat:'dev'},{icon:'📈',name:'性能分析',desc:'代码性能优化',badge:'perf-analyzer',cat:'dev'},{icon:'🔐',name:'安全审计',desc:'代码漏洞检测',badge:'code-audit',cat:'dev'},{icon:'📈',name:'数据可视化',desc:'生成图表/仪表盘',badge:'data-viz',cat:'data'},{icon:'📊',name:'统计分析',desc:'回归/预测/分析',badge:'stats-pro',cat:'data'},{icon:'📉',name:'股票分析',desc:'K线/技术指标',badge:'stock-pro',cat:'data'},{icon:'📋',name:'爬虫工具',desc:'网页数据抓取',badge:'web-scraper',cat:'data'},{icon:'📦',name:'数据库查询',desc:'SQL生成/优化',badge:'sql-pro',cat:'data'},{icon:'📊',name:'Excel高级分析',desc:'透视表/宏',badge:'excel-advanced',cat:'data'},{icon:'📈',name:'商业智能',desc:'BI报表生成',badge:'bi-pro',cat:'data'},{icon:'📉',name:'金融分析',desc:'投资/风险评估',badge:'finance-pro',cat:'data'},{icon:'📊',name:'市场调研',desc:'竞品分析/报告',badge:'market-research',cat:'data'},{icon:'📋',name:'问卷分析',desc:'自动生成报告',badge:'survey-analyzer',cat:'data'},{icon:'🤖',name:'RPA自动化',desc:'模拟人工操作',badge:'rpa-pro',cat:'auto'},{icon:'⏰',name:'定时任务',desc:'Cron计划任务',badge:'cron-scheduler',cat:'auto'},{icon:'🔄',name:'工作流编排',desc:'多步骤自动化',badge:'workflow',cat:'auto'},{icon:'📁',name:'文件同步',desc:'自动备份/同步',badge:'file-sync',cat:'auto'},{icon:'📧',name:'邮件自动化',desc:'自动回复/分类',badge:'email-auto',cat:'auto'},{icon:'📱',name:'短信通知',desc:'重要提醒',badge:'sms-notify',cat:'auto'},{icon:'🤖',name:'主动行动',desc:'AI预判需求',badge:'proactive',cat:'auto'},{icon:'🔄',name:'自我进化',desc:'记录错误/优化',badge:'self-improve',cat:'auto'},{icon:'📊',name:'数据同步',desc:'多平台同步',badge:'data-sync',cat:'auto'},{icon:'🤖',name:'技能创建器',desc:'AI自己创建技能',badge:'skill-creator',cat:'auto'},{icon:'💬',name:'飞书集成',desc:'消息/文档',badge:'feishu',cat:'comm'},{icon:'💬',name:'钉钉集成',desc:'消息/审批',badge:'dingtalk',cat:'comm'},{icon:'💬',name:'企业微信',desc:'消息/通讯录',badge:'wecom',cat:'comm'},{icon:'💬',name:'Slack集成',desc:'频道/消息',badge:'slack',cat:'comm'},{icon:'💬',name:'Discord集成',desc:'服务器/机器人',badge:'discord',cat:'comm'},{icon:'💬',name:'Telegram',desc:'消息/群组',badge:'telegram',cat:'comm'},{icon:'💬',name:'WhatsApp',desc:'消息/群发',badge:'whatsapp',cat:'comm'},{icon:'💬',name:'QQ机器人',desc:'群消息管理',badge:'qqbot',cat:'comm'},{icon:'📢',name:'群发助手',desc:'多平台群发',badge:'mass-sender',cat:'comm'},{icon:'🤝',name:'团队协作',desc:'任务分配/进度',badge:'team-collab',cat:'comm'},{icon:'🌤️',name:'天气查询',desc:'实时/预报',badge:'weather',cat:'life'},{icon:'🗺️',name:'地图导航',desc:'路线/周边',badge:'map-pro',cat:'life'},{icon:'🍽️',name:'菜谱推荐',desc:'根据食材生成',badge:'recipe',cat:'life'},{icon:'💪',name:'健康助手',desc:'运动/饮食建议',badge:'health',cat:'life'},{icon:'🧘',name:'冥想引导',desc:'放松/专注',badge:'meditation',cat:'life'}];let currentUser=null,currentLang='en',currentRegion='china',isConnected=!1,apiMode='shared',userAPIKey='';const UserProfile={init:function(userId){let profile=localStorage.getItem(`profile_${userId}`);if(!profile){profile={userId:userId,firstSeen:new Date().toISOString(),timezone:this.detectTimezone(),activePatterns:{weekdays:[],weekends:[],nightOwlScore:.2,earlyBirdScore:.2},languagePreference:'en',skillFrequency:{},lastActive:new Date().toISOString(),totalVisits:1};this.save(userId,profile)}return profile},detectTimezone:function(){try{return Intl.DateTimeFormat().resolvedOptions().timeZone}catch(e){return'UTC'}},recordVisit:function(userId){let profile=this.get(userId);if(!profile)return;let now=new Date(),hour=now.getHours(),day=now.getDay(),isWeekend=day===0||day===6,timeStr=`${hour}:00-${hour+1}:00`;isWeekend?profile.activePatterns.weekends.includes(timeStr)||(profile.activePatterns.weekends.push(timeStr),profile.activePatterns.weekends.length>30&&profile.activePatterns.weekends.shift()):profile.activePatterns.weekdays.includes(timeStr)||(profile.activePatterns.weekdays.push(timeStr),profile.activePatterns.weekdays.length>30&&profile.activePatterns.weekdays.shift());this.calculateScores(profile);profile.lastActive=now.toISOString();profile.totalVisits++;this.save(userId,profile)},calculateScores:function(profile){let nightCount=0,earlyCount=0,totalRecords=0;profile.activePatterns.weekdays.forEach(t=>{let h=parseInt(t.split(':')[0]);(h>=22||h<=4)&&nightCount++;(h>=5&&h<=8)&&earlyCount++;totalRecords++});profile.activePatterns.weekends.forEach(t=>{let h=parseInt(t.split(':')[0]);(h>=23||h<=3)&&nightCount++;(h>=6&&h<=9)&&earlyCount++;totalRecords++});profile.activePatterns.nightOwlScore=totalRecords>0?Number((nightCount/totalRecords).toFixed(2)):.2;profile.activePatterns.earlyBirdScore=totalRecords>0?Number((earlyCount/totalRecords).toFixed(2)):.2},recordSkill:function(userId,skillName){let profile=this.get(userId);if(!profile)return;profile.skillFrequency[skillName]=profile.skillFrequency[skillName]?profile.skillFrequency[skillName]+1:1;this.save(userId,profile)},get:function(userId){let data=localStorage.getItem(`profile_${userId}`);return data?JSON.parse(data):null},save:function(userId,profile){localStorage.setItem(`profile_${userId}`,JSON.stringify(profile))},getRecommendedSkills:function(userId){let profile=this.get(userId);if(!profile||!profile.skillFrequency)return[];return Object.entries(profile.skillFrequency).sort((a,b)=>b[1]-a[1]).slice(0,5).map(i=>i[0])},getGreeting:function(userId){let profile=this.get(userId);if(!profile)return'Hello';let h=new Date().getHours();return profile.activePatterns.nightOwlScore>.6?(h>=22?'晚上好，夜猫子':h<=4?'这么晚还没睡？':'Hello'):profile.activePatterns.earlyBirdScore>.6&&h>=5&&h<=8?'早安，早起的人':h<12?'早上好':h<18?'下午好':'晚上好'}};function getAnonymousUserId(){let id=localStorage.getItem('anonymous_id');return id||(id='user_'+Math.random().toString(36).substr(2,9),localStorage.setItem('anonymous_id',id),id)}const userId=getAnonymousUserId();UserProfile.init(userId);UserProfile.recordVisit(userId);async function detectUserLocation(){try{let r=await fetch('https://ipapi.co/json/'),d=await r.json();document.getElementById('ipLocation').textContent=d.country_code==='CN'?`📍 中国 · ${d.city||d.country_name}`:`📍 ${d.country_name}`;changeLanguage(d.country_code==='CN'?'zh':'en')}catch(e){document.getElementById('ipLocation').textContent='📍 Location detection failed';changeLanguage('en')}}function loadSkills(){let g=document.getElementById('skillsGrid');g.innerHTML='';SKILLS.forEach(s=>{let e=document.createElement('div');e.className='skill-item';e.setAttribute('data-cat',s.cat||'other');e.innerHTML=`<div class="skill-icon">${s.icon}</div><div class="skill-name">${s.name}</div><div class="skill-desc">${s.desc}</div><div class="skill-badge">${s.badge}</div>`;g.appendChild(e)})}function filterSkills(){let s=document.getElementById('skillSearch').value.toLowerCase();document.querySelectorAll('.skill-item').forEach(i=>{i.style.display=i.textContent.toLowerCase().includes(s)?'block':'none'})}document.querySelectorAll('.skill-cat').forEach(b=>{b.addEventListener('click',function(){document.querySelectorAll('.skill-cat').forEach(c=>c.classList.remove('active'));this.classList.add('active');let cat=this.dataset.cat;document.querySelectorAll('.skill-item').forEach(i=>{cat==='all'?i.style.display='block':i.dataset.cat===cat?i.style.display='block':i.style.display='none'})})});function changeLanguage(l){currentLang=l;let t=TRANSLATIONS[l]||TRANSLATIONS.en;document.getElementById('headerDesc').innerHTML=t.headerDesc+' <span class="skill-count">100 skills</span>';document.getElementById('langLabel').textContent=t.langLabel;document.getElementById('userName').textContent=t.userNotLogged;document.getElementById('welcomeMessage').innerHTML=t.welcome.replace(/\n/g,'<br>');document.getElementById('userInput').placeholder=t.inputPlaceholder;document.getElementById('learningIndicator').innerHTML=`<span>${t.learningIndicator}</span>`;document.getElementById('footerText').textContent=t.footerText;document.getElementById('skillSearch').placeholder=t.skillSearch;document.getElementById('skillsCount').textContent=t.skillsCount}function switchAPIMode(m){apiMode=m;document.getElementById('sharedModeTab').classList.toggle('active',m==='shared');document.getElementById('selfModeTab').classList.toggle('active',m==='self');document.getElementById('selfAPIInput').style.display=m==='self'?'block':'none';document.getElementById('sharedAPIInfo').style.display=m==='shared'?'block':'none';let e=document.getElementById('currentAPISource');m==='shared'?(e.className='api-source shared',e.innerHTML='🌐 Shared Pool'):(e.className='api-source self',e.innerHTML='🔑 Your API Key')}function saveUserAPIKey(){let k=document.getElementById('userAPIKey').value;k&&k.startsWith('sk-')?(userAPIKey=k,document.getElementById('userAPIStatusDot').className='status-dot',document.getElementById('userAPIStatus').textContent='Saved',alert('API Key saved')):alert('Invalid API Key')}async function connectAPI(){let t=TRANSLATIONS[currentLang];document.getElementById('connectBtn').disabled=!0;document.getElementById('connectBtn').textContent=t.alertConnecting;setTimeout(()=>{isConnected=!0;document.getElementById('statusDot').className='status-dot';document.getElementById('apiStatusText').textContent=t.connected;document.getElementById('userInput').disabled=!1;document.getElementById('sendBtn').disabled=!1;document.getElementById('connectBtn').disabled=!1;document.getElementById('connectBtn').textContent=t.connect;let m=t.alertConnected+(apiMode==='shared'?' Using shared pool (8100M+ tokens)':' Using your API key');addMessage('bot','✅ '+m)},1e3)}async function sendMessage(){if(!isConnected){alert(TRANSLATIONS[currentLang].alertConnectFirst);return}let i=document.getElementById('userInput'),m=i.value.trim();if(!m)return;i.value='';addMessage('user',m);let tid=addTypingIndicator();setTimeout(()=>{removeTypingIndicator(tid);addMessage('bot',`This is a demo response using ${apiMode==='shared'?'shared pool':'your API key'}. In production, this would use real API.`)},1500)}function addMessage(r,c){let ct=document.getElementById('chatContainer'),d=document.createElement('div');d.className=`message ${r==='user'?'user-message':'bot-message'}`;let cd=document.createElement('div');cd.className='message-content';cd.innerHTML=c.replace(/\n/g,'<br>');d.appendChild(cd);ct.appendChild(d);ct.scrollTop=ct.scrollHeight}function addTypingIndicator(){let c=document.getElementById('chatContainer'),t=document.createElement('div');t.className='message bot-message typing';t.id='typing-'+Date.now();let cd=document.createElement('div');cd.className='message-content';cd.textContent=TRANSLATIONS[currentLang].thinking;t.appendChild(cd);c.appendChild(t);c.scrollTop=c.scrollHeight;return t.id}function removeTypingIndicator(i){document.getElementById(i)?.remove()}document.getElementById('userInput')?.addEventListener('keypress',function(e){e.key==='Enter'&&!e.shiftKey&&(e.preventDefault(),sendMessage())});document.addEventListener('DOMContentLoaded',function(){loadSkills();detectUserLocation();changeLanguage('en')});</script></body></html>
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AiAmigo · 你的小龙虾 · AI智能体</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        header {
+            text-align: center;
+            padding: 4rem 0 2rem;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+        
+        .greeting {
+            font-size: 1.2rem;
+            background: rgba(255, 255, 255, 0.1);
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            margin-top: 1rem;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+        
+        .metric {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+        
+        .metric-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+        
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 0.5rem 0;
+        }
+        
+        .trend {
+            font-size: 0.9rem;
+            margin-left: 0.5rem;
+        }
+        
+        .trend.up {
+            color: #4ade80;
+        }
+        
+        .mini-chart {
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            opacity: 0.6;
+        }
+        
+        .skill-categories {
+            display: flex;
+            gap: 8px;
+            margin: 12px 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .skill-cat {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .skill-cat:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .skill-cat.active {
+            background: white;
+            color: #764ba2;
+            border-color: white;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .skill-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+            backdrop-filter: blur(5px);
+        }
+        
+        .skill-card:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .skill-emoji {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        
+        .skill-name {
+            font-size: 0.9rem;
+        }
+        
+        .signature {
+            margin-top: 4rem;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.9rem;
+            text-align: center;
+        }
+        
+        .signature-languages {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 0.5rem;
+            margin: 1rem 0;
+            text-align: left;
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+        
+        .signature-item {
+            padding: 0.2rem 0;
+        }
+        
+        .signature-urls {
+            margin: 1rem 0;
+            font-size: 1rem;
+        }
+        
+        .signature-urls a {
+            color: white;
+            text-decoration: none;
+            border-bottom: 1px dotted rgba(255, 255, 255, 0.5);
+            margin: 0 0.5rem;
+        }
+        
+        .signature-urls a:hover {
+            border-bottom: 1px solid white;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 2rem 0;
+            opacity: 0.7;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>AiAmigo 🦞</h1>
+            <div class="subtitle">Your AI Friend · 你的小龙虾</div>
+            <div class="greeting" id="greeting-message"></div>
+        </header>
+
+        <div class="stats">
+            <div class="metric">
+                <div class="metric-label">Users learned</div>
+                <div class="metric-value">127 <span class="trend up">↑12</span></div>
+                <div class="mini-chart">▁▂▃▄▅▆▇█</div>
+            </div>
+            <div class="metric">
+                <div class="metric-label">Total Skills</div>
+                <div class="metric-value">100</div>
+                <div class="mini-chart">█▇▆▅▄▃▂▁</div>
+            </div>
+            <div class="metric">
+                <div class="metric-label">Languages</div>
+                <div class="metric-value">22</div>
+                <div class="mini-chart">▂▃▄▅▆▇█▇</div>
+            </div>
+        </div>
+
+        <div class="skill-categories">
+            <button class="skill-cat active" data-cat="all">全部</button>
+            <button class="skill-cat" data-cat="office">办公</button>
+            <button class="skill-cat" data-cat="creative">创作</button>
+            <button class="skill-cat" data-cat="dev">开发</button>
+            <button class="skill-cat" data-cat="data">数据</button>
+            <button class="skill-cat" data-cat="auto">自动化</button>
+            <button class="skill-cat" data-cat="life">生活</button>
+        </div>
+
+        <div class="skills-grid" id="skills-container">
+            <!-- 技能卡片会通过JavaScript动态生成 -->
+        </div>
+
+        <!-- 邮件签名部分 -->
+        <div class="signature">
+            <div>Best regards</div>
+            <div><strong>Jake</strong></div>
+            <div><a href="mailto:jake@aiamigo.vip" style="color: white; text-decoration: none;">jake@aiamigo.vip</a></div>
+            
+            <div style="margin: 1rem 0; border-bottom: 1px dashed rgba(255,255,255,0.3);"></div>
+            
+            <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">AiAmigo · Your AI Friend · 🦞</div>
+            
+            <div class="signature-urls">
+                🌐 <a href="https://aiamigo.vip" target="_blank">aiamigo.vip</a> | 
+                <a href="https://aiamigo.cn" target="_blank">aiamigo.cn</a>
+            </div>
+            
+            <div class="signature-languages">
+                <div class="signature-item">🇨🇳 越用越懂你的小龙虾</div>
+                <div class="signature-item">🇬🇧 An AI agent that understands you better</div>
+                <div class="signature-item">🇪🇸 Un agente que te entiende mejor</div>
+                <div class="signature-item">🇫🇷 Un agent IA qui te comprend mieux</div>
+                <div class="signature-item">🇩🇪 Ein KI-Agent, der dich besser versteht</div>
+                <div class="signature-item">🇷🇺 ИИ-агент, который понимает тебя лучше</div>
+                <div class="signature-item">🇸🇦 وكيل ذكاء اصطناعي يفهمك أكثر</div>
+                <div class="signature-item">🇯🇵 使えば使うほどあなたを理解するAI</div>
+                <div class="signature-item">🇰🇷 사용할수록 당신을 더 이해하는 AI</div>
+            </div>
+            
+            <div style="margin-top: 1rem; border-bottom: 1px dashed rgba(255,255,255,0.3);"></div>
+        </div>
+        
+        <div class="footer">
+            © 2026 AiAmigo · 22 Languages · 100 Skills
+        </div>
+    </div>
+
+    <script>
+        // 压缩后的JavaScript代码 - 您从minifier.org得到的结果
+        ${'const CONFIG={skills:[{name:\'翻译专家\',category:\'office\',emoji:\'🌐\'},{name:\'代码助手\',category:\'dev\',emoji:\'💻\'},{name:\'写作助手\',category:\'creative\',emoji:\'✍️\'},{name:\'数据分析\',category:\'data\',emoji:\'📊\'},{name:\'PPT制作\',category:\'office\',emoji:\'📽️\'},{name:\'Excel处理\',category:\'office\',emoji:\'📈\'},{name:\'图像生成\',category:\'creative\',emoji:\'🎨\'},{name:\'视频剪辑\',category:\'creative\',emoji:\'🎬\'},{name:\'音频处理\',category:\'creative\',emoji:\'🎵\'},{name:\'Python编程\',category:\'dev\',emoji:\'🐍\'},{name:\'JavaScript\',category:\'dev\',emoji:\'🟨\'},{name:\'数据库优化\',category:\'data\',emoji:\'🗄️\'},{name:\'数据可视化\',category:\'data\',emoji:\'📉\'},{name:\'邮件自动化\',category:\'auto\',emoji:\'📧\'},{name:\'日程管理\',category:\'life\',emoji:\'📅\'},{name:\'健康建议\',category:\'life\',emoji:\'🏥\'},{name:\'学习计划\',category:\'life\',emoji:\'📚\'},{name:\'多语言翻译\',category:\'office\',emoji:\'🈶\'},{name:\'合同审核\',category:\'office\',emoji:\'⚖️\'},{name:\'简历优化\',category:\'life\',emoji:\'📄\'},{name:\'面试模拟\',category:\'life\',emoji:\'🎯\'},{name:\'会议纪要\',category:\'office\',emoji:\'📝\'},{name:\'代码审查\',category:\'dev\',emoji:\'🔍\'},{name:\'API集成\',category:\'dev\',emoji:\'🔌\'},{name:\'数据清洗\',category:\'data\',emoji:\'🧹\'},{name:\'报表自动\',category:\'auto\',emoji:\'📑\'},{name:\'提醒助手\',category:\'life\',emoji:\'⏰\'},{name:\'旅游规划\',category:\'life\',emoji:\'✈️\'},{name:\'美食推荐\',category:\'life\',emoji:\'🍜\'},{name:\'运动计划\',category:\'life\',emoji:\'🏋️\'}]};let currentCategory=\'all\';const UserProfile={init:function(userId){let profile=localStorage.getItem(`profile_${userId}`);if(!profile){profile={userId:userId,firstSeen:new Date().toISOString(),timezone:this.detectTimezone(),activePatterns:{weekdays:[],weekends:[],nightOwlScore:0,earlyBirdScore:0},languagePreference:\'zh\',skillFrequency:{},lastActive:new Date().toISOString(),totalVisits:1};this.save(userId,profile)}return profile},detectTimezone:function(){try{return Intl.DateTimeFormat().resolvedOptions().timeZone}catch(e){return\'Asia/Shanghai\'}},recordVisit:function(userId){const profile=this.get(userId);if(!profile)return;const now=new Date();const hour=now.getHours();const day=now.getDay();const isWeekend=day===0||day===6;const timeStr=`${hour}:00-${hour+1}:00`;if(isWeekend){if(!profile.activePatterns.weekends.includes(timeStr)){profile.activePatterns.weekends.push(timeStr);if(profile.activePatterns.weekends.length>30){profile.activePatterns.weekends.shift()}}}else{if(!profile.activePatterns.weekdays.includes(timeStr)){profile.activePatterns.weekdays.push(timeStr);if(profile.activePatterns.weekdays.length>30){profile.activePatterns.weekdays.shift()}}}this.calculateScores(profile);profile.lastActive=now.toISOString();profile.totalVisits++;this.save(userId,profile)},calculateScores:function(profile){let nightCount=0;let earlyCount=0;let totalRecords=0;profile.activePatterns.weekdays.forEach(timeRange=>{const hour=parseInt(timeRange.split(\':\')[0]);if(hour>=22||hour<=4)nightCount++;if(hour>=5&&hour<=8)earlyCount++;totalRecords++});profile.activePatterns.weekends.forEach(timeRange=>{const hour=parseInt(timeRange.split(\':\')[0]);if(hour>=23||hour<=3)nightCount++;if(hour>=6&&hour<=9)earlyCount++;totalRecords++});profile.activePatterns.nightOwlScore=totalRecords>0?Number((nightCount/totalRecords).toFixed(2)):0.2;profile.activePatterns.earlyBirdScore=totalRecords>0?Number((earlyCount/totalRecords).toFixed(2)):0.2},recordSkill:function(userId,skillName){const profile=this.get(userId);if(!profile)return;if(!profile.skillFrequency[skillName]){profile.skillFrequency[skillName]=1}else{profile.skillFrequency[skillName]++}this.save(userId,profile)},get:function(userId){const data=localStorage.getItem(`profile_${userId}`);return data?JSON.parse(data):null},save:function(userId,profile){localStorage.setItem(`profile_${userId}`,JSON.stringify(profile))},getRecommendedSkills:function(userId){const profile=this.get(userId);if(!profile||!profile.skillFrequency)return[];return Object.entries(profile.skillFrequency).sort((a,b)=>b[1]-a[1]).slice(0,5).map(item=>item[0])},getGreeting:function(userId){const profile=this.get(userId);if(!profile)return\'你好\';const now=new Date();const hour=now.getHours();if(profile.activePatterns.nightOwlScore>0.6){if(hour>=22)return\'晚上好，夜猫子\';if(hour<=4)return\'这么晚还没睡？\'}if(profile.activePatterns.earlyBirdScore>0.6){if(hour>=5&&hour<=8)return\'早安，早起的人\'}if(hour<12)return\'早上好\';if(hour<18)return\'下午好\';return\'晚上好\'}};function getAnonymousUserId(){let userId=localStorage.getItem(\'anonymous_id\');if(!userId){userId=\'user_\'+Math.random().toString(36).substr(2,9);localStorage.setItem(\'anonymous_id\',userId)}return userId}const userId=getAnonymousUserId();UserProfile.init(userId);UserProfile.recordVisit(userId);function updateGreeting(){const greeting=UserProfile.getGreeting(userId);const greetingElement=document.getElementById(\'greeting-message\');if(greetingElement){greetingElement.textContent=greeting}}function renderSkills(category=\'all\'){const container=document.getElementById(\'skills-container\');if(!container)return;const filtered=category===\'all\'?CONFIG.skills:CONFIG.skills.filter(s=>s.category===category);container.innerHTML=filtered.map(skill=>`\n        <div class="skill-card" data-category="${skill.category}" onclick="UserProfile.recordSkill(\'${userId}\', \'${skill.name}\')">\n            <span class="skill-emoji">${skill.emoji}</span>\n            <span class="skill-name">${skill.name}</span>\n        </div>\n    `).join(\'\');document.querySelectorAll(\'.skill-cat\').forEach(btn=>{btn.classList.toggle(\'active\',btn.dataset.cat===category)})}function updateEvolutionMetrics(){const profile=UserProfile.get(userId);if(!profile)return;const usersLearned=document.querySelector(\'.metric-value\');if(usersLearned){const baseCount=127+(profile.totalVisits||0);usersLearned.innerHTML=`${baseCount} <span class="trend up">↑${profile.totalVisits || 0}</span>`}const nightScore=profile.activePatterns.nightOwlScore||0.2;const earlyScore=profile.activePatterns.earlyBirdScore||0.2}document.addEventListener(\'DOMContentLoaded\',function(){updateGreeting();renderSkills(\'all\');updateEvolutionMetrics();document.querySelectorAll(\'.skill-cat\').forEach(btn=>{btn.addEventListener(\'click\',function(){renderSkills(this.dataset.cat)})})});'}
+    </script>
+</body>
+</html>
