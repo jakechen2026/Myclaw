@@ -835,13 +835,37 @@
         function changeLanguage(l){currentLang=l;let t=TRANSLATIONS[l]||TRANSLATIONS.zh;document.getElementById('headerDesc').innerHTML=t.headerDesc+' <span class="skill-count">100 skills</span>';document.getElementById('langLabel').textContent=t.langLabel;document.getElementById('userName').textContent=t.userNotLogged;document.getElementById('welcomeMessage').innerHTML=t.welcome.replace(/\n/g,'<br>');document.getElementById('userInput').placeholder=t.inputPlaceholder;document.getElementById('learningIndicator').innerHTML=`<span>${t.learningIndicator}</span>`;document.getElementById('footerText').textContent=t.footerText;document.getElementById('skillSearch').placeholder=t.skillSearch;document.getElementById('skillsCount').textContent=t.skillsCount}
         function switchAPIMode(m){apiMode=m;document.getElementById('sharedModeTab').classList.toggle('active',m==='shared');document.getElementById('selfModeTab').classList.toggle('active',m==='self');document.getElementById('selfAPIInput').style.display=m==='self'?'block':'none';document.getElementById('sharedAPIInfo').style.display=m==='shared'?'block':'none';let e=document.getElementById('currentAPISource');e.innerHTML=m==='shared'?'🌐 共享池':'🔑 自己的Key';e.className=m==='shared'?'api-source shared':'api-source self'}
         function saveUserAPIKey(){let k=document.getElementById('userAPIKey').value;k&&k.startsWith('sk-')?(userAPIKey=k,document.getElementById('userAPIStatusDot').className='status-dot',document.getElementById('userAPIStatus').textContent='已保存',alert('API Key saved')):alert('请输入有效的API Key')}
-        async function connectAPI(){let t=TRANSLATIONS[currentLang];document.getElementById('connectBtn').disabled=!0;document.getElementById('connectBtn').textContent='连接中...';setTimeout(()=>{isConnected=!0;document.getElementById('statusDot').className='status-dot';document.getElementById('apiStatusText').textContent='已连接';document.getElementById('userInput').disabled=!1;document.getElementById('sendBtn').disabled=!1;document.getElementById('connectBtn').disabled=!1;document.getElementById('connectBtn').textContent='连接';let m='✅ 连接成功！'+(apiMode==='shared'?' 使用共享池 (8100万+ tokens)':' 使用你的API Key');addMessage('bot',m)},1e3)}
+        // ==================== 自动连接API ====================
+async function autoConnectAPI() {
+    // 直接设置连接状态
+    setTimeout(() => {
+        isConnected = true;
+        document.getElementById('statusDot').className = 'status-dot';
+        document.getElementById('apiStatusText').textContent = '已连接';
+        document.getElementById('userInput').disabled = false;
+        document.getElementById('sendBtn').disabled = false;
+        
+        // 如果有连接按钮，隐藏或删除它
+        const connectBtn = document.getElementById('connectBtn');
+        if (connectBtn) {
+            connectBtn.style.display = 'none';
+        }
+        
+        console.log('✅ AiAmigo 自动连接成功');
+        addMessage('bot', '✅ 连接成功！使用共享池 (8100万+ tokens)');
+    }, 500); // 0.5秒后自动连接
+}
         async function sendMessage(){if(!isConnected){alert('请先连接API');return}let i=document.getElementById('userInput'),m=i.value.trim();if(!m)return;i.value='';addMessage('user',m);let tid=addTypingIndicator();setTimeout(()=>{removeTypingIndicator(tid);addMessage('bot','这是演示回复，正式版会调用真实API。')},1500)}
         function addMessage(r,c){let ct=document.getElementById('chatContainer'),d=document.createElement('div');d.className=`message ${r==='user'?'user-message':'bot-message'}`;let cd=document.createElement('div');cd.className='message-content';cd.innerHTML=c.replace(/\n/g,'<br>');d.appendChild(cd);ct.appendChild(d);ct.scrollTop=ct.scrollHeight}
         function addTypingIndicator(){let c=document.getElementById('chatContainer'),t=document.createElement('div');t.className='message bot-message typing';t.id='typing-'+Date.now();let cd=document.createElement('div');cd.className='message-content';cd.textContent=TRANSLATIONS[currentLang]?.thinking||'AiAmigo 正在思考...';t.appendChild(cd);c.appendChild(t);c.scrollTop=c.scrollHeight;return t.id}
         function removeTypingIndicator(i){document.getElementById(i)?.remove()}
         document.getElementById('userInput')?.addEventListener('keypress',function(e){e.key==='Enter'&&!e.shiftKey&&(e.preventDefault(),sendMessage())});
-        document.addEventListener('DOMContentLoaded',function(){loadSkills();detectUserLocation();changeLanguage('zh')});
+        document.addEventListener('DOMContentLoaded', function() {
+    loadSkills();
+    detectUserLocation();
+    changeLanguage('zh');
+    autoConnectAPI(); // 
+});
     </script>
 </body>
 </html>
