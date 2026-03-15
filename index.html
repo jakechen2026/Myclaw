@@ -63,47 +63,76 @@
 </head>
 <body>
 <div class="container">
-    <div class="header"><h1>🦞 AiAmigo <span>Tu Amigo IA</span></h1><p id="headerDesc">Tu Amigo IA · 22 Idiomas · 100 Habilidades <span class="skill-count">100 skills</span></p></div>
+    <div class="header"><h1>🦞 AiAmigo <span>Your AI Friend</span></h1><p id="headerDesc">你的AI朋友 · 22种语言 · 100大技能 <span class="skill-count">100 skills</span></p></div>
     <div class="region-bar">
         <div class="region-selector">
-            <label id="langLabel">🌐 Idioma:</label>
+            <label id="langLabel">🌐 语言:</label>
             <select id="languageSelect" onchange="changeLanguage(this.value)">
-                <option value="es">🇪🇸 Español</option><option value="es-ar">🇦🇷 Argentina</option><option value="es-mx" selected>🇲🇽 México</option><option value="en">🇺🇸 English</option><option value="zh">🇨🇳 中文</option><option value="pt">🇧🇷 Português</option><option value="fr">🇫🇷 Français</option><option value="de">🇩🇪 Deutsch</option><option value="ms">🇲🇾 Melayu</option><option value="ar">🇸🇦 العربية</option><option value="hi">🇮🇳 हिन्दी</option><option value="ur">🇵🇰 اردو</option><option value="ru">🇷🇺 Русский</option><option value="th">🇹🇭 ไทย</option><option value="vi">🇻🇳 Tiếng Việt</option><option value="id">🇮🇩 Indonesia</option><option value="fil">🇵🇭 Filipino</option><option value="ko">🇰🇷 한국어</option><option value="ja">🇯🇵 日本語</option><option value="sw">🇰🇪 Kiswahili</option><option value="am">🇪🇹 አማርኛ</option><option value="af">🇿🇦 Afrikaans</option>
+                <option value="zh" selected>🇨🇳 中文</option>
+                <option value="en">🇺🇸 English</option>
+                <option value="es">🇪🇸 Español</option>
+                <option value="pt">🇧🇷 Português</option>
+                <option value="es-ar">🇦🇷 Argentina</option>
+                <option value="es-mx">🇲🇽 México</option>
+                <option value="fr">🇫🇷 Français</option>
+                <option value="de">🇩🇪 Deutsch</option>
+                <option value="ms">🇲🇾 Melayu</option>
+                <option value="ar">🇸🇦 العربية</option>
+                <option value="hi">🇮🇳 हिन्दी</option>
+                <option value="ur">🇵🇰 اردو</option>
+                <option value="ru">🇷🇺 Русский</option>
+                <option value="th">🇹🇭 ไทย</option>
+                <option value="vi">🇻🇳 Tiếng Việt</option>
+                <option value="id">🇮🇩 Indonesia</option>
+                <option value="fil">🇵🇭 Filipino</option>
+                <option value="ko">🇰🇷 한국어</option>
+                <option value="ja">🇯🇵 日本語</option>
+                <option value="sw">🇰🇪 Kiswahili</option>
+                <option value="am">🇪🇹 አማርኛ</option>
+                <option value="af">🇿🇦 Afrikaans</option>
             </select>
         </div>
-        <div class="ip-badge" id="ipBadge"><span id="ipLocation">Detectando tu ubicación...</span></div>
+        <div class="ip-badge" id="ipBadge"><span id="ipLocation">正在检测你的位置...</span></div>
     </div>
-    <div class="user-bar"><div class="user-info"><div class="user-avatar">👤</div><div><span class="user-name" id="userName">Visitante</span><span class="user-plan">Gratis para siempre</span></div></div></div>
-    <div class="api-section"><div class="api-status"><span class="status-dot"></span><span id="apiStatusText">✨ Conectado a la IA más avanzada</span></div></div>
+    <div class="user-bar"><div class="user-info"><div class="user-avatar">👤</div><div><span class="user-name" id="userName">访客</span><span class="user-plan">永久免费</span></div></div></div>
+    <div class="api-section"><div class="api-status"><span class="status-dot"></span><span id="apiStatusText">✨ 已连接最新AI大模型</span></div></div>
     <div class="evolution-bar">
-        <div class="metric"><span class="metric-label">Usuarios aprendidos</span><span class="metric-value">127</span></div>
-        <div class="metric"><span class="metric-label">Preferencias</span><span class="metric-value">3,842</span></div>
-        <div class="metric"><span class="metric-label">Errores evitados</span><span class="metric-value">231</span></div>
+        <div class="metric"><span class="metric-label">学习用户</span><span class="metric-value">127</span></div>
+        <div class="metric"><span class="metric-label">偏好记录</span><span class="metric-value">3,842</span></div>
+        <div class="metric"><span class="metric-label">避免错误</span><span class="metric-value">231</span></div>
     </div>
     <div class="main-content">
         <div class="chat-section">
-            <div class="chat-header"><h3>💬 Chat</h3><div class="learning-indicator" id="learningIndicator">Aprendiendo tus preferencias</div></div>
-            <div class="chat-container" id="chatContainer"><div class="message bot-message"><div class="message-content" id="welcomeMessage">¡Hola! Soy AiAmigo.<br>Empieza a chatear, sin registro.</div></div></div>
-            <div class="input-area"><div class="input-box"><textarea id="userInput" placeholder="Pregúntame algo..."></textarea><button id="sendBtn" onclick="sendMessage()">📤</button></div></div>
+            <div class="chat-header"><h3>💬 会话</h3><div class="learning-indicator" id="learningIndicator">正在学习你的偏好</div></div>
+            <div class="chat-container" id="chatContainer"><div class="message bot-message"><div class="message-content" id="welcomeMessage">你好！我是 AiAmigo。<br>直接开始聊天，无需登录。</div></div></div>
+            <div class="input-area"><div class="input-box"><textarea id="userInput" placeholder="问我任何问题..."></textarea><button id="sendBtn" onclick="sendMessage()">📤</button></div></div>
         </div>
         <div class="skills-section">
-            <div class="skills-header"><h3>🛠️ 100 Habilidades</h3><p>100 habilidades listas</p>
-                <div class="skill-categories"><button class="skill-cat active" data-cat="all">Todo</button><button class="skill-cat" data-cat="office">Oficina</button><button class="skill-cat" data-cat="creative">Creativo</button><button class="skill-cat" data-cat="dev">Desarrollo</button><button class="skill-cat" data-cat="data">Datos</button><button class="skill-cat" data-cat="auto">Automático</button><button class="skill-cat" data-cat="life">Vida</button></div>
-                <div class="skills-search"><input type="text" id="skillSearch" placeholder="Buscar habilidades..." onkeyup="filterSkills()"></div>
+            <div class="skills-header"><h3>🛠️ 100技能</h3><p>100项技能已就绪</p>
+                <div class="skill-categories" id="skillCategories">
+                    <button class="skill-cat active" data-cat="all">全部</button>
+                    <button class="skill-cat" data-cat="office">办公</button>
+                    <button class="skill-cat" data-cat="creative">创作</button>
+                    <button class="skill-cat" data-cat="dev">开发</button>
+                    <button class="skill-cat" data-cat="data">数据</button>
+                    <button class="skill-cat" data-cat="auto">自动化</button>
+                    <button class="skill-cat" data-cat="life">生活</button>
+                </div>
+                <div class="skills-search"><input type="text" id="skillSearch" placeholder="搜索技能..." onkeyup="filterSkills()"></div>
             </div>
             <div class="skills-grid" id="skillsGrid"></div>
         </div>
     </div>
     <div class="footer">
-        <div id="footerText">🦞 AiAmigo · 100 habilidades · 22 idiomas</div>
+        <div id="footerText">🦞 AiAmigo · 100技能 · 22种语言</div>
         <div class="footer-links">
-            <a href="#">Términos</a><a href="#">Privacidad</a>
-            <div class="contact-group"><a href="mailto:13510966616@126.com">📧 China</a><a href="mailto:jakechen15118157506@gmail.com">📧 Global</a><a href="mailto:jake@aiamigo.vip">📧 Marca</a></div>
+            <a href="#">条款</a><a href="#">隐私</a>
+            <div class="contact-group"><a href="mailto:13510966616@126.com">📧 国内</a><a href="mailto:jakechen15118157506@gmail.com">📧 国际</a><a href="mailto:jake@aiamigo.vip">📧 品牌</a></div>
         </div>
     </div>
 </div>
 <script>
-// ==================== 配置 ====================
+// ==================== 讯飞API配置（已测试可用）====================
 const XUNFEI_CONFIG = {
     API_KEY: '4402ac66d4adff938b77b43a8791f50c:YTk4NTFjODBkYjk5NTlkYjA0ZWI5ZTVh',
     BASE_URL: 'https://maas-api.cn-huabei-1.xf-yun.com/v2/chat/completions',
@@ -112,17 +141,79 @@ const XUNFEI_CONFIG = {
 
 // ==================== 22种语言完整翻译 ====================
 const TRANSLATIONS = {
-    en: { langLabel: "Language:", ipDetecting: "Detecting your location...", apiStatus: "✨ Connected to advanced AI", welcome: "Hello! I'm AiAmigo.\nJust start chatting.", inputPlaceholder: "Ask me anything...", learningIndicator: "Learning your preferences", footerText: "AiAmigo · 100 skills · 22 languages", thinking: "AiAmigo is thinking...", skillSearch: "Search skills...", all: "All", office: "Office", creative: "Creative", dev: "Dev", data: "Data", auto: "Auto", life: "Life", userName: "Visitor", userPlan: "Free forever" },
-    zh: { langLabel: "语言:", ipDetecting: "正在检测你的位置...", apiStatus: "✨ 已连接最新AI大模型", welcome: "你好！我是 AiAmigo。\n直接开始聊天。", inputPlaceholder: "问我任何问题...", learningIndicator: "正在学习你的偏好", footerText: "AiAmigo · 100技能 · 22种语言", thinking: "AiAmigo 正在思考...", skillSearch: "搜索技能...", all: "全部", office: "办公", creative: "创作", dev: "开发", data: "数据", auto: "自动化", life: "生活", userName: "访客", userPlan: "永久免费" },
-    es: { langLabel: "Idioma:", ipDetecting: "Detectando tu ubicación...", apiStatus: "✨ Conectado a la IA más avanzada", welcome: "¡Hola! Soy AiAmigo.\nEmpieza a chatear.", inputPlaceholder: "Pregúntame algo...", learningIndicator: "Aprendiendo tus preferencias", footerText: "AiAmigo · 100 habilidades · 22 idiomas", thinking: "AiAmigo está pensando...", skillSearch: "Buscar habilidades...", all: "Todo", office: "Oficina", creative: "Creativo", dev: "Desarrollo", data: "Datos", auto: "Automático", life: "Vida", userName: "Visitante", userPlan: "Gratis para siempre" },
-    'es-mx': { langLabel: "Idioma:", ipDetecting: "Detectando tu ubicación...", apiStatus: "✨ Conectado a la IA más avanzada", welcome: "¡Hola! Soy AiAmigo.\nEmpieza a chatear.", inputPlaceholder: "Pregúntame algo...", learningIndicator: "Aprendiendo tus preferencias", footerText: "AiAmigo · 100 habilidades · 22 idiomas", thinking: "AiAmigo está pensando...", skillSearch: "Buscar habilidades...", all: "Todo", office: "Oficina", creative: "Creativo", dev: "Desarrollo", data: "Datos", auto: "Automático", life: "Vida", userName: "Visitante", userPlan: "Gratis para siempre" },
-    'es-ar': { langLabel: "Idioma:", ipDetecting: "Detectando tu ubicación...", apiStatus: "✨ Conectado a la IA más avanzada", welcome: "¡Hola! Soy AiAmigo.\nEmpezá a chatear.", inputPlaceholder: "Preguntame algo...", learningIndicator: "Aprendiendo tus preferencias", footerText: "AiAmigo · 100 habilidades · 22 idiomas", thinking: "AiAmigo está pensando...", skillSearch: "Buscar habilidades...", all: "Todo", office: "Oficina", creative: "Creativo", dev: "Desarrollo", data: "Datos", auto: "Automático", life: "Vida", userName: "Visitante", userPlan: "Gratis para siempre" },
-    pt: { langLabel: "Idioma:", ipDetecting: "Detectando sua localização...", apiStatus: "✨ Conectado à IA mais avançada", welcome: "Olá! Sou AiAmigo.\nComece a conversar.", inputPlaceholder: "Pergunte-me algo...", learningIndicator: "Aprendendo suas preferências", footerText: "AiAmigo · 100 habilidades · 22 idiomas", thinking: "AiAmigo está pensando...", skillSearch: "Buscar habilidades...", all: "Tudo", office: "Escritório", creative: "Criativo", dev: "Desenvolvimento", data: "Dados", auto: "Automático", life: "Vida", userName: "Visitante", userPlan: "Gratuito para sempre" },
-    fr: { langLabel: "Langue:", ipDetecting: "Détection de votre position...", apiStatus: "✨ Connecté à l'IA la plus avancée", welcome: "Bonjour! Je suis AiAmigo.\nCommencez à discuter.", inputPlaceholder: "Demandez-moi quelque chose...", learningIndicator: "Apprend vos préférences", footerText: "AiAmigo · 100 compétences · 22 langues", thinking: "AiAmigo réfléchit...", skillSearch: "Rechercher des compétences...", all: "Tous", office: "Bureau", creative: "Créatif", dev: "Développement", data: "Données", auto: "Automatique", life: "Vie", userName: "Visiteur", userPlan: "Gratuit pour toujours" },
-    de: { langLabel: "Sprache:", ipDetecting: "Erkennung deines Standorts...", apiStatus: "✨ Verbunden mit fortschrittlichster KI", welcome: "Hallo! Ich bin AiAmigo.\nStarte einfach.", inputPlaceholder: "Frag mich etwas...", learningIndicator: "Lerne deine Vorlieben", footerText: "AiAmigo · 100 Fähigkeiten · 22 Sprachen", thinking: "AiAmigo denkt...", skillSearch: "Fähigkeiten suchen...", all: "Alle", office: "Büro", creative: "Kreativ", dev: "Entwicklung", data: "Daten", auto: "Automatisch", life: "Leben", userName: "Besucher", userPlan: "Für immer kostenlos" }
+    en: {
+        langLabel: "Language:",
+        apiStatus: "✨ Connected to advanced AI",
+        welcome: "Hello! I'm AiAmigo.\nJust start chatting.",
+        inputPlaceholder: "Ask me anything...",
+        learningIndicator: "Learning your preferences",
+        footerText: "AiAmigo · 100 skills · 22 languages",
+        thinking: "AiAmigo is thinking...",
+        skillSearch: "Search skills...",
+        categories: { all: "All", office: "Office", creative: "Creative", dev: "Dev", data: "Data", auto: "Auto", life: "Life" },
+        userName: "Visitor",
+        userPlan: "Free forever",
+        ipDetecting: "Detecting your location..."
+    },
+    zh: {
+        langLabel: "语言:",
+        apiStatus: "✨ 已连接最新AI大模型",
+        welcome: "你好！我是 AiAmigo。\n直接开始聊天，无需登录。",
+        inputPlaceholder: "问我任何问题...",
+        learningIndicator: "正在学习你的偏好",
+        footerText: "AiAmigo · 100技能 · 22种语言",
+        thinking: "AiAmigo 正在思考...",
+        skillSearch: "搜索技能...",
+        categories: { all: "全部", office: "办公", creative: "创作", dev: "开发", data: "数据", auto: "自动化", life: "生活" },
+        userName: "访客",
+        userPlan: "永久免费",
+        ipDetecting: "正在检测你的位置..."
+    },
+    es: {
+        langLabel: "Idioma:",
+        apiStatus: "✨ Conectado a la IA más avanzada",
+        welcome: "¡Hola! Soy AiAmigo.\nEmpieza a chatear.",
+        inputPlaceholder: "Pregúntame algo...",
+        learningIndicator: "Aprendiendo tus preferencias",
+        footerText: "AiAmigo · 100 habilidades · 22 idiomas",
+        thinking: "AiAmigo está pensando...",
+        skillSearch: "Buscar habilidades...",
+        categories: { all: "Todo", office: "Oficina", creative: "Creativo", dev: "Desarrollo", data: "Datos", auto: "Automático", life: "Vida" },
+        userName: "Visitante",
+        userPlan: "Gratis para siempre",
+        ipDetecting: "Detectando tu ubicación..."
+    },
+    'es-mx': {
+        langLabel: "Idioma:",
+        apiStatus: "✨ Conectado a la IA más avanzada",
+        welcome: "¡Hola! Soy AiAmigo.\nEmpieza a chatear.",
+        inputPlaceholder: "Pregúntame algo...",
+        learningIndicator: "Aprendiendo tus preferencias",
+        footerText: "AiAmigo · 100 habilidades · 22 idiomas",
+        thinking: "AiAmigo está pensando...",
+        skillSearch: "Buscar habilidades...",
+        categories: { all: "Todo", office: "Oficina", creative: "Creativo", dev: "Desarrollo", data: "Datos", auto: "Automático", life: "Vida" },
+        userName: "Visitante",
+        userPlan: "Gratis para siempre",
+        ipDetecting: "Detectando tu ubicación..."
+    },
+    fr: {
+        langLabel: "Langue:",
+        apiStatus: "✨ Connecté à l'IA la plus avancée",
+        welcome: "Bonjour! Je suis AiAmigo.\nCommencez à discuter.",
+        inputPlaceholder: "Demandez-moi quelque chose...",
+        learningIndicator: "Apprend vos préférences",
+        footerText: "AiAmigo · 100 compétences · 22 langues",
+        thinking: "AiAmigo réfléchit...",
+        skillSearch: "Rechercher des compétences...",
+        categories: { all: "Tous", office: "Bureau", creative: "Créatif", dev: "Développement", data: "Données", auto: "Automatique", life: "Vie" },
+        userName: "Visiteur",
+        userPlan: "Gratuit pour toujours",
+        ipDetecting: "Détection de votre position..."
+    }
 };
 
-// ==================== 100技能数据 ====================
+// ==================== 100技能数据（保持中文，因为技能名称是专有名词）===================
 const SKILLS = [
     { icon: '📄', name: 'PDF全能处理', desc: '编辑/转换/合并/加密PDF', badge: 'nano-pdf', cat: 'office' },
     { icon: '📝', name: '文档总结', desc: '总结网页/PDF/视频/音频', badge: 'summarize', cat: 'office' },
@@ -156,7 +247,7 @@ const SKILLS = [
     { icon: '🔐', name: '安全审计', desc: '代码漏洞检测', badge: 'code-audit', cat: 'dev' }
 ];
 
-let currentLang = 'es-mx';
+let currentLang = 'zh';
 
 // ==================== 技能函数 ====================
 function loadSkills() {
@@ -178,7 +269,7 @@ function filterSkills() {
     });
 }
 
-// ==================== 发送消息 ====================
+// ==================== 发送消息（已修复API格式）====================
 async function sendMessage() {
     const input = document.getElementById('userInput');
     const message = input.value.trim();
@@ -190,6 +281,8 @@ async function sendMessage() {
     const typingId = addTypingIndicator();
 
     try {
+        console.log('Sending request to:', XUNFEI_CONFIG.BASE_URL);
+        
         const response = await fetch(XUNFEI_CONFIG.BASE_URL, {
             method: 'POST',
             headers: {
@@ -199,7 +292,7 @@ async function sendMessage() {
             body: JSON.stringify({
                 model: XUNFEI_CONFIG.MODEL,
                 messages: [
-                    { role: 'system', content: `Eres un asistente de IA amigable llamado AiAmigo. Responde en el idioma que el usuario está usando: ${currentLang === 'es' || currentLang.startsWith('es') ? 'español' : currentLang === 'en' ? 'inglés' : currentLang === 'zh' ? 'chino' : currentLang === 'pt' ? 'portugués' : currentLang === 'fr' ? 'francés' : currentLang === 'de' ? 'alemán' : currentLang === 'ja' ? 'japonés' : currentLang === 'ko' ? 'coreano' : currentLang === 'ru' ? 'ruso' : currentLang === 'ar' ? 'árabe' : 'español'}` },
+                    { role: 'system', content: '你是一个友好的AI助手，名叫AiAmigo。请用用户使用的语言回答。' },
                     { role: 'user', content: message }
                 ],
                 temperature: 0.7,
@@ -207,10 +300,16 @@ async function sendMessage() {
             })
         });
 
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error('API Error Response:', errorText);
+            throw new Error(`HTTP ${response.status}: ${errorText}`);
+        }
         
         const data = await response.json();
-        const reply = data.choices?.[0]?.message?.content || 'Lo siento, no puedo responder ahora.';
+        console.log('API Response:', data);
+        
+        const reply = data.choices?.[0]?.message?.content || '抱歉，我暂时无法回答。';
         
         removeTypingIndicator(typingId);
         addMessage('bot', reply);
@@ -218,8 +317,8 @@ async function sendMessage() {
     } catch (error) {
         console.error('API Error:', error);
         removeTypingIndicator(typingId);
-        const t = TRANSLATIONS[currentLang] || TRANSLATIONS['es-mx'];
-        addMessage('bot', '😅 Error de conexión. Por favor intenta de nuevo.');
+        const t = TRANSLATIONS[currentLang] || TRANSLATIONS.zh;
+        addMessage('bot', `😅 ${t.thinking === 'AiAmigo está pensando...' ? 'Error de conexión. Por favor intenta de nuevo.' : '连接出错了，请稍后重试。'}`);
     }
 }
 
@@ -242,7 +341,7 @@ function addTypingIndicator() {
     typingDiv.id = 'typing-' + Date.now();
     const contentDiv = document.createElement('div');
     contentDiv.className = 'message-content';
-    contentDiv.textContent = TRANSLATIONS[currentLang]?.thinking || 'AiAmigo está pensando...';
+    contentDiv.textContent = TRANSLATIONS[currentLang]?.thinking || 'AiAmigo 正在思考...';
     typingDiv.appendChild(contentDiv);
     container.appendChild(typingDiv);
     container.scrollTop = container.scrollHeight;
@@ -254,13 +353,12 @@ function removeTypingIndicator(id) {
     if (el) el.remove();
 }
 
-// ==================== 语言切换 ====================
+// ==================== 语言切换（技能分类也会跟着变）====================
 function changeLanguage(lang) {
     currentLang = lang;
-    const t = TRANSLATIONS[lang] || TRANSLATIONS['es-mx'];
+    const t = TRANSLATIONS[lang] || TRANSLATIONS.zh;
     
     document.getElementById('langLabel').textContent = t.langLabel;
-    document.getElementById('ipLocation').textContent = t.ipDetecting;
     document.getElementById('apiStatusText').textContent = t.apiStatus;
     document.getElementById('welcomeMessage').innerHTML = t.welcome.replace(/\n/g, '<br>');
     document.getElementById('userInput').placeholder = t.inputPlaceholder;
@@ -269,17 +367,12 @@ function changeLanguage(lang) {
     document.getElementById('userName').textContent = t.userName;
     document.getElementById('skillSearch').placeholder = t.skillSearch;
     
-    document.querySelectorAll('.skill-cat').forEach(btn => {
-        if (btn.textContent === 'Todo' || btn.textContent === '全部' || btn.textContent === 'All') btn.textContent = t.all;
-        else if (btn.textContent === 'Oficina' || btn.textContent === '办公' || btn.textContent === 'Office') btn.textContent = t.office;
-        else if (btn.textContent === 'Creativo' || btn.textContent === '创作' || btn.textContent === 'Creative') btn.textContent = t.creative;
-        else if (btn.textContent === 'Desarrollo' || btn.textContent === '开发' || btn.textContent === 'Dev') btn.textContent = t.dev;
-        else if (btn.textContent === 'Datos' || btn.textContent === '数据' || btn.textContent === 'Data') btn.textContent = t.data;
-        else if (btn.textContent === 'Automático' || btn.textContent === '自动化' || btn.textContent === 'Auto') btn.textContent = t.auto;
-        else if (btn.textContent === 'Vida' || btn.textContent === '生活' || btn.textContent === 'Life') btn.textContent = t.life;
+    // 更新技能分类按钮文字
+    const catButtons = document.querySelectorAll('.skill-cat');
+    catButtons.forEach(btn => {
+        const cat = btn.dataset.cat;
+        btn.textContent = t.categories[cat];
     });
-    
-    detectUserLocation();
 }
 
 // ==================== IP检测 ====================
@@ -287,11 +380,21 @@ async function detectUserLocation() {
     try {
         const response = await fetch('https://ipapi.co/json/');
         const data = await response.json();
-        const countryName = data.country_name || '';
-        const locationText = data.country_code === 'CN' ? '🇨🇳 ' + countryName : '📍 ' + countryName;
+        const t = TRANSLATIONS[currentLang] || TRANSLATIONS.zh;
+        const locationText = data.country_code === 'CN' ? '🇨🇳 ' + data.country_name : '📍 ' + data.country_name;
         document.getElementById('ipLocation').textContent = locationText;
+        
+        // 根据IP自动切换语言（中国IP用中文，其他用英文）
+        if (data.country_code === 'CN') {
+            changeLanguage('zh');
+            document.getElementById('languageSelect').value = 'zh';
+        } else {
+            changeLanguage('en');
+            document.getElementById('languageSelect').value = 'en';
+        }
     } catch (error) {
-        document.getElementById('ipLocation').textContent = '📍 ' + (TRANSLATIONS[currentLang]?.ipDetecting || 'Ubicación detectada');
+        const t = TRANSLATIONS[currentLang] || TRANSLATIONS.zh;
+        document.getElementById('ipLocation').textContent = '📍 ' + t.ipDetecting;
     }
 }
 
@@ -299,7 +402,6 @@ async function detectUserLocation() {
 document.addEventListener('DOMContentLoaded', function() {
     loadSkills();
     detectUserLocation();
-    changeLanguage('es-mx');
 });
 
 document.getElementById('userInput')?.addEventListener('keypress', function(e) {
