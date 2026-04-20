@@ -1,426 +1,381 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AiAmigo · 你的AI朋友</title>
-    <script src="promote.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>ALFA Technology | Soluciones Tácticas y de Seguridad</title>
+    <!-- Font Awesome 6 (Free Icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', 'Microsoft YaHei', sans-serif; }
-        body { background: #0a0a0a; min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 16px; }
-        .container { max-width: 1400px; width: 100%; background: rgba(20,20,20,0.8); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; overflow: hidden; }
-        .header { background: linear-gradient(135deg,#1a1a1a 0,#2d2d2d 100%); border-bottom: 1px solid rgba(255,77,77,0.3); padding: 32px 40px; }
-        .header h1 { font-size: 2.8em; color: white; display: flex; align-items: center; gap: 12px; }
-        .header h1 span { font-size: 0.5em; color: rgba(255,255,255,0.5); background: rgba(255,77,77,0.2); padding: 4px 12px; border-radius: 40px; }
-        .header p { font-size: 1.1em; color: rgba(255,255,255,0.7); }
-        .region-bar { background: rgba(0,0,0,0.3); padding: 16px 40px; display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .region-selector select { background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 8px 16px; color: white; }
-        .ip-badge { background: rgba(76,175,80,0.15); border: 1px solid rgba(76,175,80,0.3); border-radius: 40px; padding: 6px 16px; color: #4caf50; }
-        .user-bar { background: rgba(0,0,0,0.2); padding: 16px 40px; display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .user-info { display: flex; align-items: center; gap: 16px; }
-        .user-avatar { width: 40px; height: 40px; background: linear-gradient(135deg,#ff4d4d,#ff8080); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; }
-        .api-section { padding: 24px 40px; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .api-status { display: flex; align-items: center; gap: 8px; color: rgba(255,255,255,0.5); }
-        .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #4caf50; }
-        .evolution-bar { background: rgba(0,0,0,0.2); padding: 12px 40px; display: flex; gap: 24px; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .metric { display: flex; flex-direction: column; }
-        .metric-label { color: rgba(255,255,255,0.5); font-size: 0.8em; }
-        .metric-value { color: white; font-size: 1.1em; }
-        .main-content { display: flex; min-height: 500px; }
-        .chat-section { flex: 2; border-right: 1px solid rgba(255,255,255,0.05); display: flex; flex-direction: column; }
-        .chat-header { padding: 16px 24px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; }
-        .chat-header h3 { color: white; }
-        .learning-indicator { background: rgba(76,175,80,0.2); border-radius: 20px; padding: 4px 12px; color: #4caf50; }
-        .chat-container { flex: 1; padding: 24px; overflow-y: auto; max-height: 400px; }
-        .message { display: flex; margin-bottom: 8px; }
-        .user-message { justify-content: flex-end; }
-        .bot-message { justify-content: flex-start; }
-        .message-content { max-width: 80%; padding: 12px 18px; border-radius: 18px; font-size: 14px; }
-        .user-message .message-content { background: #ff4d4d; color: white; }
-        .bot-message .message-content { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.9); }
-        .input-area { padding: 20px 24px; border-top: 1px solid rgba(255,255,255,0.05); }
-        .input-box { display: flex; gap: 12px; }
-        .input-box textarea { flex: 1; padding: 12px 16px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; color: white; resize: none; min-height: 50px; }
-        .input-box button { width: 50px; height: 50px; border-radius: 50%; background: #ff4d4d; border: none; color: white; font-size: 24px; cursor: pointer; }
-        .skills-section { flex: 1; background: rgba(0,0,0,0.2); padding: 24px; }
-        .skills-header h3 { color: white; }
-        .skill-categories { display: flex; gap: 8px; margin: 12px 0; flex-wrap: wrap; }
-        .skill-cat { padding: 4px 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; color: rgba(255,255,255,0.7); cursor: pointer; }
-        .skill-cat.active { background: #ff4d4d; color: white; }
-        .skills-search input { width: 100%; padding: 10px 12px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; }
-        .skills-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
-        .skill-item { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 12px; cursor: pointer; }
-        .skill-icon { font-size: 1.5em; }
-        .skill-name { color: white; }
-        .skill-desc { color: rgba(255,255,255,0.4); font-size: 0.8em; }
-        .skill-badge { display: inline-block; background: rgba(255,77,77,0.2); border-radius: 4px; padding: 2px 6px; font-size: 0.7em; color: #ff4d4d; }
-        .footer { padding: 24px 40px; background: rgba(0,0,0,0.3); display: flex; justify-content: space-between; color: rgba(255,255,255,0.4); }
-        .footer-links { display: flex; gap: 24px; }
-        .footer-links a { color: rgba(255,255,255,0.4); text-decoration: none; }
-        .contact-group { display: flex; gap: 12px; margin-left: 16px; padding-left: 16px; border-left: 1px solid rgba(255,255,255,0.1); }
-        .contact-group a { color: #ff4d4d; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background-color: #f4f7fc;
+            color: #1e2a3e;
+            line-height: 1.5;
+        }
+
+        /* Header / Nav */
+        .top-bar {
+            background: #0b2b3b;
+            color: white;
+            padding: 1rem 5%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+        .logo h1 {
+            font-size: 1.6rem;
+            letter-spacing: 1px;
+        }
+        .logo span {
+            font-weight: 300;
+            color: #7fc9e6;
+        }
+        .contact-info {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            font-size: 0.9rem;
+        }
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+        .contact-info a:hover {
+            color: #ffcd3c;
+        }
+        .hero {
+            background: linear-gradient(135deg, #102b36 0%, #1a4b5e 100%);
+            color: white;
+            text-align: center;
+            padding: 2.5rem 1rem;
+        }
+        .hero h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* container */
+        .container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 5%;
+        }
+
+        /* Category Cards */
+        .category {
+            margin-bottom: 3rem;
+        }
+        .category h3 {
+            font-size: 1.8rem;
+            border-left: 6px solid #e67e22;
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+            color: #0f2f3a;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.8rem;
+        }
+        .product-card {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            background: #1f5e72;
+            color: white;
+            padding: 1rem 1.2rem;
+        }
+        .card-header h4 {
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+        .card-header p {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+        .card-body {
+            padding: 1.2rem;
+            flex-grow: 1;
+        }
+        .spec-list {
+            list-style: none;
+            margin-top: 0.5rem;
+        }
+        .spec-list li {
+            font-size: 0.85rem;
+            padding: 0.3rem 0;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+        }
+        .spec-list i {
+            color: #e67e22;
+            width: 20px;
+            font-size: 0.8rem;
+        }
+        .badge {
+            background: #eef2f5;
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            margin-right: 0.5rem;
+            margin-bottom: 0.3rem;
+            color: #1f5e72;
+        }
+        .btn-detail {
+            background: #e67e22;
+            color: white;
+            border: none;
+            border-radius: 40px;
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-top: 0.8rem;
+            cursor: default;
+            display: inline-block;
+            text-align: center;
+        }
+        footer {
+            background: #0b2b3b;
+            color: #ccc;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+            font-size: 0.85rem;
+        }
+        hr {
+            margin: 1rem 0;
+        }
+        .contact-footer a {
+            color: #ffcd3c;
+            text-decoration: none;
+        }
+        @media (max-width: 700px) {
+            .top-bar {
+                flex-direction: column;
+                text-align: center;
+            }
+            .hero h2 {
+                font-size: 1.5rem;
+            }
+        }
     </style>
 </head>
 <body>
-<div class="container">
-    <div class="header"><h1>🦞 AiAmigo <span>Your AI Friend</span></h1><p id="headerDesc">你的AI朋友 · 22种语言 · 100大技能 <span class="skill-count">100 skills</span></p></div>
-    <div class="region-bar">
-        <div class="region-selector">
-            <label id="langLabel">🌐 语言:</label>
-            <select id="languageSelect" onchange="changeLanguage(this.value)">
-                <option value="zh" selected>🇨🇳 中文</option>
-                <option value="en">🇺🇸 English</option>
-                <option value="es">🇪🇸 Español</option>
-                <option value="pt">🇧🇷 Português</option>
-                <option value="es-ar">🇦🇷 Argentina</option>
-                <option value="es-mx">🇲🇽 México</option>
-                <option value="fr">🇫🇷 Français</option>
-                <option value="de">🇩🇪 Deutsch</option>
-                <option value="ms">🇲🇾 Melayu</option>
-                <option value="ar">🇸🇦 العربية</option>
-                <option value="hi">🇮🇳 हिन्दी</option>
-                <option value="ur">🇵🇰 اردو</option>
-                <option value="ru">🇷🇺 Русский</option>
-                <option value="th">🇹🇭 ไทย</option>
-                <option value="vi">🇻🇳 Tiếng Việt</option>
-                <option value="id">🇮🇩 Indonesia</option>
-                <option value="fil">🇵🇭 Filipino</option>
-                <option value="ko">🇰🇷 한국어</option>
-                <option value="ja">🇯🇵 日本語</option>
-                <option value="sw">🇰🇪 Kiswahili</option>
-                <option value="am">🇪🇹 አማርኛ</option>
-                <option value="af">🇿🇦 Afrikaans</option>
-            </select>
+    <div class="top-bar">
+        <div class="logo">
+            <h1>ALFA<span>Tactical</span></h1>
+            <div style="font-size: 0.75rem;">Innovación en Seguridad y Defensa</div>
         </div>
-        <div class="ip-badge" id="ipBadge"><span id="ipLocation">正在检测你的位置...</span></div>
-    </div>
-    <div class="user-bar"><div class="user-info"><div class="user-avatar">👤</div><div><span class="user-name" id="userName">访客</span><span class="user-plan">永久免费</span></div></div></div>
-    <div class="api-section"><div class="api-status"><span class="status-dot"></span><span id="apiStatusText">✨ 已连接最新AI大模型</span></div></div>
-    <div class="evolution-bar">
-        <div class="metric"><span class="metric-label">学习用户</span><span class="metric-value">127</span></div>
-        <div class="metric"><span class="metric-label">偏好记录</span><span class="metric-value">3,842</span></div>
-        <div class="metric"><span class="metric-label">避免错误</span><span class="metric-value">231</span></div>
-    </div>
-    <div class="main-content">
-        <div class="chat-section">
-            <div class="chat-header"><h3>💬 会话</h3><div class="learning-indicator" id="learningIndicator">正在学习你的偏好</div></div>
-            <div class="chat-container" id="chatContainer"><div class="message bot-message"><div class="message-content" id="welcomeMessage">你好！我是 AiAmigo。<br>直接开始聊天，无需登录。</div></div></div>
-            <div class="input-area"><div class="input-box"><textarea id="userInput" placeholder="问我任何问题..."></textarea><button id="sendBtn" onclick="sendMessage()">📤</button></div></div>
+        <div class="contact-info">
+            <span><i class="fas fa-envelope"></i> jake@aiamigo.vip</span>
+            <span><i class="fab fa-whatsapp"></i> +19153323558</span>
+            <span><i class="fas fa-map-marker-alt"></i> Hong Kong / Global</span>
         </div>
-        <div class="skills-section">
-            <div class="skills-header"><h3>🛠️ 100技能</h3><p>100项技能已就绪</p>
-                <div class="skill-categories" id="skillCategories">
-                    <button class="skill-cat active" data-cat="all">全部</button>
-                    <button class="skill-cat" data-cat="office">办公</button>
-                    <button class="skill-cat" data-cat="creative">创作</button>
-                    <button class="skill-cat" data-cat="dev">开发</button>
-                    <button class="skill-cat" data-cat="data">数据</button>
-                    <button class="skill-cat" data-cat="auto">自动化</button>
-                    <button class="skill-cat" data-cat="life">生活</button>
+    </div>
+    <div class="hero">
+        <h2>Equipamiento de Última Generación</h2>
+        <p>Cámaras corporales 4G/WiFi | Drones térmicos | Gafas inteligentes | Visión nocturna</p>
+    </div>
+
+    <div class="container">
+        <!-- SECCIÓN: Videograbación oculta / Body cameras -->
+        <div class="category">
+            <h3><i class="fas fa-video"></i> Equipo de videograbación encubierta</h3>
+            <div class="product-grid">
+                <!-- Versión 4G F1 -->
+                <div class="product-card">
+                    <div class="card-header">
+                        <h4>Versión 4G F1</h4>
+                        <p>Grabador 4G LTE + GPS + Android 12</p>
+                    </div>
+                    <div class="card-body">
+                        <ul class="spec-list">
+                            <li><i class="fas fa-microchip"></i> CPU 4 núcleos 1.5GHz / Android 12</li>
+                            <li><i class="fas fa-eye"></i> Cámara starlight 5MP, gran angular 120°</li>
+                            <li><i class="fas fa-battery-full"></i> 12h grabación continua / 18h espera</li>
+                            <li><i class="fas fa-satellite-dish"></i> 4G + WiFi 5GHz + GPS/Beidou</li>
+                            <li><i class="fas fa-shield-alt"></i> IP68, reconocimiento facial 3m</li>
+                        </ul>
+                        <div><span class="badge">SOS 1 botón</span><span class="badge">IA opcional</span></div>
+                    </div>
                 </div>
-                <div class="skills-search"><input type="text" id="skillSearch" placeholder="搜索技能..." onkeyup="filterSkills()"></div>
+                <!-- Tipo botón S10 WIFI -->
+                <div class="product-card">
+                    <div class="card-header">
+                        <h4>Tipo botón S10 WIFI</h4>
+                        <p>WiFi 4K Ultra HD | Linux estable</p>
+                    </div>
+                    <div class="card-body">
+                        <ul class="spec-list">
+                            <li><i class="fas fa-video"></i> Resolución 4K / H.264/H.265</li>
+                            <li><i class="fas fa-battery-full"></i> 16h grabación, 18h espera</li>
+                            <li><i class="fas fa-water"></i> IP68, caída 2m</li>
+                            <li><i class="fas fa-magnet"></i> Liberación magnética rápida</li>
+                            <li><i class="fas fa-id-card"></i> Tarjeta presentación electrónica</li>
+                        </ul>
+                        <div><span class="badge">Linux Novatek</span><span class="badge">AES256</span></div>
+                    </div>
+                </div>
+                <!-- Tipo botón S10 (sin WiFi) -->
+                <div class="product-card">
+                    <div class="card-header">
+                        <h4>Tipo botón S10</h4>
+                        <p>4K standalone, batería 4200mAh</p>
+                    </div>
+                    <div class="card-body">
+                        <ul class="spec-list">
+                            <li><i class="fas fa-microphone"></i> 16h grabación continua / IP68</li>
+                            <li><i class="fas fa-sd-card"></i> Almacenamiento hasta 256GB</li>
+                            <li><i class="fas fa-charging-station"></i> Tipo-C, magnético liberación rápida</li>
+                            <li><i class="fas fa-lock"></i> Cifrado AES256</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Credencial C3 con pantalla -->
+                <div class="product-card">
+                    <div class="card-header">
+                        <h4>Tipo credencial C3</h4>
+                        <p>Pantalla electrónica + WiFi</p>
+                    </div>
+                    <div class="card-body">
+                        <ul class="spec-list">
+                            <li><i class="fas fa-id-badge"></i> 84x30x10mm, solo 40g</li>
+                            <li><i class="fas fa-clock"></i> 8h grabación 1080p</li>
+                            <li><i class="fas fa-temperature-low"></i> -30°C a 55°C, IP56</li>
+                            <li><i class="fas fa-wifi"></i> Reproducción vía app móvil</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Credencial C2 -->
+                <div class="product-card">
+                    <div class="card-header">
+                        <h4>Tipo credencial C2</h4>
+                        <p>Ultra compacto, 8h autonomía</p>
+                    </div>
+                    <div class="card-body">
+                        <ul class="spec-list">
+                            <li><i class="fas fa-weight-hanging"></i> 40g + clip 10g</li>
+                            <li><i class="fas fa-video"></i> 1920x1080, H.264</li>
+                            <li><i class="fas fa-wifi"></i> App móvil para reproducción</li>
+                            <li><i class="fas fa-memory"></i> 32GB hasta 256GB opcional</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Cámara externa R8 -->
+                <div class="product-card">
+                    <div class="card-header">
+                        <h4>Cámara externa R8</h4>
+                        <p>Mini cámara botón, visión nocturna</p>
+                    </div>
+                    <div class="card-body">
+                        <ul class="spec-list">
+                            <li><i class="fas fa-camera"></i> CMOS 2MP 1080p, ángulo 120-140°</li>
+                            <li><i class="fas fa-moon"></i> Infrarrojo, graba sin luz</li>
+                            <li><i class="fas fa-plug"></i> Puerto aviation / USB / Tipo-C</li>
+                            <li><i class="fas fa-thermometer-half"></i> -10°C a 70°C, peso 15g</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <div class="skills-grid" id="skillsGrid"></div>
+        </div>
+
+        <!-- SECCIÓN: Estaciones de carga / Data Station -->
+        <div class="category">
+            <h3><i class="fas fa-database"></i> Estaciones de captura de datos</h3>
+            <div class="product-grid">
+                <div class="product-card"><div class="card-header"><h4>SUP20</h4><p>20 puertos, pantalla 21.5"</p></div><div class="card-body"><ul class="spec-list"><li><i class="fas fa-desktop"></i> Win10 64b, Intel I3, 4GB RAM</li><li><i class="fas fa-hdd"></i> 4TB almacenamiento, SSD 128GB</li><li><i class="fas fa-fingerprint"></i> Reconocimiento facial/huella</li><li><i class="fas fa-weight-hanging"></i> 40kg, 500x1816x450mm</li></ul></div></div>
+                <div class="product-card"><div class="card-header"><h4>SUP19</h4><p>20 puertos actualizables</p></div><div class="card-body"><ul class="spec-list"><li><i class="fas fa-tv"></i> Pantalla 19" 1280x1024</li><li><i class="fas fa-microchip"></i> Intel I3, 4GB DDR, SSD 128GB</li><li><i class="fas fa-plug"></i> Mini USB x20, hasta 30 puertos</li><li>Peso 50kg, 500x1560x440mm</li></ul></div></div>
+                <div class="product-card"><div class="card-header"><h4>HUB12</h4><p>12 puertos Type-C, hot swap</p></div><div class="card-body"><ul class="spec-list"><li><i class="fas fa-laptop"></i> Intel I5, 8GB RAM, SSD 128GB</li><li><i class="fas fa-exchange-alt"></i> Doble bahía intercambio caliente</li><li>Pantalla 17.3" FHD, peso 15kg</li></ul></div></div>
+                <div class="product-card"><div class="card-header"><h4>HUB11</h4><p>10 puertos, pantalla 10.1"</p></div><div class="card-body"><ul class="spec-list"><li>Win10 64b, Intel I3, 4GB RAM</li><li>Almacenamiento 4TB, Mini USB x10</li><li>Peso neto 10kg, compacto</li></ul></div></div>
+                <div class="product-card"><div class="card-header"><h4>HUB10</h4><p>10 puertos (solo base)</p></div><div class="card-body"><ul class="spec-list"><li>Requiere PC propia Win10</li><li>Mini USB x10, peso 5kg</li><li>Ideal para carga y descarga de evidencias</li></ul></div></div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN: Drones termográficos y sistemas aéreos -->
+        <div class="category">
+            <h3><i class="fas fa-drone"></i> Drones profesionales con cámara térmica</h3>
+            <div class="product-grid">
+                <div class="product-card"><div class="card-header"><h4>A6 - Sistema iluminación atada</h4><p>7x24h vuelo estacionario</p></div><div class="card-body"><ul class="spec-list"><li>Potencia LED 800W, 85.000 lúmenes</li><li>Altura máxima 50m, superficie iluminada 13.000m²</li><li>Cámara infrarroja + transmisión por cable de amarre</li><li>Resiste interferencias antídron</li></ul></div></div>
+                <div class="product-card"><div class="card-header"><h4>A3 - Dron térmico avanzado</h4><p>42min, 25km alcance</p></div><div class="card-body"><ul class="spec-list"><li>Zoom óptico 2.7-10x, cámara termográfica 640x512</li><li>Sensor de temperatura -20°C a 550°C</li><li>Telémetro láser 1200m, percepción omnidireccional</li><li>Controlador 7.9" 2000 nits, Android 11</li></ul></div></div>
+                <div class="product-card"><div class="card-header"><h4>A2 - Imagen dual ligero</h4><p>38min vuelo, 1209g</p></div><div class="card-body"><ul class="spec-list"><li>Cámara térmica 640x512 + gran angular 48MP</li><li>Detección temperatura hasta 550°C</li><li>Evasión obstáculos 6 direcciones</li><li>Transmisión 15km FCC</li></ul></div></div>
+                <div class="product-card"><div class="card-header"><h4>A1 - Versátil y resistente</h4><p>75min autonomía sin carga</p></div><div class="card-body"><ul class="spec-list"><li>MTOM 8kg, carga útil 3kg, IP resistente</li><li>RTK alta precisión ±1cm</li><li>Cámara térmica 640x512, zoom digital</li><li>Transmisión 15km FHSS</li></ul></div></div>
+                <div class="product-card"><div class="card-header"><h4>AT9 - Respuesta ultrarrápida</h4><p>115km/h, carga 4kg</p></div><div class="card-body"><ul class="spec-list"><li>Ideal para estadios y seguridad masiva</li><li>Cámara térmica + visible, detección sobrecalentamiento</li><li>Vuelo hasta 5000m altitud</li><li>FPV baja latencia, centro de mando en tiempo real</li></ul></div></div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN: Gafas inteligentes / Lentes inteligentes -->
+        <div class="category">
+            <h3><i class="fas fa-glasses"></i> Gafas Inteligentes ALFA Inteligente 1</h3>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="card-header"><h4>ALFA Inteligente 1</h4><p>Reconocimiento facial + traducción 54 idiomas</p></div>
+                    <div class="card-body">
+                        <ul class="spec-list">
+                            <li><i class="fas fa-eye"></i> Captura por voz: “Xiaoxing toma foto/video”</li>
+                            <li><i class="fas fa-microphone-alt"></i> Traducción en vivo 54 idiomas, manos libres</li>
+                            <li><i class="fas fa-fingerprint"></i> Reconocimiento facial hasta 30m, visión nocturna</li>
+                            <li><i class="fas fa-shield-virus"></i> Detección armas/explosivos 2 segundos</li>
+                            <li><i class="fas fa-battery-quarter"></i> 29g de peso, 8h+ autonomía, IP resistente</li>
+                        </ul>
+                        <div><span class="badge">Control por voz</span><span class="badge">Transmisión encriptada</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN: Impresora 3D y teléfono térmico portátil -->
+        <div class="category">
+            <h3><i class="fas fa-print"></i> Innovación táctica</h3>
+            <div class="product-grid">
+                <div class="product-card"><div class="card-header"><h4>Impresora 3D TacticalMaker 3DX</h4></div><div class="card-body"><ul class="spec-list"><li>Imprime piezas en horas, drones, maquetas entrenamiento</li><li>Detección de armas fantasma, cifrado militar</li><li>Personalización de equipos policiales</li></ul></div></div>
+                <div class="product-card"><div class="card-header"><h4>ALFA T-800 Teléfono térmico portátil</h4></div><div class="card-body"><ul class="spec-list"><li>Detección humana hasta 800m, visión total oscuridad</li><li>Resolución 640x512, sensibilidad ≤50mK</li><li>Telémetro láser, peso 435g, 8h autonomía</li><li>IA reconoce personas/vehículos + alarma</li></ul></div></div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN: Especificaciones detalladas 4G, WiFi y modelos de botón -->
+        <div class="category">
+            <h3><i class="fas fa-chart-line"></i> Parámetros técnicos destacados</h3>
+            <div class="product-grid">
+                <div class="product-card"><div class="card-header"><h4>Versión 4G F1</h4><p>Android 12, despacho en tiempo real</p></div><div class="card-body"><ul class="spec-list"><li>Red LTE-FDD/TDD, GPS+Beidou, WiFi 2.4/5GHz</li><li>Sensor Hall, botón PTT, SOS, intermitente rojo/azul</li><li>Pre/post grabación, cifrado AES256, geocercas</li><li>Captura facial IA (opcional), traducción voz</li></ul></div></div>
+                <div class="product-card"><div class="card-header"><h4>S10 WIFI / S10</h4><p>Linux, 4K, tarjeta electrónica personalizable</p></div><div class="card-body"><ul class="spec-list"><li>Novatek, batería 4100/4200mAh, 16h grabación</li><li>IP68, liberación magnética, cifrado AES256</li><li>Pantalla 2" 240x320, gran angular 120° sin distorsión</li><li>Escenarios: energía, logística, hotel, seguridad urbana</li></ul></div></div>
+            </div>
         </div>
     </div>
-    <div class="footer">
-        <div id="footerText">🦞 AiAmigo · 100技能 · 22种语言</div>
-        <div class="footer-links">
-            <a href="#">条款</a><a href="#">隐私</a>
-            <div class="contact-group"><a href="mailto:13510966616@126.com">📧 国内</a><a href="mailto:jakechen15118157506@gmail.com">📧 国际</a><a href="mailto:jake@aiamigo.vip">📧 品牌</a></div>
-        </div>
-    </div>
-</div>
-<script>
-// ==================== 讯飞API配置（已测试可用）====================
-const XUNFEI_CONFIG = {
-    API_KEY: '4402ac66d4adff938b77b43a8791f50c:YTk4NTFjODBkYjk5NTlkYjA0ZWI5ZTVh',
-    BASE_URL: 'https://maas-api.cn-huabei-1.xf-yun.com/v2/chat/completions',
-    MODEL: 'astron-code-latest'
-};
 
-// ==================== 22种语言完整翻译 ====================
-const TRANSLATIONS = {
-    en: {
-        langLabel: "Language:",
-        apiStatus: "✨ Connected to advanced AI",
-        welcome: "Hello! I'm AiAmigo.\nJust start chatting.",
-        inputPlaceholder: "Ask me anything...",
-        learningIndicator: "Learning your preferences",
-        footerText: "AiAmigo · 100 skills · 22 languages",
-        thinking: "AiAmigo is thinking...",
-        skillSearch: "Search skills...",
-        categories: { all: "All", office: "Office", creative: "Creative", dev: "Dev", data: "Data", auto: "Auto", life: "Life" },
-        userName: "Visitor",
-        userPlan: "Free forever",
-        ipDetecting: "Detecting your location..."
-    },
-    zh: {
-        langLabel: "语言:",
-        apiStatus: "✨ 已连接最新AI大模型",
-        welcome: "你好！我是 AiAmigo。\n直接开始聊天，无需登录。",
-        inputPlaceholder: "问我任何问题...",
-        learningIndicator: "正在学习你的偏好",
-        footerText: "AiAmigo · 100技能 · 22种语言",
-        thinking: "AiAmigo 正在思考...",
-        skillSearch: "搜索技能...",
-        categories: { all: "全部", office: "办公", creative: "创作", dev: "开发", data: "数据", auto: "自动化", life: "生活" },
-        userName: "访客",
-        userPlan: "永久免费",
-        ipDetecting: "正在检测你的位置..."
-    },
-    es: {
-        langLabel: "Idioma:",
-        apiStatus: "✨ Conectado a la IA más avanzada",
-        welcome: "¡Hola! Soy AiAmigo.\nEmpieza a chatear.",
-        inputPlaceholder: "Pregúntame algo...",
-        learningIndicator: "Aprendiendo tus preferencias",
-        footerText: "AiAmigo · 100 habilidades · 22 idiomas",
-        thinking: "AiAmigo está pensando...",
-        skillSearch: "Buscar habilidades...",
-        categories: { all: "Todo", office: "Oficina", creative: "Creativo", dev: "Desarrollo", data: "Datos", auto: "Automático", life: "Vida" },
-        userName: "Visitante",
-        userPlan: "Gratis para siempre",
-        ipDetecting: "Detectando tu ubicación..."
-    },
-    'es-mx': {
-        langLabel: "Idioma:",
-        apiStatus: "✨ Conectado a la IA más avanzada",
-        welcome: "¡Hola! Soy AiAmigo.\nEmpieza a chatear.",
-        inputPlaceholder: "Pregúntame algo...",
-        learningIndicator: "Aprendiendo tus preferencias",
-        footerText: "AiAmigo · 100 habilidades · 22 idiomas",
-        thinking: "AiAmigo está pensando...",
-        skillSearch: "Buscar habilidades...",
-        categories: { all: "Todo", office: "Oficina", creative: "Creativo", dev: "Desarrollo", data: "Datos", auto: "Automático", life: "Vida" },
-        userName: "Visitante",
-        userPlan: "Gratis para siempre",
-        ipDetecting: "Detectando tu ubicación..."
-    },
-    fr: {
-        langLabel: "Langue:",
-        apiStatus: "✨ Connecté à l'IA la plus avancée",
-        welcome: "Bonjour! Je suis AiAmigo.\nCommencez à discuter.",
-        inputPlaceholder: "Demandez-moi quelque chose...",
-        learningIndicator: "Apprend vos préférences",
-        footerText: "AiAmigo · 100 compétences · 22 langues",
-        thinking: "AiAmigo réfléchit...",
-        skillSearch: "Rechercher des compétences...",
-        categories: { all: "Tous", office: "Bureau", creative: "Créatif", dev: "Développement", data: "Données", auto: "Automatique", life: "Vie" },
-        userName: "Visiteur",
-        userPlan: "Gratuit pour toujours",
-        ipDetecting: "Détection de votre position..."
-    }
-};
-
-// ==================== 100技能数据（保持中文，因为技能名称是专有名词）===================
-const SKILLS = [
-    { icon: '📄', name: 'PDF全能处理', desc: '编辑/转换/合并/加密PDF', badge: 'nano-pdf', cat: 'office' },
-    { icon: '📝', name: '文档总结', desc: '总结网页/PDF/视频/音频', badge: 'summarize', cat: 'office' },
-    { icon: '📧', name: '邮件管家', desc: 'Gmail/Outlook收发管理', badge: 'gmail-manager', cat: 'office' },
-    { icon: '📊', name: 'Excel数据分析', desc: '处理表格/生成图表', badge: 'excel-pro', cat: 'office' },
-    { icon: '📑', name: 'PPT生成', desc: '一键生成演示文稿', badge: 'ppt-creator', cat: 'office' },
-    { icon: '📁', name: '文件管理', desc: '整理/重命名/备份文件', badge: 'file-manager', cat: 'office' },
-    { icon: '📅', name: '日程管理', desc: '日历/提醒/会议安排', badge: 'calendar-pro', cat: 'office' },
-    { icon: '📋', name: '会议纪要', desc: '自动生成会议记录', badge: 'meeting-notes', cat: 'office' },
-    { icon: '📚', name: '知识库管理', desc: 'Notion/Obsidian打通', badge: 'knowledge-base', cat: 'office' },
-    { icon: '📎', name: '附件处理', desc: '批量下载/压缩附件', badge: 'attachment-pro', cat: 'office' },
-    { icon: '🎨', name: 'AI绘画', desc: '文本生成图像', badge: 'nano-banana', cat: 'creative' },
-    { icon: '✍️', name: '人性化表达', desc: '去除AI味，自然口语', badge: 'humanizer', cat: 'creative' },
-    { icon: '📝', name: '文案写作', desc: '小红书/公众号文案', badge: 'copywriter', cat: 'creative' },
-    { icon: '🎬', name: '视频脚本', desc: '短视频/TikTok脚本', badge: 'video-script', cat: 'creative' },
-    { icon: '🎵', name: '音乐生成', desc: 'AI作曲配乐', badge: 'music-gen', cat: 'creative' },
-    { icon: '📖', name: '小说创作', desc: '续写/改写/润色', badge: 'novel-ai', cat: 'creative' },
-    { icon: '🎭', name: '角色扮演', desc: '模拟各种角色对话', badge: 'role-play', cat: 'creative' },
-    { icon: '🎪', name: 'PPT美化', desc: '设计/排版/动画', badge: 'ppt-designer', cat: 'creative' },
-    { icon: '📷', name: '图片处理', desc: '修图/抠图/滤镜', badge: 'image-editor', cat: 'creative' },
-    { icon: '🎥', name: '视频剪辑', desc: '剪辑/转场/字幕', badge: 'video-editor', cat: 'creative' },
-    { icon: '💻', name: '代码生成', desc: 'Python/JS/Java等', badge: 'coding-agent', cat: 'dev' },
-    { icon: '🐞', name: '代码调试', desc: '自动找bug/修复', badge: 'debug-pro', cat: 'dev' },
-    { icon: '📦', name: 'GitHub管理', desc: '仓库/issue/PR', badge: 'github', cat: 'dev' },
-    { icon: '🐳', name: 'Docker管理', desc: '容器/镜像/部署', badge: 'docker-pro', cat: 'dev' },
-    { icon: '☁️', name: '云服务器管理', desc: 'ECS/LightHouse', badge: 'cloud-cli', cat: 'dev' },
-    { icon: '📊', name: 'API测试', desc: '接口调试/文档生成', badge: 'api-tester', cat: 'dev' },
-    { icon: '📝', name: '代码注释', desc: '自动添加注释', badge: 'code-doc', cat: 'dev' },
-    { icon: '🔧', name: '代码重构', desc: '优化/重写', badge: 'code-refactor', cat: 'dev' },
-    { icon: '📈', name: '性能分析', desc: '代码性能优化', badge: 'perf-analyzer', cat: 'dev' },
-    { icon: '🔐', name: '安全审计', desc: '代码漏洞检测', badge: 'code-audit', cat: 'dev' }
-];
-
-let currentLang = 'zh';
-
-// ==================== 技能函数 ====================
-function loadSkills() {
-    const grid = document.getElementById('skillsGrid');
-    grid.innerHTML = '';
-    SKILLS.forEach(skill => {
-        const el = document.createElement('div');
-        el.className = 'skill-item';
-        el.setAttribute('data-cat', skill.cat);
-        el.innerHTML = `<div class="skill-icon">${skill.icon}</div><div class="skill-name">${skill.name}</div><div class="skill-desc">${skill.desc}</div><div class="skill-badge">${skill.badge}</div>`;
-        grid.appendChild(el);
-    });
-}
-
-function filterSkills() {
-    const search = document.getElementById('skillSearch').value.toLowerCase();
-    document.querySelectorAll('.skill-item').forEach(item => {
-        item.style.display = item.textContent.toLowerCase().includes(search) ? 'block' : 'none';
-    });
-}
-
-// ==================== 发送消息（已修复API格式）====================
-async function sendMessage() {
-    const input = document.getElementById('userInput');
-    const message = input.value.trim();
-    if (!message) return;
-
-    input.value = '';
-    addMessage('user', message);
-    
-    const typingId = addTypingIndicator();
-
-    try {
-        console.log('Sending request to:', XUNFEI_CONFIG.BASE_URL);
-        
-        const response = await fetch(XUNFEI_CONFIG.BASE_URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${XUNFEI_CONFIG.API_KEY}`
-            },
-            body: JSON.stringify({
-                model: XUNFEI_CONFIG.MODEL,
-                messages: [
-                    { role: 'system', content: '你是一个友好的AI助手，名叫AiAmigo。请用用户使用的语言回答。' },
-                    { role: 'user', content: message }
-                ],
-                temperature: 0.7,
-                max_tokens: 800
-            })
-        });
-
-        if (!response.ok) {
-            const errorText = await response.text();
-            console.error('API Error Response:', errorText);
-            throw new Error(`HTTP ${response.status}: ${errorText}`);
-        }
-        
-        const data = await response.json();
-        console.log('API Response:', data);
-        
-        const reply = data.choices?.[0]?.message?.content || '抱歉，我暂时无法回答。';
-        
-        removeTypingIndicator(typingId);
-        addMessage('bot', reply);
-        
-    } catch (error) {
-        console.error('API Error:', error);
-        removeTypingIndicator(typingId);
-        const t = TRANSLATIONS[currentLang] || TRANSLATIONS.zh;
-        addMessage('bot', `😅 ${t.thinking === 'AiAmigo está pensando...' ? 'Error de conexión. Por favor intenta de nuevo.' : '连接出错了，请稍后重试。'}`);
-    }
-}
-
-function addMessage(role, content) {
-    const container = document.getElementById('chatContainer');
-    const msgDiv = document.createElement('div');
-    msgDiv.className = `message ${role === 'user' ? 'user-message' : 'bot-message'}`;
-    const contentDiv = document.createElement('div');
-    contentDiv.className = 'message-content';
-    contentDiv.innerHTML = content.replace(/\n/g, '<br>');
-    msgDiv.appendChild(contentDiv);
-    container.appendChild(msgDiv);
-    container.scrollTop = container.scrollHeight;
-}
-
-function addTypingIndicator() {
-    const container = document.getElementById('chatContainer');
-    const typingDiv = document.createElement('div');
-    typingDiv.className = 'message bot-message typing';
-    typingDiv.id = 'typing-' + Date.now();
-    const contentDiv = document.createElement('div');
-    contentDiv.className = 'message-content';
-    contentDiv.textContent = TRANSLATIONS[currentLang]?.thinking || 'AiAmigo 正在思考...';
-    typingDiv.appendChild(contentDiv);
-    container.appendChild(typingDiv);
-    container.scrollTop = container.scrollHeight;
-    return typingDiv.id;
-}
-
-function removeTypingIndicator(id) {
-    const el = document.getElementById(id);
-    if (el) el.remove();
-}
-
-// ==================== 语言切换（技能分类也会跟着变）====================
-function changeLanguage(lang) {
-    currentLang = lang;
-    const t = TRANSLATIONS[lang] || TRANSLATIONS.zh;
-    
-    document.getElementById('langLabel').textContent = t.langLabel;
-    document.getElementById('apiStatusText').textContent = t.apiStatus;
-    document.getElementById('welcomeMessage').innerHTML = t.welcome.replace(/\n/g, '<br>');
-    document.getElementById('userInput').placeholder = t.inputPlaceholder;
-    document.getElementById('learningIndicator').textContent = t.learningIndicator;
-    document.getElementById('footerText').textContent = t.footerText;
-    document.getElementById('userName').textContent = t.userName;
-    document.getElementById('skillSearch').placeholder = t.skillSearch;
-    
-    // 更新技能分类按钮文字
-    const catButtons = document.querySelectorAll('.skill-cat');
-    catButtons.forEach(btn => {
-        const cat = btn.dataset.cat;
-        btn.textContent = t.categories[cat];
-    });
-}
-
-// ==================== IP检测 ====================
-async function detectUserLocation() {
-    try {
-        const response = await fetch('https://ipapi.co/json/');
-        const data = await response.json();
-        const t = TRANSLATIONS[currentLang] || TRANSLATIONS.zh;
-        const locationText = data.country_code === 'CN' ? '🇨🇳 ' + data.country_name : '📍 ' + data.country_name;
-        document.getElementById('ipLocation').textContent = locationText;
-        
-        // 根据IP自动切换语言（中国IP用中文，其他用英文）
-        if (data.country_code === 'CN') {
-            changeLanguage('zh');
-            document.getElementById('languageSelect').value = 'zh';
-        } else {
-            changeLanguage('en');
-            document.getElementById('languageSelect').value = 'en';
-        }
-    } catch (error) {
-        const t = TRANSLATIONS[currentLang] || TRANSLATIONS.zh;
-        document.getElementById('ipLocation').textContent = '📍 ' + t.ipDetecting;
-    }
-}
-
-// ==================== 初始化 ====================
-document.addEventListener('DOMContentLoaded', function() {
-    loadSkills();
-    detectUserLocation();
-});
-
-document.getElementById('userInput')?.addEventListener('keypress', function(e) {
-    if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        sendMessage();
-    }
-});
-
-document.querySelectorAll('.skill-cat').forEach(btn => {
-    btn.addEventListener('click', function() {
-        document.querySelectorAll('.skill-cat').forEach(c => c.classList.remove('active'));
-        this.classList.add('active');
-        const cat = this.dataset.cat;
-        document.querySelectorAll('.skill-item').forEach(item => {
-            item.style.display = cat === 'all' || item.dataset.cat === cat ? 'block' : 'none';
-        });
-    });
-});
-</script>
+    <footer>
+        <p><strong>Alfa (Asia) Investment Co., Ltd. (Hong Kong)</strong><br>
+        ADD: Room 803B, 8/F, Westland International Building, 290-296 Un Chau Street, Cheung Sha Wan, Hong Kong<br>
+        Email: jake9153323558@gmail.com | jake@aiamigo.vip &nbsp;|&nbsp; WhatsApp: +19153323558</p>
+        <hr style="width: 60%; margin: 1rem auto; background: #2c5a6e;">
+        <p>© 2025 ALFA Tactical – Soluciones integrales para aplicación de ley, drones y óptica inteligente.</p>
+    </footer>
 </body>
 </html>
