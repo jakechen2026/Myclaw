@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es-MX">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>ALFA Tactical | AI Public Safety Ecosystem</title>
+    <title>ALFA Tactical | Ecosistema de Seguridad IA</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -20,7 +20,7 @@
             scroll-behavior: smooth;
         }
 
-        /* OpenClaw style: diagonal tech grid + neon glow */
+        /* Estilo OpenClaw: cuadrícula diagonal + brillo neón */
         .diagonal-bg {
             position: fixed;
             top: 0;
@@ -82,6 +82,16 @@
             border: 1px solid #00E0FF;
             color: #00E0FF;
             font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .contact-badge a {
+            color: #00E0FF;
+            text-decoration: none;
+        }
+        .contact-badge a:hover {
+            text-decoration: underline;
         }
 
         .hero {
@@ -90,7 +100,7 @@
             position: relative;
         }
         .hero h1 {
-            font-size: 4rem;
+            font-size: 3.5rem;
             font-weight: 800;
             background: linear-gradient(135deg, #FFFFFF, #00E0FF, #A855F7);
             -webkit-background-clip: text;
@@ -101,7 +111,7 @@
         .hero p {
             font-size: 1.2rem;
             color: #A0AEC0;
-            max-width: 700px;
+            max-width: 750px;
             margin: 1rem auto 0;
         }
         .hero-glow {
@@ -231,7 +241,11 @@
             font-size: 0.8rem;
             color: white;
             border: none;
-            cursor: default;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .btn-glow:hover {
+            opacity: 0.85;
         }
 
         .stats-bar {
@@ -264,8 +278,9 @@
             color: #8A9BB5;
         }
         @media (max-width: 760px) {
-            .hero h1 { font-size: 2.2rem; }
+            .hero h1 { font-size: 2rem; }
             .product-grid { grid-template-columns: 1fr; }
+            .contact-badge { font-size: 0.7rem; gap: 6px; }
         }
     </style>
 </head>
@@ -276,91 +291,97 @@
 <nav class="navbar">
     <div class="logo">ALFA<span style="font-weight:500;">·TACTICAL</span></div>
     <div class="nav-links">
-        <a href="#">Ecosystem</a><a href="#">Drones</a><a href="#">Body Cams</a><a href="#">AI Cloud</a>
+        <a href="#">Ecosistema</a>
+        <a href="#">Drones</a>
+        <a href="#">Cámaras</a>
+        <a href="#">IA Cloud</a>
     </div>
-    <div class="contact-badge"><i class="fab fa-whatsapp"></i> +19153323558</div>
+    <div class="contact-badge">
+        <i class="fas fa-envelope"></i> <a href="mailto:jake@aiamigo.vip">jake@aiamigo.vip</a>
+        <i class="fab fa-whatsapp"></i> <a href="https://wa.me/19153323558">+19153323558</a>
+    </div>
 </nav>
 
 <div class="container">
     <div class="hero">
-        <h1>Evidence. Intelligence. Autonomy.</h1>
-        <p>4G AI body cameras · Thermal drones · 108‑language translation glasses · Robotic dogs</p>
+        <h1>Evidencia. Inteligencia. Autonomía.</h1>
+        <p>Cámaras corporales 4G con IA · Drones térmicos · Gafas de traducción en 108 idiomas · Perros robóticos</p>
     </div>
 
     <div class="stats-bar">
-        <div class="stat-item"><div class="stat-number">12+</div><div>Years innovation</div></div>
-        <div class="stat-item"><div class="stat-number">4K/30fps</div><div>Edge AI ready</div></div>
-        <div class="stat-item"><div class="stat-number">108</div><div>Languages</div></div>
-        <div class="stat-item"><div class="stat-number">IP68</div><div>Ruggedized</div></div>
+        <div class="stat-item"><div class="stat-number">12+</div><div>Años de innovación</div></div>
+        <div class="stat-item"><div class="stat-number">4K/30fps</div><div>IA en el borde</div></div>
+        <div class="stat-item"><div class="stat-number">108</div><div>Idiomas</div></div>
+        <div class="stat-item"><div class="stat-number">IP68</div><div>Resistencia total</div></div>
     </div>
 
-    <!-- 4G F1 + SaaS Subscription -->
-    <div class="section-title"><i class="fas fa-microchip"></i> ALFA 4G F1 — AI Evidence Ecosystem</div>
+    <!-- ALFA 4G F1 + Suscripción SaaS -->
+    <div class="section-title"><i class="fas fa-microchip"></i> ALFA 4G F1 — Ecosistema de Evidencia IA</div>
     <div class="product-grid">
         <div class="card">
-            <div class="card-header"><h3>Versión 4G F1</h3><div class="model-tag">Android 12 · 4G LTE · Edge AI</div></div>
+            <div class="card-header"><h3>Versión 4G F1</h3><div class="model-tag">Android 12 · 4G LTE · IA en el borde</div></div>
             <div class="card-body">
                 <ul class="spec-list">
-                    <li><i class="fas fa-cloud-upload-alt"></i> <strong>Video Evidence System</strong> + hybrid cloud</li>
-                    <li><i class="fas fa-chalkboard-user"></i> <strong>Command & Dispatch System</strong> real‑time</li>
-                    <li><i class="fas fa-face-smile"></i> Face recognition · Behavior analysis · Auto case generation</li>
-                    <li><i class="fas fa-microphone-alt"></i> AI transcription (speech→text) · Auto redaction (face/plate)</li>
-                    <li><i class="fas fa-search"></i> AI video retrieval · AiAmigo Cloud vault</li>
-                    <li><i class="fas fa-shield-alt"></i> AES256 encryption · chain of custody</li>
+                    <li><i class="fas fa-cloud-upload-alt"></i> <strong>Sistema de Evidencia en Video</strong> + nube híbrida</li>
+                    <li><i class="fas fa-chalkboard-user"></i> <strong>Sistema de Comando y Despacho</strong> en tiempo real</li>
+                    <li><i class="fas fa-face-smile"></i> Reconocimiento facial · Análisis de conducta · Generación automática de casos</li>
+                    <li><i class="fas fa-microphone-alt"></i> Transcripción IA (voz→texto) · Enmascaramiento automático (rostro/placa)</li>
+                    <li><i class="fas fa-search"></i> Búsqueda de video por IA · Almacenamiento en AiAmigo Cloud</li>
+                    <li><i class="fas fa-shield-alt"></i> Cifrado AES256 · Cadena de custodia</li>
                 </ul>
-                <div class="badge-group"><span class="badge">5‑year plan: hardware negotiable</span><span class="badge">Hybrid cloud</span></div>
+                <div class="badge-group"><span class="badge">Plan 5 años: hardware negociable</span><span class="badge">Nube híbrida</span></div>
             </div>
         </div>
 
-        <div class="pricing-card"><h3>Basic</h3><div class="price">$200 <small>/year</small></div><ul class="spec-list"><li>50GB cloud</li><li>Basic dispatch viewer</li><li>Email support</li></ul><div class="btn-glow">Subscribe</div></div>
-        <div class="pricing-card"><h3>Standard</h3><div class="price">$400 <small>/year</small></div><ul class="spec-list"><li>200GB cloud + hybrid</li><li>Face & behavior AI</li><li>Auto case generation</li></ul><div class="btn-glow">Subscribe</div></div>
-        <div class="pricing-card" style="border-color:#A855F7;"><h3>AI Edition</h3><div class="price">$800 <small>/year</small></div><ul class="spec-list"><li>Unlimited cloud + on‑prem</li><li>AI transcription + auto redaction</li><li>Video retrieval + priority support</li></ul><div class="btn-glow">Subscribe</div><div class="badge" style="margin-top:0.8rem;">* Hardware negotiable for 5‑year contract</div></div>
+        <div class="pricing-card"><h3>Básico</h3><div class="price">$200 <small>/año</small></div><ul class="spec-list"><li>50GB en nube</li><li>Visor básico de despacho</li><li>Soporte por email</li></ul><div class="btn-glow">Suscribirse</div></div>
+        <div class="pricing-card"><h3>Estándar</h3><div class="price">$400 <small>/año</small></div><ul class="spec-list"><li>200GB nube + híbrida</li><li>IA facial y de conducta</li><li>Generación automática de casos</li></ul><div class="btn-glow">Suscribirse</div></div>
+        <div class="pricing-card" style="border-color:#A855F7;"><h3>Edición IA</h3><div class="price">$800 <small>/año</small></div><ul class="spec-list"><li>Nube ilimitada + on‑prem</li><li>Transcripción IA + enmascaramiento</li><li>Búsqueda semántica + soporte prioritario</li></ul><div class="btn-glow">Suscribirse</div><div class="badge" style="margin-top:0.8rem;">* Hardware negociable en contrato de 5 años</div></div>
     </div>
 
-    <!-- Button-Style Covert Body Cameras -->
-    <div class="section-title"><i class="fas fa-user-secret"></i> Button‑Style Covert Body Cameras</div>
+    <!-- Cámaras ocultas tipo botón (Ocultas) -->
+    <div class="section-title"><i class="fas fa-user-secret"></i> Cámaras Corporales Ocultas Tipo Botón</div>
     <div class="product-grid">
-        <div class="card"><div class="card-header"><h3>S10 Button WIFI</h3><div class="model-tag">4K · Linux · Magnetic</div></div><div class="card-body"><ul class="spec-list"><li>4K Ultra HD, H.264/H.265</li><li>16h recording / 18h standby</li><li>IP68, 2m drop</li><li>Digital business card</li></ul><div class="badge-group"><span class="badge">Novatek</span><span class="badge">AES256</span></div></div></div>
-        <div class="card"><div class="card-header"><h3>S10 Button</h3><div class="model-tag">4K standalone</div></div><div class="card-body"><ul class="spec-list"><li>16h continuous, 4200mAh</li><li>Expandable 256GB</li><li>Type-C, magnetic release</li></ul><div class="badge-group"><span class="badge">IP68</span><span class="badge">4K@30fps</span></div></div></div>
-        <div class="card"><div class="card-header"><h3>C3 Badge Camera</h3><div class="model-tag">E‑paper · Ultra compact</div></div><div class="card-body"><ul class="spec-list"><li>84x30x10mm, 40g</li><li>8h 1080p recording</li><li>-30°C to 55°C, IP56</li><li>WiFi + app playback</li></ul></div></div>
+        <div class="card"><div class="card-header"><h3>S10 Botón WIFI <span style="font-size:0.7rem; background:#00E0FF20; padding:2px 8px; border-radius:20px; margin-left:8px;">Oculta</span></h3><div class="model-tag">4K · Linux · Liberación magnética</div></div><div class="card-body"><ul class="spec-list"><li>4K Ultra HD, H.264/H.265</li><li>16h grabación / 18h espera</li><li>IP68, caída 2m</li><li>Tarjeta de presentación digital</li></ul><div class="badge-group"><span class="badge">Novatek</span><span class="badge">AES256</span></div></div></div>
+        <div class="card"><div class="card-header"><h3>S10 Botón <span style="font-size:0.7rem; background:#00E0FF20; padding:2px 8px; border-radius:20px; margin-left:8px;">Oculta</span></h3><div class="model-tag">4K autónomo</div></div><div class="card-body"><ul class="spec-list"><li>16h continua, 4200mAh</li><li>Expandible 256GB</li><li>Tipo-C, liberación magnética</li></ul><div class="badge-group"><span class="badge">IP68</span><span class="badge">4K@30fps</span></div></div></div>
+        <div class="card"><div class="card-header"><h3>C3 Credencial <span style="font-size:0.7rem; background:#00E0FF20; padding:2px 8px; border-radius:20px; margin-left:8px;">Oculta</span></h3><div class="model-tag">Pantalla electrónica · Ultra compacto</div></div><div class="card-body"><ul class="spec-list"><li>84x30x10mm, solo 40g</li><li>8h grabación 1080p</li><li>-30°C a 55°C, IP56</li><li>WiFi + reproducción por app</li></ul></div></div>
     </div>
 
-    <!-- Infrared Thermal Drones -->
-    <div class="section-title"><i class="fas fa-drone"></i> Infrared Thermal Drones</div>
+    <!-- Drones térmicos infrarrojos -->
+    <div class="section-title"><i class="fas fa-drone"></i> Drones Térmicos Infrarrojos</div>
     <div class="product-grid">
-        <div class="card"><div class="card-header"><h3>A3 Thermal Drone</h3><div class="model-tag">640x512 · 42min</div></div><div class="card-body"><ul class="spec-list"><li>-20°C to 550°C measurement</li><li>15km transmission, 25km range</li><li>Laser rangefinder 1200m</li><li>7.9" 2000 nits controller</li></ul><div class="badge-group"><span class="badge">Omnidirectional</span><span class="badge">IP55</span></div></div></div>
-        <div class="card"><div class="card-header"><h3>A2 Dual Vision</h3><div class="model-tag">48MP + Thermal</div></div><div class="card-body"><ul class="spec-list"><li>640x512 thermal + 48MP wide</li><li>6‑direction obstacle avoidance</li><li>38min flight, 1209g</li><li>15km FCC transmission</li></ul></div></div>
-        <div class="card"><div class="card-header"><h3>A6 Tethered Lighting</h3><div class="model-tag">7x24h · 85,000 lm</div></div><div class="card-body"><ul class="spec-list"><li>800W LED, 50m altitude</li><li>Illuminates 13,000m²</li><li>Thermal camera + anti‑jamming</li></ul></div></div>
+        <div class="card"><div class="card-header"><h3>A3 Drone Térmico</h3><div class="model-tag">640x512 · 42min vuelo</div></div><div class="card-body"><ul class="spec-list"><li>Medición -20°C a 550°C</li><li>Transmisión 15km, alcance 25km</li><li>Telémetro láser 1200m</li><li>Controlador 7.9" 2000 nits</li></ul><div class="badge-group"><span class="badge">Sensores omnidireccionales</span><span class="badge">IP55</span></div></div></div>
+        <div class="card"><div class="card-header"><h3>A2 Visión Dual</h3><div class="model-tag">48MP + Térmica</div></div><div class="card-body"><ul class="spec-list"><li>Térmica 640x512 + gran angular 48MP</li><li>Evasión obstáculos 6 direcciones</li><li>38min vuelo, 1209g</li><li>Transmisión 15km FCC</li></ul></div></div>
+        <div class="card"><div class="card-header"><h3>A6 Iluminación Atada</h3><div class="model-tag">7x24h · 85.000 lúmenes</div></div><div class="card-body"><ul class="spec-list"><li>LED 800W, altura 50m</li><li>Ilumina 13.000m²</li><li>Cámara térmica + anti‑interferencias</li></ul></div></div>
     </div>
 
-    <!-- 108-Language AI Translation & Night Vision Glasses -->
-    <div class="section-title"><i class="fas fa-glasses"></i> 108‑Language AI Translation & Night Vision Glasses</div>
+    <!-- Gafas de traducción IA 108 idiomas + Gafas de visión nocturna -->
+    <div class="section-title"><i class="fas fa-glasses"></i> Gafas de Traducción IA (108 idiomas) y Visión Nocturna</div>
     <div class="product-grid">
-        <div class="card"><div class="card-header"><h3>ALFA Inteligente 1</h3><div class="model-tag">108 languages · Real‑time translation</div></div><div class="card-body"><ul class="spec-list"><li>Voice control photo/video</li><li>108 languages live translation + recording</li><li>Face recognition up to 30m</li><li>Infrared night vision mode</li><li>29g, 8h battery</li></ul><div class="badge-group"><span class="badge">Offline translation</span><span class="badge">Encrypted</span></div></div></div>
-        <div class="card"><div class="card-header"><h3>Infrared Night Vision Goggles</h3><div class="model-tag">Passive · Tactical grade</div></div><div class="card-body"><ul class="spec-list"><li>200m detection range, total darkness</li><li>1080p recording with IR</li><li>10h continuous use</li><li>Hands‑free, head mount</li></ul></div></div>
+        <div class="card"><div class="card-header"><h3>ALFA Inteligente 1</h3><div class="model-tag">108 idiomas · Traducción en tiempo real</div></div><div class="card-body"><ul class="spec-list"><li>Control por voz: foto/video</li><li>Traducción en vivo 108 idiomas + grabación</li><li>Reconocimiento facial hasta 30m</li><li>Modo visión nocturna infrarroja</li><li>29g, 8h batería</li></ul><div class="badge-group"><span class="badge">Traducción offline</span><span class="badge">Cifrado</span></div></div></div>
+        <div class="card"><div class="card-header"><h3>Gafas Visión Nocturna IR</h3><div class="model-tag">Pasivas · Grado táctico</div></div><div class="card-body"><ul class="spec-list"><li>Detección 200m, oscuridad total</li><li>Grabación 1080p con IR</li><li>10h uso continuo</li><li>Manos libres, montura para casco</li></ul></div></div>
     </div>
 
-    <!-- Tactical 3D Printer & Robotic Dog -->
-    <div class="section-title"><i class="fas fa-print"></i> Tactical Additive Manufacturing & Robotics</div>
+    <!-- Impresora 3D táctica + Perro robótico -->
+    <div class="section-title"><i class="fas fa-print"></i> Fabricación Aditiva y Robótica Táctica</div>
     <div class="product-grid">
-        <div class="card"><div class="card-header"><h3>TacticalMaker 3DX</h3><div class="model-tag">Field 3D printer</div></div><div class="card-body"><ul class="spec-list"><li>Print drone parts, custom gear in hours</li><li>Ghost gun detection + encrypted firmware</li><li>Low‑cost training models</li></ul><div class="badge-group"><span class="badge">On‑site printing</span><span class="badge">AES encrypted</span></div></div></div>
-        <div class="card"><div class="card-header"><h3>ALFA RoboDog R1</h3><div class="model-tag">Quadruped · AI edge</div></div><div class="card-body"><ul class="spec-list"><li>20kg payload, 3h autonomy</li><li>360° thermal + LiDAR</li><li>Remote control 2km, autonomous nav</li><li>IP67, swappable battery</li></ul></div></div>
-        <div class="card"><div class="card-header"><h3>Data Station SUP20</h3><div class="model-tag">Evidence upload hub</div></div><div class="card-body"><ul class="spec-list"><li>20 ports, 4TB storage</li><li>Face/fingerprint/QR auth</li><li>Real‑time network review</li></ul></div></div>
+        <div class="card"><div class="card-header"><h3>TacticalMaker 3DX</h3><div class="model-tag">Impresora 3D de campo</div></div><div class="card-body"><ul class="spec-list"><li>Imprime piezas de drones en horas</li><li>Detección de armas fantasma + firmware cifrado</li><li>Modelos de entrenamiento bajo costo</li></ul><div class="badge-group"><span class="badge">Impresión in situ</span><span class="badge">Cifrado AES</span></div></div></div>
+        <div class="card"><div class="card-header"><h3>ALFA RoboDog R1</h3><div class="model-tag">Cuadrúpedo · IA en el borde</div></div><div class="card-body"><ul class="spec-list"><li>Carga útil 20kg, 3h autonomía</li><li>360° térmica + LiDAR</li><li>Control remoto 2km, navegación autónoma</li><li>IP67, batería intercambiable</li></ul></div></div>
+        <div class="card"><div class="card-header"><h3>Estación SUP20</h3><div class="model-tag">Centro de carga y evidencia</div></div><div class="card-body"><ul class="spec-list"><li>20 puertos, 4TB almacenamiento</li><li>Autenticación facial/huella/QR</li><li>Revisión en red en tiempo real</li></ul></div></div>
     </div>
 
-    <!-- AiAmigo Cloud Section -->
+    <!-- Sección AiAmigo Cloud -->
     <div style="background: linear-gradient(145deg, #0F1325, #080A14); border-radius: 2rem; padding: 2rem; margin: 2rem 0; border: 1px solid #00E0FF; text-align: center;">
         <i class="fas fa-cloud-upload-alt" style="font-size: 2.5rem; color: #00E0FF;"></i>
-        <h3 style="margin: 0.5rem 0;">AiAmigo Cloud — Zero‑Trust Evidence Vault</h3>
-        <p style="color: #A0AEC0;">All video evidence encrypted in AiAmigo cloud with optional hybrid on‑prem deployment. AES256 + chain of custody.</p>
-        <div class="badge-group" style="justify-content: center; margin-top: 1rem;"><span class="badge">GDPR compliant</span><span class="badge">USMCA region</span></div>
+        <h3 style="margin: 0.5rem 0;">AiAmigo Cloud — Bóveda de Evidencia Cero Confianza</h3>
+        <p style="color: #A0AEC0;">Toda la evidencia en video se almacena cifrada en AiAmigo Cloud con opción de despliegue híbrido local. AES256 + cadena de custodia.</p>
+        <div class="badge-group" style="justify-content: center; margin-top: 1rem;"><span class="badge">Cumple GDPR</span><span class="badge">Región USMCA</span></div>
     </div>
 </div>
 
 <footer>
-    <div><strong>ALFA Tactical — USMCA Innovation Hub</strong> | Texas / Mexico City</div>
+    <div><strong>ALFA Tactical — Centro de Innovación USMCA</strong> | Texas / Ciudad de México</div>
     <div style="margin: 0.5rem 0;">jake@aiamigo.vip | +19153323558</div>
-    <div>© 2025 ALFA Tactical — AI evidence ecosystem, thermal drones, smart optics & robotics</div>
+    <div>© 2025 ALFA Tactical — Ecosistema de evidencia IA, drones térmicos, óptica inteligente y robótica</div>
 </footer>
 </body>
 </html>
